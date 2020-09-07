@@ -1,0 +1,15 @@
+.DS_Store
+.idea/
+
+# Byte compiled
+*.py[cod]
+
+# Packages
+*.egg
+*.egg-info
+
+*.pdf
+
+/docs/build/
+/examples/.ipynb_checkpoints/
+/docs/source/guide/ipynb/.ipynb_checkpoints/
