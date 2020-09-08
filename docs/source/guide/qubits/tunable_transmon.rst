@@ -98,7 +98,7 @@ Estimation of coherence times
     scqubits.TunableTransmon.plot_t1_effective_vs_paramvals
     scqubits.TunableTransmon.plot_t2_effective_vs_paramvals
     scqubits.TunableTransmon.t1
-    scqubits.TunableTransmon.t1_capacitive_loss
+    scqubits.TunableTransmon.t1_capacitive
     scqubits.TunableTransmon.t1_charge_impedance
     scqubits.TunableTransmon.t1_effective
     scqubits.TunableTransmon.t1_flux_bias_line

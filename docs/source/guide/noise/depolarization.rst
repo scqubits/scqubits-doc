@@ -39,11 +39,11 @@ where :math:`T` is the bath temperature, and :math:`k_B` Boltzmann's constant.
 Capacitive noise
 -----------------------
 
-+--------------------------------------------+-----------------------------------------+
-| Method name                                | ``t1_capacitive_loss``                  |
-+--------------------------------------------+-----------------------------------------+
-| :math:`B_\lambda`                          | :math:`2e \hat{n}`                      |
-+--------------------------------------------+-----------------------------------------+
++-------------------+--------------------+
+| Method name       | ``t1_capacitive``  |
++===================+====================+
+| :math:`B_\lambda` | :math:`2e \hat{n}` |
++-------------------+--------------------+
 
 Capacitive noise corresponds to noise coming from a lossy capacitance. The assumed spectral density reads
 
@@ -90,7 +90,7 @@ Inductive noise
 -----------------------
 
 +-------------------+----------------------------------------+
-| Method name       | ``t1_inductive_loss``                  |
+| Method name       | ``t1_inductive``                       |
 +===================+========================================+
 | :math:`B_\lambda` | :math:`\frac{\Phi_0}{2\pi} \hat{\phi}` |
 +-------------------+----------------------------------------+
