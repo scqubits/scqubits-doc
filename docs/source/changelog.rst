@@ -7,6 +7,24 @@
 Change Log
 **********
 
+Version 1.3.1
++++++++++++++
+
+**Major changes/additions**
+    - Coherence calculations for the majority of qubits. These allow for estimating coherence times and rates due to various noise channels.
+    - A new units system: users can specify energy units of their system Hamiltonian. These units are automatically considered when plotting and in coherence time calculations.
+    - Separated documentation and example jupyter notebooks into individual repositories, see scqubits-doc and scqubits-examples.
+
+**Minor changes/additions**
+    - Introduced tests for real-valuedness of zero-pi Hamiltonians for speedup.
+    - New options in plotting (e.g. grid).
+
+**Bug fixes**
+    - Fixed bug preventing the proper disabling of the progress bar.
+    - Various bug fixes and improvements of file IO operations.
+    - Fixed issue with color legend bar in .plot_matrixelements.
+
+
 Version 1.2.3
 +++++++++++++
 

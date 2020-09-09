@@ -90,7 +90,7 @@ Estimation of coherence times
     scqubits.Transmon.plot_t1_effective_vs_paramvals
     scqubits.Transmon.plot_t2_effective_vs_paramvals
     scqubits.Transmon.t1
-    scqubits.Transmon.t1_capacitive_loss
+    scqubits.Transmon.t1_capacitive
     scqubits.Transmon.t1_charge_impedance
     scqubits.Transmon.t1_effective
     scqubits.Transmon.t2_effective
