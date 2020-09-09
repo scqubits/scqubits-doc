@@ -266,7 +266,7 @@ The default real part of admittance is assumed to be
     \left(\frac{2 \Delta}{\hbar \omega} \right)^{3/2}  x_{\rm qp} \
     K_{0} \left( \frac{\hbar |\omega|}{2 k_B T} \right) \sinh \left( \frac{\hbar \omega }{2 k_B T} \right).
 
-** In many publications, the operator :math:`\sin(\hat{\phi}/2)` is used, this is due to grouping of flux with the quadratic and not the :math:`\cos` term of the Hamiltonian.
+** In many publications, the operator :math:`\sin(\hat{\phi}/2)` is used. This is due to grouping of flux with the quadratic and not the :math:`\cos` term of the Hamiltonian.
 
 This method can be customized further through various noise related parameters shown below:
 
