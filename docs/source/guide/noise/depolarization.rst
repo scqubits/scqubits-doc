@@ -243,11 +243,11 @@ References: [Koch2007]_, [Groszkowski2018]_,
 Quasiparticle-tunneling noise
 ----------------------------------
 
-+--------------------------------------------+-----------------------------------------+
-| Method name                                | ``t1_quasiparticle_tunneling``          |
-+--------------------------------------------+-----------------------------------------+
-| :math:`B_\lambda`                          | :math:`\sin(\hat{\phi}/2)`              |
-+--------------------------------------------+-----------------------------------------+
++-------------------+--------------------------------------------------+
+| Method name       | ``t1_quasiparticle_tunneling``                   |
++===================+==================================================+
+| :math:`B_\lambda` | :math:`\cos(\hat{\phi}/2)`  (see note ** below)  |
++-------------------+--------------------------------------------------+
 
 Noise due to quasiparticle tunelling. The assumed spectral density reads
 
@@ -265,6 +265,8 @@ The default real part of admittance is assumed to be
     {\rm Re} Y_{\rm qp}(\omega) = \sqrt{\frac{2}{\pi}} \frac{8 E_J}{R_k \Delta} \
     \left(\frac{2 \Delta}{\hbar \omega} \right)^{3/2}  x_{\rm qp} \
     K_{0} \left( \frac{\hbar |\omega|}{2 k_B T} \right) \sinh \left( \frac{\hbar \omega }{2 k_B T} \right).
+
+** In many publications, the operator :math:`\sin(\hat{\phi}/2)` is used, this is due to grouping of flux with the quadratic and not the :math:`\cos` term of the Hamiltonian.
 
 This method can be customized further through various noise related parameters shown below:
 
