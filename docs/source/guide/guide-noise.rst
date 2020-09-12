@@ -13,7 +13,7 @@ affecting most circuits to more specialized ones applicable only to the qubit of
 
 .. note::
 
-    The coherence calculations in scqubits use standard approximation techiniqes discussed in the listed references. 
+    The coherence calculations in scqubits use standard approximation techniques discussed in the listed references. 
     It is up to the user to ensure the assumptions are consistent with their parameter choices. 
 
 A list of the channels supported by a given qubit can be obtained by calling the ``supported_noise_channels()`` method.
