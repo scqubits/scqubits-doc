@@ -1,4 +1,5 @@
-sphinx
+sphinx>=3
+pygments>=2.4.1
 sphinx_rtd_theme
 nbsphinx
 sphinxcontrib-napoleon
