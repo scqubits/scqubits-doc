@@ -123,7 +123,7 @@ Estimation of coherence times
     scqubits.ZeroPi.t1
     scqubits.ZeroPi.t1_effective
     scqubits.ZeroPi.t1_flux_bias_line
-    scqubits.ZeroPi.t1_inductive_loss
+    scqubits.ZeroPi.t1_inductive
     scqubits.ZeroPi.t2_effective
     scqubits.ZeroPi.tphi_1_over_f
     scqubits.ZeroPi.tphi_1_over_f_cc

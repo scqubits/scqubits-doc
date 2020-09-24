@@ -20,6 +20,7 @@ Superconducting Qubits in Python
    :maxdepth: 2
 
    installation.rst
+   example-notebooks.rst
    guide/guide.rst
    api-doc/apidoc.rst
    changelog.rst

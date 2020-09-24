@@ -39,11 +39,11 @@ where :math:`T` is the bath temperature, and :math:`k_B` Boltzmann's constant.
 Capacitive noise
 -----------------------
 
-+--------------------------------------------+-----------------------------------------+
-| Method name                                | ``t1_capacitive_loss``                  |
-+--------------------------------------------+-----------------------------------------+
-| :math:`B_\lambda`                          | :math:`2e \hat{n}`                      |
-+--------------------------------------------+-----------------------------------------+
++-------------------+--------------------+
+| Method name       | ``t1_capacitive``  |
++===================+====================+
+| :math:`B_\lambda` | :math:`2e \hat{n}` |
++-------------------+--------------------+
 
 Capacitive noise corresponds to noise coming from a lossy capacitance. The assumed spectral density reads
 
@@ -74,7 +74,7 @@ This method can be customized further through various noise related parameters s
 +----------------+-----------------------------+------------------------------------------------+
 | T              | 0.015                       | Temperature (in K)                             |
 +----------------+-----------------------------+------------------------------------------------+
-| total          | False                       | Return both up and down rates                  |
+| total          | True                        | Return both up and down rates                  |
 +----------------+-----------------------------+------------------------------------------------+
 | get_rate       | False                       | Return rate instead of time                    |
 +----------------+-----------------------------+------------------------------------------------+
@@ -86,11 +86,13 @@ Qubits that support this noise channel include:
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
 :ref:`ZeroPi <qubit_zeropi>`.
 
+References: [Nguyen2019]_, [Smith2020]_  
+
 Inductive noise
 -----------------------
 
 +-------------------+----------------------------------------+
-| Method name       | ``t1_inductive_loss``                  |
+| Method name       | ``t1_inductive``                       |
 +===================+========================================+
 | :math:`B_\lambda` | :math:`\frac{\Phi_0}{2\pi} \hat{\phi}` |
 +-------------------+----------------------------------------+
@@ -127,7 +129,7 @@ This method can be customized further through various noise related parameters s
 +----------------+-----------------------------+------------------------------------------------+
 | T              | 0.015                       | Temperature (in K)                             |
 +----------------+-----------------------------+------------------------------------------------+
-| total          | False                       | Return both up and down rates                  |
+| total          | True                        | Return both up and down rates                  |
 +----------------+-----------------------------+------------------------------------------------+
 | get_rate       | False                       | Return rate instead of time                    |
 +----------------+-----------------------------+------------------------------------------------+
@@ -136,6 +138,7 @@ This method can be customized further through various noise related parameters s
 Qubits that support this noise channel include: 
 :ref:`Fluxonium <qubit_fluxonium>`.
 
+References: [Nguyen2019]_, [Smith2020]_  
 
 Charge-coupled impedance noise
 ------------------------------
@@ -173,7 +176,7 @@ This method can be customized further through various noise related parameters s
 +----------------+---------------+----------------------------------------------------+
 | T              | 0.015         | Temperature (in K)                                 |
 +----------------+---------------+----------------------------------------------------+
-| total          | False         | Return both up and down rates                      |
+| total          | True          | Return both up and down rates                      |
 +----------------+---------------+----------------------------------------------------+
 | get_rate       | False         | Return rate instead of time                        |
 +----------------+---------------+----------------------------------------------------+
@@ -184,15 +187,16 @@ Qubits that support this noise channel include:
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
 
+References: [Schoelkopf2003]_, [Ithier2005]_
 
 Flux-bias line noise
 -------------------------
 
-+--------------------------------------------+--------------------------------------------------------------+
-| Method name                                | ``t1_flux_bias_line``                                        |
-+--------------------------------------------+--------------------------------------------------------------+
-| :math:`B_\lambda`                          | :math:`\frac{\partial \hat{H}}{\partial \Phi_x}`             | 
-+--------------------------------------------+--------------------------------------------------------------+
++-------------------+--------------------------------------------------+
+| Method name       | ``t1_flux_bias_line``                            |
++===================+==================================================+
+| :math:`B_\lambda` | :math:`\frac{\partial \hat{H}}{\partial \Phi_x}` |
++-------------------+--------------------------------------------------+
 
 Noise due to current noisy biasing current coupled to the qubit via flux. The assumed spectral density reads
 
@@ -222,7 +226,7 @@ This method can be customized further through various noise related parameters s
 +----------------+---------------+---------------------------------------------------------------------+
 | T              | 0.015         | Temperature (in K)                                                  |
 +----------------+---------------+---------------------------------------------------------------------+
-| total          | False         | Return both up and down rates                                       |
+| total          | True          | Return both up and down rates                                       |
 +----------------+---------------+---------------------------------------------------------------------+
 | get_rate       | False         | Return rate instead of time                                         |
 +----------------+---------------+---------------------------------------------------------------------+
@@ -234,14 +238,16 @@ Qubits that support this noise channel include:
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
 :ref:`ZeroPi <qubit_zeropi>`.
 
+References: [Koch2007]_, [Groszkowski2018]_, 
+
 Quasiparticle-tunneling noise
 ----------------------------------
 
-+--------------------------------------------+-----------------------------------------+
-| Method name                                | ``t1_quasiparticle_tunneling``          |
-+--------------------------------------------+-----------------------------------------+
-| :math:`B_\lambda`                          | :math:`\sin(\hat{\phi}/2)`              |
-+--------------------------------------------+-----------------------------------------+
++-------------------+--------------------------------------------------+
+| Method name       | ``t1_quasiparticle_tunneling``                   |
++===================+==================================================+
+| :math:`B_\lambda` | :math:`\sin(\hat{\phi}/2)`  (see note ** below)  |
++-------------------+--------------------------------------------------+
 
 Noise due to quasiparticle tunelling. The assumed spectral density reads
 
@@ -259,6 +265,8 @@ The default real part of admittance is assumed to be
     {\rm Re} Y_{\rm qp}(\omega) = \sqrt{\frac{2}{\pi}} \frac{8 E_J}{R_k \Delta} \
     \left(\frac{2 \Delta}{\hbar \omega} \right)^{3/2}  x_{\rm qp} \
     K_{0} \left( \frac{\hbar |\omega|}{2 k_B T} \right) \sinh \left( \frac{\hbar \omega }{2 k_B T} \right).
+
+** This form assumes that the external flux is grouped with the inductive term of the Hamiltonian. In qubits where the flux is grouped with the Josephson term, the noise operator is appropriately transformed.  
 
 This method can be customized further through various noise related parameters shown below:
 
@@ -279,7 +287,7 @@ This method can be customized further through various noise related parameters s
 +----------------+-------------------------------------+------------------------------------------------+
 | Delta          | :math:`3.4 \times 10^{-4}` (for Al) | Superconducting gap (eV)                       |
 +----------------+-------------------------------------+------------------------------------------------+
-| total          | False                               | Return both up and down rates                  |
+| total          | True                                | Return both up and down rates                  |
 +----------------+-------------------------------------+------------------------------------------------+
 | get_rate       | False                               | Return rate instead of time                    |
 +----------------+-------------------------------------+------------------------------------------------+
@@ -291,7 +299,7 @@ Qubits that support this noise channel include:
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
 :ref:`ZeroPi <qubit_zeropi>`.
 
-References: [Catelani2011]_, [Pop2014]_, [Smith2020]_
+References: [Catelani2011]_, [Nguyen2019]_, [Pop2014]_, [Smith2020]_
 
 User-defined noise
 -----------------------

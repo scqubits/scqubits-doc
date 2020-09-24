@@ -21,6 +21,5 @@ User Guide
    guide-units.rst
    ./ipynb/storage.ipynb
    ./ipynb/parallel.ipynb
-   guide-example-ipynb.rst
    guide-settings.rst
 
