@@ -7,6 +7,14 @@
 Change Log
 **********
 
+Version 1.3.2
++++++++++++++
+
+**Bug fixes**
+- bug fix: `<qubit>.create()` failed in jupyter notebooks due to missing image files
+- bug fix: corrected the form of the quasiparticle noise operator
+
+
 Version 1.3.1
 +++++++++++++
 
