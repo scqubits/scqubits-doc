@@ -35,6 +35,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.ifconfig',
               'sphinx.ext.napoleon',
+              'sphinx_autodoc_typehints',
               'nbsphinx',
               'sphinx.ext.mathjax']
 
@@ -56,6 +57,9 @@ master_doc = 'index'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', '**.ipynb_checkpoints']
 
+# for sphinx-autodoc-typehints
+# set_type_checking_flag = True
+always_document_param_types = True
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -116,6 +120,7 @@ todo_include_todos = True
 
 napoleon_numpy_docstring = True
 napoleon_use_admonition_for_notes = True
+napoleon_use_rtype = False
 
 # Do not print input/output cell numbers
 nbsphinx_prompt_width = '0ex'

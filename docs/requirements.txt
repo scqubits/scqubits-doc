@@ -4,6 +4,7 @@ sphinx_rtd_theme
 nbsphinx
 sphinxcontrib-napoleon
 autodoc
+sphinx-autodoc-typehints
 numpy>=1.14.2
 scipy>=1.1.0
 matplotlib>=3.0.0
