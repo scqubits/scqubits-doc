@@ -8,6 +8,14 @@ Change Log
 **********
 
 
+Version 1.3.3   [XXXXX !!!!  XXXXX  NOT YET RELEASED, ADD ADDITIONAL CHANGES HERE ]
++++++++++++++
+
+**Improvements**
+- corrected the expression for the grid spacing in `discretization.py`. As a result, convergence for ZeroPi is now faster
+- added support for higher-order stencils in the discretized derivatives
+
+
 Version 1.3.2
 +++++++++++++
 
