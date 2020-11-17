@@ -76,8 +76,32 @@ FullZeroPi
 .. _classes-oscillator:
 
 Oscillator
---------------
+----------
 
 .. autoclass:: scqubits.Oscillator
+    :members:
+    :inherited-members:
+
+
+----------------------------------
+
+.. _classes-currentmirror:
+
+Current Mirror
+--------------
+
+.. autoclass:: scqubits.CurrentMirror
+    :members:
+    :inherited-members:
+
+
+----------------------------------
+
+.. _classes-VCHOS:
+
+VCHOS
+-----
+
+.. autoclass:: scqubits.VCHOS
     :members:
     :inherited-members:

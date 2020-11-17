@@ -21,3 +21,5 @@ summarized here. For a complete description see the API documentation.
    qubits/flux_qubit.rst
    qubits/zeropi.rst
    qubits/fullzeropi.rst
+   qubits/current_mirror.rst
+   qubits/tight_binding.rst
