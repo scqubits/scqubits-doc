@@ -16,13 +16,13 @@ This module assumes that the potential is of the form
 
     .. math::
 
-        U=-EJ[1]*\cos(\phi_1)-EJ[2]*\cos(\phi_2)-...-EJ[N]*\cos(bc[1]*\phi_1+bc[2]*\phi_2+...-2\pi f),
+        U=-EJ[1]\cos(\phi_1)-EJ[2]\cos(\phi_2)-...-EJ[N]\cos(bc[1]\phi_1+bc[2]\phi_2+...-2\pi f),
 
 
 where the array :math:`bc` denotes the coefficients of terms in the boundary term.
 For the flux qubit, the last term looks
-like :math:`-\alpha*EJ*\cos(\phi_1-\phi_2-2\pi f)`, where :math:`0.5\leq\alpha<1.0`.
-For the current mirror it is :math:`-EJ[N]*\cos(\sum_i(\phi_i)-2\pi f)`.
+like :math:`-\alpha\cdot EJ\cos(\phi_1-\phi_2-2\pi f)`, where :math:`0.5\leq\alpha<1.0`.
+For the current mirror it is :math:`-EJ[N]\cos(\sum_i(\phi_i)-2\pi f)`.
 Extensions to different types of potentials requires overriding the function::
 
    VCHOS._local_potential
@@ -47,29 +47,23 @@ the default form, the user must initialize::
 
    MyQubit.boundary_coefficients
 
-an ndarray of the coefficients in the boundary term in ``MyQubit.__init__``.
+an ndarray of the coefficients in the boundary term in ``MyQubit.__init__()``.
 
-Initialize ``VCHOS`` for example in the following way::
+Inside of ``MyQubit.__init__()`` initialize ``VCHOS`` for example in the following way::
 
-   EJ = 1.0
-   ng = 0.0
-   flux = 0.0
-   maximum_periodic_vector_length = 8
-   number_degrees_freedom = 2
-   number_periodic_degrees_freedom = 2
-   num_exc = 4
-   vchos = VCHOS(EJlist=np.array([EJ, EJ]), nglist=np.array([ng, ng]), flux=flux,
-                 maximum_periodic_vector_length=maximum_periodic_vector_length,
-                 number_degrees_freedom=number_degrees_freedom,
-                 number_periodic_degrees_freedom=number_periodic_degrees_freedom,
-                 num_exc=num_exc)
+   def __init__(self, EJ1, EJ2, EJ3, ECJ1, ECJ2, ECJ3,
+                ECg1, ECg2, ng1, ng2, flux, truncated_dim=None, **kwargs):
+       EJlist = np.array([EJ1, EJ2, EJ3])
+       nglist = np.array([ng1, ng2])
+       VCHOS.__init__(self, EJlist, nglist, flux, number_degrees_freedom=2,
+                      number_periodic_degrees_freedom=2, **kwargs)
 
-where we have used the Flux Qubit as an example application of ``VCHOS``.
-``maximum_periodic_vector_length`` determines the maximum Manhattan length
-of a possible periodic continuation vector, ``number_degrees_freedom`` is the number
-of degrees of freedom your qubit possesses, ``number_periodic_degrees_freedom`` is the
-number of those degrees of freedom that are periodic, and ``num_exc`` is the maximum
-number of excitations kept per mode.
+
+where we have used the Flux Qubit as an example application of ``VCHOS``. Two
+required keyword-arguments ``kwargs`` are ``maximum_periodic_vector_length`` and
+``num_exc``. ``maximum_periodic_vector_length`` determines the maximum
+Manhattan length of a possible periodic continuation vector and
+``num_exc`` is the maximum number of excitations kept per mode.
 
 A global excitation cutoff scheme is implemented in ``Hashing``, in which case
 the keyword argument ``global_exc`` must be set and ``num_exc`` should
@@ -78,7 +72,7 @@ not be passed as an argument. The class ``MyQubit`` must inherit
 
 If the user would like to squeeze states localized in non-global minima in
 order to accurately reflect the local curvature, this can be done by
-instead inheriting ``VCHOSSqueezing``. No other changes need be made.
+instead inheriting ``VCHOSSqueezing``. No other changes need to be made.
 
 If the user would like to optimize the harmonic lengths of the ansatz states,
 this can be done by setting the flag ``vchos.harmonic_length_optimization=1``.
@@ -92,14 +86,15 @@ note that the convention used in the code is that for arrays of the
 coordinates (necessary for constructing periodic continuation vectors, for example),
 the extended degrees of freedom come first. For
 example, for the :math:`0-\pi` qubit, with real :math:`\phi` and periodic :math:`\theta`
-degrees of freedom, the array ``position=np.array([0, 2*np.pi])`` describes
-a periodic continuation vector where no periodic continuation is done in the
-:math:`\phi` direction, and we periodically continue by :math:`2\pi` in the :math:`\theta` direction.
-See current_mirror_vchos.py, flux_qubit_vchos.py and zero_pi_vchos.py for examples.
+degrees of freedom, in the position vector ``[0, 2*np.pi]``, ``0`` refers to :math:`\phi`
+and ``2*np.pi`` refers to :math:`\theta`.
+
+See current_mirror_vchos.py, flux_qubit_vchos.py and zero_pi_vchos.py for examples
+of qubits implemented using variational tight binding.
 
 
-Calculational methods related to Hamiltonian and energy spectra
-_______________________________________________________________
+Calculational methods related to transfer matrix and inner-product matrix
+_________________________________________________________________________
 
 .. autosummary::
 
@@ -107,8 +102,6 @@ _______________________________________________________________
    scqubits.VCHOS.kinetic_matrix
    scqubits.VCHOS.potential_matrix
    scqubits.VCHOS.inner_product_matrix
-   scqubits.VCHOS.eigenvals
-   scqubits.VCHOS.eigensys
 
 
 
