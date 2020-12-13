@@ -97,11 +97,11 @@ Current Mirror
 
 ----------------------------------
 
-.. _classes-VCHOS:
+.. _classes-variationaltightbinding:
 
-VCHOS
------
+Variational Tight Binding
+-------------------------
 
-.. autoclass:: scqubits.VCHOS
+.. autoclass:: scqubits.VariationalTightBinding
     :members:
     :inherited-members:

@@ -1,8 +1,8 @@
 .. scqubits
    Copyright (C) 2017 and later, Jens Koch & Peter Groszkowski
 
-Tight Binding
-==============
+Variational Tight Binding
+=========================
 
 This module serves as a parent class that qubit classes can be derived from.
 The idea is to attempt to diagonalize superconducting circuit
@@ -25,9 +25,9 @@ like :math:`-\alpha\cdot EJ\cos(\phi_1-\phi_2-2\pi f)`, where :math:`0.5\leq\alp
 For the current mirror it is :math:`-EJ[N]\cos(\sum_i(\phi_i)-2\pi f)`.
 Extensions to different types of potentials requires overriding the function::
 
-   VCHOS._local_potential
+   VariationalTightBinding._local_potential
 
-An example can be found in scqubits/core/zero_pi_vchos.py,
+An example can be found in scqubits/core/zero_pi_vtb.py,
 where we must implement a potential of the form
 
    .. math::
@@ -35,7 +35,7 @@ where we must implement a potential of the form
       U=E_{L}\phi^2 - 2E_{J}\cos(\theta)\cos(\phi-2\pi f/2)
 
 If the user would like to define a new qubit class ``MyQubit`` that inherits
-``VCHOS``, the user must define the functions::
+``VariationalTightBinding``, the user must define the functions::
 
    MyQubit.potential()
    MyQubit.build_capacitance_matrix()
@@ -49,17 +49,17 @@ the default form, the user must initialize::
 
 an ndarray of the coefficients in the boundary term in ``MyQubit.__init__()``.
 
-Inside of ``MyQubit.__init__()`` initialize ``VCHOS`` for example in the following way::
+Inside of ``MyQubit.__init__()`` initialize ``VariationalTightBinding`` for example in the following way::
 
    def __init__(self, EJ1, EJ2, EJ3, ECJ1, ECJ2, ECJ3,
                 ECg1, ECg2, ng1, ng2, flux, truncated_dim=None, **kwargs):
        EJlist = np.array([EJ1, EJ2, EJ3])
        nglist = np.array([ng1, ng2])
-       VCHOS.__init__(self, EJlist, nglist, flux, number_degrees_freedom=2,
+       VariationalTightBinding.__init__(self, EJlist, nglist, flux, number_degrees_freedom=2,
                       number_periodic_degrees_freedom=2, **kwargs)
 
 
-where we have used the Flux Qubit as an example application of ``VCHOS``. Two
+where we have used the Flux Qubit as an example application of ``VariationalTightBinding``. Two
 required keyword-arguments ``kwargs`` are ``maximum_periodic_vector_length`` and
 ``num_exc``. ``maximum_periodic_vector_length`` determines the maximum
 Manhattan length of a possible periodic continuation vector and
@@ -68,18 +68,18 @@ Manhattan length of a possible periodic continuation vector and
 A global excitation cutoff scheme is implemented in ``Hashing``, in which case
 the keyword argument ``global_exc`` must be set and ``num_exc`` should
 not be passed as an argument. The class ``MyQubit`` must inherit
-``Hashing`` before ``VCHOS`` in order for methods to be overridden correctly.
+``Hashing`` before ``VariationalTightBinding`` in order for methods to be overridden correctly.
 
 If the user would like to squeeze states localized in non-global minima in
 order to accurately reflect the local curvature, this can be done by
-instead inheriting ``VCHOSSqueezing``. No other changes need to be made.
+instead inheriting ``VariationalTightBindingSqueezing``. No other changes need to be made.
 
 If the user would like to optimize the harmonic lengths of the ansatz states,
-this can be done by setting the flag ``vchos.harmonic_length_optimization=1``.
+this can be done by setting the flag ``MyQubit.harmonic_length_optimization=1``.
 By default the flag is set to 0. If the user is using squeezing and would
 like to optimize the harmonic lengths of states localized in all minima,
 as opposed to just the global minimum, this can be done by setting the flag
-``vchos.optimize_all_minima=1``.
+``MyQubit.optimize_all_minima=1``.
 
 If the user is implementing a qubit that has both real and periodic degrees of freedom,
 note that the convention used in the code is that for arrays of the
@@ -89,7 +89,7 @@ example, for the :math:`0-\pi` qubit, with real :math:`\phi` and periodic :math:
 degrees of freedom, in the position vector ``[0, 2*np.pi]``, ``0`` refers to :math:`\phi`
 and ``2*np.pi`` refers to :math:`\theta`.
 
-See current_mirror_vchos.py, flux_qubit_vchos.py and zero_pi_vchos.py for examples
+See current_mirror_vtb.py, flux_qubit_vtb.py and zero_pi_vtb.py for examples
 of qubits implemented using variational tight binding.
 
 
@@ -98,10 +98,10 @@ _________________________________________________________________________
 
 .. autosummary::
 
-   scqubits.VCHOS.transfer_matrix
-   scqubits.VCHOS.kinetic_matrix
-   scqubits.VCHOS.potential_matrix
-   scqubits.VCHOS.inner_product_matrix
+   scqubits.VariationalTightBinding.transfer_matrix
+   scqubits.VariationalTightBinding.kinetic_matrix
+   scqubits.VariationalTightBinding.potential_matrix
+   scqubits.VariationalTightBinding.inner_product_matrix
 
 
 
@@ -110,9 +110,9 @@ ______________________
 
 .. autosummary::
 
-   scqubits.VCHOS.build_gamma_matrix
-   scqubits.VCHOS.eigensystem_normal_modes
-   scqubits.VCHOS.omega_matrix
-   scqubits.VCHOS.Xi_matrix
-   scqubits.VCHOS.sorted_minima
-   scqubits.VCHOS.find_relevant_periodic_continuation_vectors
+   scqubits.VariationalTightBinding.build_gamma_matrix
+   scqubits.VariationalTightBinding.eigensystem_normal_modes
+   scqubits.VariationalTightBinding.omega_matrix
+   scqubits.VariationalTightBinding.Xi_matrix
+   scqubits.VariationalTightBinding.sorted_minima
+   scqubits.VariationalTightBinding.find_relevant_periodic_continuation_vectors
