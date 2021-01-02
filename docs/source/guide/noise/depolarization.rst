@@ -15,7 +15,7 @@ The rate of a transition from state :math:`i` to state :math:`j` can be expresse
    \Gamma_{ij} = \frac{1}{\hbar^2} |\langle i| B_{\lambda} |j \rangle|^2 S(\omega_{ij}),
 
 where :math:`B_\lambda` is the noise operator, and :math:`S(\omega_{ij})` the spectral density function evaluated at
-the angular frequency associated with the transition frequeny, :math:`\omega_{ij} = \omega_{j} - \omega_{i}`.
+the angular frequency associated with the transition frequency, :math:`\omega_{ij} = \omega_{j} - \omega_{i}`.
 :math:`\omega_{ij}` is positive in the case of  decay (the qubit emits energy to the bath), and negative in case of
 excitations (the qubit absorbs energy from the bath).
 
