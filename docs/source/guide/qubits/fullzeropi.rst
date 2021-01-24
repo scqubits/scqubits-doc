@@ -27,29 +27,29 @@ qubit (realized by ``ZeroPi``)  on one hand, and the zeta LC oscillator on the o
 
 An instance of the full Zero-Pi qubit is created as follows::
 
-   phi_grid = scqubits.Grid1d(-6*np.pi, 6*np.pi, 200)
+   phi_grid = scq.Grid1d(-6*np.pi, 6*np.pi, 200)
 
-   zero_pi = scqubits.FullZeroPi(grid = phi_grid,
-                                EJ   = 0.25,
-                                EL   = 10.0**(-2),
-                                ECJ  = 0.5,
-                                EC   = 0.001,
-                                dEJ  = 0.05,
-                                dCJ  = 0.05,
-                                dEL  = 0.01,
-                                dC   = 0.08,
-                                ng   = 0.1,
-                                flux = 0.23,
-                                ncut = 30,
-                                zeropi_cutoff = 10,
-                                zeta_cutoff = 30)
+   zero_pi = scq.FullZeroPi(grid = phi_grid,
+                            EJ   = 0.25,
+                            EL   = 10.0**(-2),
+                            ECJ  = 0.5,
+                            EC   = 0.001,
+                            dEJ  = 0.05,
+                            dCJ  = 0.05,
+                            dEL  = 0.01,
+                            dC   = 0.08,
+                            ng   = 0.1,
+                            flux = 0.23,
+                            ncut = 30,
+                            zeropi_cutoff = 10,
+                            zeta_cutoff = 30)
 
 Here, ``flux`` is given in in terms of the flux quantum, i.e., in the form :math:`\Phi_\text{ext}/\Phi_0`. In the above example,
 the disorder parameters ``dEJ`` and ``dCJ`` are not specified, and hence take on the default value zero (no disorder).
 
 From within Jupyter notebook, an instance of the disordered Zero-Pi qubit can alternatively be created with::
 
-   zero_pi = scqubits.ZeroPiFull.create()
+   zero_pi = scq.ZeroPiFull.create()
 
 This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.
