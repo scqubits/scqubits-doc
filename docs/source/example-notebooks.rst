@@ -14,8 +14,9 @@ Users can easily clone it to their local file system by executing::
 
     git clone https://github.com/scqubits/scqubits-examples
 
-The full contents of `scqubits-examples` can be also explored in Binder:
+The full contents of `scqubits-examples` can be also explored in Binder, which provides live jupyter notebooks. The
+notebooks can be accessed by following this `link <https://mybinder.org/v2/gh/scqubits/scqubits-examples/master>`_.
 
 .. image:: https://mybinder.org/badge_logo.svg
- :target: https://mybinder.org/v2/gh/scqubits/scqubits-examples/master
+   :target: https://mybinder.org/v2/gh/scqubits/scqubits-examples/master
 
