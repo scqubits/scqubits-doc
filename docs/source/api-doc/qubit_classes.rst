@@ -102,6 +102,6 @@ Current Mirror
 Variational Tight Binding
 -------------------------
 
-.. autoclass:: scqubits.VariationalTightBinding
+.. autoclass:: scqubits.VTBBaseMethods
     :members:
     :inherited-members:
