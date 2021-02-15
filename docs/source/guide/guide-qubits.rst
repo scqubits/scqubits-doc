@@ -22,3 +22,4 @@ summarized here. For a complete description see the API documentation.
    qubits/zeropi.rst
    qubits/fullzeropi.rst
    qubits/genericqubit.rst
+   qubits/cos2phi_qubit.rst
