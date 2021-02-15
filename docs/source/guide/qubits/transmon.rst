@@ -23,14 +23,14 @@ charge-number cutoff specified by ``ncut``. This cutoff must be chosen sufficien
 
 An instance of the transmon qubit is initialized as follows::
 
-   transmon = scq.Transmon(EJ=30.02,
-                           EC=1.2,
-                           ng=0.3,
-                           ncut=31)
+   transmon = scqubits.Transmon(EJ=30.02,
+                                 EC=1.2,
+                                 ng=0.3,
+                                 ncut=31)
 
 From within Jupyter notebook, a transmon instance can alternatively be created with::
 
-   transmon = scq.Transmon.create()
+   transmon = scqubits.Transmon.create()
 
 This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.

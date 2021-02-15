@@ -24,18 +24,18 @@ internally uses the :math:`E_C`-:math:`E_L` harmonic-oscillator basis [Zhu2013]_
 
 An instance of the fluxonium created as follows::
 
-   fluxonium = scq.Fluxonium(EJ = 8.9,
-                             EC = 2.5,
-                             EL = 0.5,
-                             flux = 0.33,
-                             cutoff = 110)
+   fluxonium = scqubits.Fluxonium(EJ = 8.9,
+                                  EC = 2.5,
+                                  EL = 0.5,
+                                  flux = 0.33,
+                                  cutoff = 110)
 
 Here, the flux threading the circuit loop is specified by ``flux`` which records the flux in units of the magnetic
 flux quantum, :math:`\Phi_\text{ext}/\Phi_0`.
 
 From within Jupyter notebook, a fluxonium instance can alternatively be created with::
 
-   fluxonium = scq.Fluxonium.create()
+   fluxonium = scqubits.Fluxonium.create()
 
 This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.

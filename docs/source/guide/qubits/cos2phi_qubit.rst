@@ -7,9 +7,9 @@ Cosine Two Phi Qubit
 =========================
 
 .. figure:: ../../graphics/fluxqubit.png
-   :align: center
-   :width: 4in
-
+   :align: center 
+   :width: 4in  
+ 
 The cosine two phi qubit [Smith2020]_ is described by the Hamiltonian
 
 .. math::
@@ -17,7 +17,7 @@ The cosine two phi qubit [Smith2020]_ is described by the Hamiltonian
    H = & \,2 E_\text{CJ}n_\phi^2 + 2 E_\text{CJ} (n_\theta - n_\text{g} - n_\zeta)^2 + 4 E_\text{C} n_\zeta^2\\
    & + E_\text{L}(\phi - \varphi_\text{ext}/2)^2 + E_\text{L} \zeta^2 - 2 E_\text{J}\cos{\theta}\cos{\phi}.
 
-In the presence of disorder, the above Hamiltonian is modified
+In the presence of disorder, the above Hamiltonian is modified 
 
 .. math::
 
@@ -25,13 +25,13 @@ In the presence of disorder, the above Hamiltonian is modified
     & + E_\text{L}'(\phi - \varphi_\text{ext}/2)^2 + E_\text{L}' \zeta^2 - 2 E_\text{J}\cos{\theta}\cos{\phi} \\
     & + 2 \delta_\text{EJ} E_\text{J}\sin{\theta}\sin{\phi} \\
     & - 4 \delta_\text{CJ} E_\text{CJ}' n_\phi (n_\theta - n_\text{g}-n_\zeta) \\
-    & + \delta_\text{L}E_\text{L}'(2\phi - \varphi_\text{ext})\zeta ,
+    & + \delta_\text{L}E_\text{L}'(2\phi - \varphi_\text{ext})\zeta , 
 
-where :math:`E_\text{CJ}' = E_\text{CJ} / (1 - \delta_\text{CJ})^2` and :math:`E_\text{L}' = E_\text{L} / (1 - \delta_\text{L})^2`. Here, the disorder is defined as follows: the inductive energy of the two inductors are :math:`E_\text{L}/(1 \pm \delta_\text{L})`; the charging energy of the two Josephson junctions are :math:`E_\text{CJ}/(1 \pm \delta_\text{CJ})`; the junction energy of the two Josephson junctions are :math:`E_\text{J} (1 \pm \delta_\text{EJ})`.
+where :math:`E_\text{CJ}' = E_\text{CJ} / (1 - \delta_\text{CJ})^2` and :math:`E_\text{L}' = E_\text{L} / (1 - \delta_\text{L})^2`. Here, the disorder is defined as follows: the inductive energy of the two inductors are :math:`E_\text{L}/(1 \pm \delta_\text{L})`; the charging energy of the two Josephson junctions are :math:`E_\text{CJ}/(1 \pm \delta_\text{CJ})`; the junction energy of the two Josephson junctions are :math:`E_\text{J} (1 \pm \delta_\text{EJ})`. 
 
 Here, we adopt notation that is consistent with other qubit classes. A conversion to the notation used in Ref. [Smith2020]_ can be founded in the following table.
 
-.. list-table::
+.. list-table:: 
    :widths: 25 25
 
    * - Notation used here
@@ -41,13 +41,13 @@ Here, we adopt notation that is consistent with other qubit classes. A conversio
    * - :math:`\theta`
      - :math:`\varphi`
    * - :math:`\phi`
-     - :math:`\phi/2`
+     - :math:`\phi/2`  
    * - :math:`E_\text{C}`
-     - :math:`E_\text{C} x`
+     - :math:`E_\text{C} x` 
    * - :math:`E_\text{CJ}`
-     - :math:`E_\text{C}`
+     - :math:`E_\text{C}` 
 
-
+                
 To numerically diagonalize the Hamiltonian in the ``Cos2PhiQubit`` class, harmonic basis is used for both the :math:`\phi` and :math:`\zeta` variables, and charge basis is used for :math:`\theta` variable. The user needs to specify cutoffs for basis states described above, i.e., ``phi_cut``, ``zeta_cut``, and ``n_cut``, chosen large enough so that convergence is achieved.
 
 An instance of the cosine two phi qubit is initialized as follows::
@@ -124,7 +124,7 @@ Computation and visualization of matrix elements
     scqubits.Cos2PhiQubit.get_matelements_vs_paramvals
     scqubits.Cos2PhiQubit.plot_matelem_vs_paramvals
 
-
+   
 Estimation of coherence times
 -----------------------------
 

@@ -7,21 +7,12 @@
 Change Log
 **********
 
-
-Version 1.3.3   [XXXXX !!!!  XXXXX  NOT YET RELEASED, ADD ADDITIONAL CHANGES HERE ]
-+++++++++++++
-
-**Improvements**
-- corrected the expression for the grid spacing in `discretization.py`. As a result, convergence for ZeroPi is now faster
-- added support for higher-order stencils in the discretized derivatives
-
-
 Version 1.3.2
 +++++++++++++
 
 **Bug fixes**
-- bug fix: `<qubit>.create()` failed in jupyter notebooks due to missing image files
-- bug fix: corrected the form of the quasiparticle noise operator
+    - bug fix: `<qubit>.create()` failed in jupyter notebooks due to missing image files
+    - bug fix: corrected the form of the quasiparticle noise operator
 
 
 Version 1.3.1
