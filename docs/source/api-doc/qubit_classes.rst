@@ -84,7 +84,7 @@ Oscillator
 
 ----------------------------------
 
-.. _classes-cosinetwophiqubit:
+.. _classes-cos2phiqubit:
 
 Cos2PhiQubit
 -----------------------
