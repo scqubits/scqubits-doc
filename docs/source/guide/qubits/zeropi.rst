@@ -28,24 +28,24 @@ using charge basis for the ``theta`` variable.
 
 An instance of the Zero-Pi qubit is created as follows::
 
-   phi_grid = scq.Grid1d(-6*np.pi, 6*np.pi, 200)
+   phi_grid = scqubits.Grid1d(-6*np.pi, 6*np.pi, 200)
 
-   zero_pi = scq.ZeroPi(grid = phi_grid,
-                        EJ   = 0.25,
-                        EL   = 10.0**(-2),
-                        ECJ  = 0.5,
-                        EC   = None,
-                        ECS  = 10.0**(-3),
-                        ng   = 0.1,
-                        flux = 0.23,
-                        ncut = 30)
+   zero_pi = scqubits.ZeroPi(grid = phi_grid,
+                              EJ   = 0.25,
+                              EL   = 10.0**(-2),
+                              ECJ  = 0.5,
+                              EC   = None,
+                              ECS  = 10.0**(-3),
+                              ng   = 0.1,
+                              flux = 0.23,
+                              ncut = 30)
 
 Here, ``flux`` is given in units of the flux quantum, i.e., in the form :math:`\Phi_\text{ext}/\Phi_0`. In the above example,
 the disorder parameters ``dEJ`` and ``dCJ`` are not specified, and hence take on the default value zero (no disorder).
 
 From within Jupyter notebook, a fluxonium instance can alternatively be created with::
 
-   zero_pi = scq.ZeroPi.create()
+   zero_pi = scqubits.ZeroPi.create()
 
 This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.

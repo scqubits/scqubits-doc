@@ -27,7 +27,7 @@ is the relative junction asymmetry.
 
 An instance of a tunable transmon qubit is created like this::
 
-   tune_tmon = scq.TunableTransmon(
+   tune_tmon = scqubits.TunableTransmon(
       EJmax=50.0,
       EC=0.5,
       d=0.01,
@@ -38,7 +38,7 @@ An instance of a tunable transmon qubit is created like this::
 
 From within Jupyter notebook, a GUI-based creation is supported via::
 
-   tune_tmon = scq.TunableTransmon.create()
+   tune_tmon = scqubits.TunableTransmon.create()
 
 This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.

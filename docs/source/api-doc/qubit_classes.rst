@@ -81,3 +81,15 @@ Oscillator
 .. autoclass:: scqubits.Oscillator
     :members:
     :inherited-members:
+
+----------------------------------
+
+.. _classes-cos2phiqubit:
+
+Cos2PhiQubit
+-----------------------
+
+.. autoclass:: scqubits.Cos2PhiQubit
+    :members:
+    :inherited-members:
+

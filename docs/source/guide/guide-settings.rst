@@ -32,13 +32,10 @@ scqubits has a few internal parameters that can be changed by the user:
 +-------------------------+------------------------------+-------------------------------------------------------------------+
 | ``MULTIPROC``           | `str`                        | 'pathos' (default) or 'multiprocessing'                           |
 +-------------------------+------------------------------+-------------------------------------------------------------------+
-| ``NUM_CPUS``            | `int`                        | number of cores to be used in parallelization (default: 1)        |
-+-------------------------+------------------------------+-------------------------------------------------------------------+
-| ``STENCIL``             | `int` in [3, 5, 7, 9]        | Stencil for discretized derivatives (default: 7)                  |
+| ``NUM_CPUS``            | int                          | number of cores to be used in parallelization (default: 1)        |
 +-------------------------+------------------------------+-------------------------------------------------------------------+
 
-
-Users can also set up units of the energy scales. This is discussed in the :ref:`guide_units` section of the user guide.
+Users can also setup units of the energy scales. This is discussed in the :ref:`guide_units` section of the user guide. 
 
 
 .. note:: The ``DEFAULT_ENERGY_UNIT`` setting is no longer used - see :ref:`guide_units` for information on how to set energy units. 
