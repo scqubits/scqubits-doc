@@ -32,7 +32,10 @@ scqubits can also be installed using the Python package manager `pip <http://www
 
    pip install scqubits
 
+to upgrade to the latest version of scqubits by 
+.. code-block:: bash
 
+   pip install scqubits -U
 
 
 .. _install-requires:
