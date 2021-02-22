@@ -47,7 +47,7 @@ By default, all coherence time calculations assume that the qubit Hilbert space 
 If needed, the user can provide different energy levels as arguments in order to extend the relevant subspace.
 
 A set of examples showing how to perform a variety of coherence-times estimates is presented in
-this `jupyter notebook <https://nbviewer.jupyter.org/github/scqubits/scqubits/blob/master/examples/demo_noise.ipynb>`_ .
+this `jupyter notebook <https://nbviewer.jupyter.org/github/scqubits/scqubits-examples/blob/master/examples/demo_noise.ipynb>`_ .
 
 More detailed discussions of the individual supported noise channels can be found in the following subsections.
 
