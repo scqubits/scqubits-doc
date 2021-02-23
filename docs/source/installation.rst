@@ -13,12 +13,17 @@ Installation
 Installing via conda
 ====================
 
-For Python 3.6, 3.7 and 3.8, installation via conda is supported.
+For Python 3.6, 3.7 and 3.8, installation via conda is supported. This is done by executing
 
 .. code-block:: bash
 
    conda install -c conda-forge scqubits
 
+Upgrading to the latest version of scqubits can be done by 
+
+.. code-block:: bash
+
+   conda update -c conda-forge scqubits
 
 
 .. _install-via_pip:
@@ -32,11 +37,11 @@ scqubits can also be installed using the Python package manager `pip <http://www
 
    pip install scqubits
 
-to upgrade to the latest version of scqubits by 
+To upgrade to the latest version of scqubits one can execute 
+
 .. code-block:: bash
 
    pip install scqubits -U
-
 
 .. _install-requires:
 
