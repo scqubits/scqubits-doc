@@ -86,7 +86,7 @@ Qubits that support this noise channel include:
 :ref:`TunableTransmon <qubit_tunable_transmon>`, 
 :ref:`ZeroPi <qubit_zeropi>`.
 
-1/f criticial current noise
+1/f critical current noise
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Critical-current noise is suspected to arise from trapping and de-trapping of charges at defect sites inside Josephson
 junctions. These trapped charges then may locally suppress or enhance the tunneling across the junction, leading to

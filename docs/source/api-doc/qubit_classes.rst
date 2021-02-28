@@ -82,6 +82,15 @@ Oscillator
     :members:
     :inherited-members:
 
+.. _classes-kerroscillator:
+
+KerrOscillator
+--------------
+
+.. autoclass:: scqubits.KerrOscillator
+    :members:
+    :inherited-members:
+
 ----------------------------------
 
 .. _classes-cos2phiqubit:
