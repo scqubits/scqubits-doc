@@ -14,8 +14,13 @@ Users can easily clone it to their local file system by executing::
 
     git clone https://github.com/scqubits/scqubits-examples
 
-The full contents of `scqubits-examples` can be also explored in Binder:
+The full contents of `scqubits-examples` can also be explored in a live jupyter
+notebook via Binder:
 
 .. image:: https://mybinder.org/badge_logo.svg
- :target: https://mybinder.org/v2/gh/scqubits/scqubits-examples/master
+   :width: 110
+   :height: 20
+   :scale: 200
+   :align: center
+   :target: https://mybinder.org/v2/gh/scqubits/scqubits-examples/master
 

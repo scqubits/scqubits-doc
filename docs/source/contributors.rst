@@ -32,6 +32,6 @@ Contributors
 | **Jun Sung** (Northwestern University) - Bug hunter
 | **Sydney Wang** (IMSA) - Code contributor
 | **Daniel Weiss** (Northwestern University) - Code contributor, bug hunter
-| **Xinyuan You** (Northwestern University) - Code contributor
+| **Xinyuan You** (Northwestern University) - Code contributor, bug hunter
 | **Athena Zheng** (IMSA) - Code contributor
 

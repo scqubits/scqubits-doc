@@ -20,7 +20,7 @@ Superconducting Qubits in Python
    further offers an interface to QuTiP, making it easy to work with composite Hilbert spaces consisting of multiple
    coupled superconducting qubits and harmonic modes.
 
-   Internally, scqubits performs numerics utilizing Numpy and Scipy; plotting capabilities rely on Matplotlib.
+   scqubits performs numerics utilizing Numpy and Scipy; plotting capabilities rely on Matplotlib.
 
 
 .. toctree::

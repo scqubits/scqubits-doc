@@ -38,7 +38,7 @@ h3 {
 }
 
 .rst-content .toctree-wrapper > p.caption, h2, h3, h4, h5, h6, legend {
-    margin-top: 40px;
+    margin-top: 50px;
     font-weight: 400;
     font-family: "Open Sans", Roboto,ff-tisa-web-pro,Georgia,Arial,sans-serif;
 }
@@ -73,7 +73,7 @@ body {
     padding: 1.618em 3.236em;
     height: 100%;
     max-width: 900px;
-    margin: auto;
+    margin-left: 40px;
 }
 
 .highlight {
@@ -81,11 +81,11 @@ body {
 }
 
 html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.simple) > dt {
-    font-size: 120%;
+    font-size: 110%;
 }
 
 .rst-content dl dt {
-    font-size: 120%;
+    font-size: 110%;
 }
 
 .rst-content .section ol li > p:only-child, .rst-content .section ol li > p:only-child:last-child, .rst-content .section ul li > p:only-child, .rst-content .section ul li > p:only-child:last-child {
@@ -93,22 +93,20 @@ html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-co
 }
 
 .wy-menu-vertical a {
-    font-size: 110%;
+    font-size: 100%;
 }
 
 element {
 
 }
 .wy-side-nav-search input[type="text"] {
-
     width: 100%;
     border-radius: 50px;
-    padding: 6px 12px;
+    padding: 8px 14px;
     border-color: #2472a4;
-
 }
 
 input[type="color"], input[type="date"], input[type="datetime-local"], input[type="datetime"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"] {
-    font-size: 110%;
+    font-size: 100%;
     font-family: "Open Sans",Lato,proxima-nova,Helvetica Neue,Arial,sans-serif;
 }
