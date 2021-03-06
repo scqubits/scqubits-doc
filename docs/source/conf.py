@@ -36,7 +36,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.ifconfig',
               'sphinx.ext.napoleon',
               'nbsphinx',
-              'sphinx.ext.mathjax']
+              'sphinx.ext.mathjax',
+              'sphinx_autodoc_typehints',]
 
 
 html_show_sourcelink = False

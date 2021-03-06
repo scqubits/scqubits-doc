@@ -24,7 +24,7 @@ Version 1.3.1
     - Separated documentation and example jupyter notebooks into individual repositories, see scqubits-doc and scqubits-examples.
 
 **Minor changes/additions**
-    - Introduced tests for real-valuedness of zero-pi Hamiltonians for speedup.
+    - Introduced tests for real-valuedness of zero-pi Hamiltonians (for speedup).
     - New options in plotting (e.g. grid).
 
 **Bug fixes**
