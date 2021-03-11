@@ -21,19 +21,26 @@
 
 /* Font overrides */
 h1 {
-    font-size: 32px;
-    margin-top: 40px;
+    font-size: 34px;
+    line-height: 34px;
+    margin-top: 60px;
+    margin-bottom: 50px;
     font-weight: 700;
     font-family: "Open Sans", Roboto,ff-tisa-web-pro,Georgia,Arial,sans-serif;
 }
 
 h2 {
-    font-size: 28px;
+    margin-top: 60px;
+    margin-bottom: 28px;
+    font-size: 32px;
+    line-height: 32px;
     color: #4d77cf;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 24px;
+    line-height: 24px;
+    margin-top: 40px;
     color: #4d77cf;
 }
 
@@ -66,7 +73,7 @@ body {
 
 .rst-content code.literal, .rst-content tt.literal {
     color: rgb(0, 90, 130);
-    background: rgb(252, 252, 252);
+    background: transparent;
 }
 
 .wy-nav-content {
