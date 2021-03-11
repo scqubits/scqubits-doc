@@ -4,7 +4,7 @@
 .. _guide-settings:
 
 *************************************
-Modifying Internal scqubits Settings
+Modifying Settings of scqubits
 *************************************
 
 .. _settings-params:

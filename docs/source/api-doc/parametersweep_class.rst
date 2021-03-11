@@ -15,4 +15,4 @@ ParameterSweep
 --------------
 
 .. autoclass:: scqubits.ParameterSweep
-    :members:
+   :exclude-members: serialize, deserialize, broadcase, receive
