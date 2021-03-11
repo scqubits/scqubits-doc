@@ -12,10 +12,12 @@ User Guide
 
    guide-overview.rst
    ./ipynb/basics.ipynb
+   ./ipynb/gui.ipynb
    guide-qubits.rst
    guide-noise.rst
    ./ipynb/hilbertspace.ipynb
    ./ipynb/paramsweep.ipynb
+   ./ipynb/paramsweep2.ipynb
    ./ipynb/explorer.ipynb
    guide-plot-options.rst
    guide-units.rst

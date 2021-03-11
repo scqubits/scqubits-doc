@@ -10,7 +10,8 @@ Tunable Transmon Qubit
    :align: center
    :width: 4in
 
-The flux-tunable transmon qubit [Koch2007]_ is a simple modification of the fixed-frequency transmon obtained by
+The flux-tunable transmon qubit [Koch2007]_ is a simple modification of the
+fixed-frequency transmon obtained. It is obtained by
 replacing the Josephson junction by a SQUID loop of two Josephson junctions. A flux threaded through this loop can
 then be used to change the effective Josephson energy of the circuit and thus make the transmon tunable.
 

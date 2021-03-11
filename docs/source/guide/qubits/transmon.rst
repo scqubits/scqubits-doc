@@ -17,8 +17,10 @@ The transmon qubit [Koch2007]_ is described by the Hamiltonian
 
    H=4E_\text{C}(\hat{n}-n_g)^2-\frac{1}{2}E_\text{J}\sum_n(|n\rangle\langle n+1|+\text{h.c.}),
 
-expressed in discrete charge basis. :math:`E_C` is the charging energy, :math:`E_J` the Josephson energy, and
-:math:`n_g` the offset charge. Within the ``Transmon`` class, charge-basis representation is employed with a
+expressed in discrete charge basis. Here, :math:`E_C` is the charging energy,
+:math:`E_J` the Josephson energy, and
+:math:`n_g` the offset charge. Within the :class:`~scqubits.Transmon` class,
+charge-basis representation is employed with a
 charge-number cutoff specified by ``ncut``. This cutoff must be chosen sufficiently large for convergence.
 
 An instance of the transmon qubit is initialized as follows::

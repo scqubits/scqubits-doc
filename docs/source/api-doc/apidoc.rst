@@ -11,7 +11,7 @@ This chapter contains the API documentation consisting of a list of the relevant
 of scqubits.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
    qubit_classes.rst
    hilbertspace_class.rst

@@ -10,7 +10,8 @@ Full Zero-Pi Qubit  (incl. coupling to zeta mode)
    :align: center
    :width: 4in
 
-The full Zero-Pi qubit [Brooks2013]_ [Dempster2014]_, when including coupling to the zeta mode, is described by the
+The full Zero-Pi qubit [Brooks2013]_ [Dempster2014]_ includes the coupling of the
+primary qubit degrees of freedom to the zeta mode. It is described by the
 Hamiltonian :math:`H = H_{0-\pi} + H_\text{int} + H_\zeta`, where
 
 .. math::
@@ -19,7 +20,8 @@ Hamiltonian :math:`H = H_{0-\pi} + H_\text{int} + H_\zeta`, where
    &H_\text{int} = 2E_{C\Sigma}dC\,\partial_\theta\partial_\zeta + E_L dE_L \phi\,\zeta\\
    &H_\zeta = \omega_\zeta a^\dagger a
 
-expressed in phase basis. The definition of the relevant charging energies :math:`E_\text{CJ}`, :math:`E_{\text{C}\Sigma}`,
+expressed in the phase basis. The definition of the relevant charging energies
+:math:`E_\text{CJ}`, :math:`E_{\text{C}\Sigma}`,
 Josephson energies :math:`E_\text{J}`, inductive energies :math:`E_\text{L}`, and relative amounts of disorder
 :math:`dC_\text{J}`, :math:`dE_\text{J}`, :math:`dC`, :math:`dE_\text{L}` follows [Groszkowski2018]_.
 Internally, the ``FullZeroPi`` class formulates the Hamiltonian matrix via the product basis of the decoupled Zero-Pi
