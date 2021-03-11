@@ -4,7 +4,7 @@
 .. _guide_noise:
 
 **************************
-Coherence Times Estimates
+Coherence Times
 **************************
 
 scqubits implements coherence time calculations for estimating depolarization and pure-dephasing times for a majority of the
