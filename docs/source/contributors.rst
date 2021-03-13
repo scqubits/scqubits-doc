@@ -28,6 +28,7 @@ Contributors
 | **Farid Hassani** (IST Austria) - Bug hunter
 | **Ziwen Huang** (Northwestern University) - Bug hunter
 | **Nicholas Irons** - Code contributor
+| **Pranav Mundahda** (Princeton University) - Bug hunter
 | **David Schuster** (University of Chicago) - Code contributor
 | **Jun Sung** (Northwestern University) - Bug hunter
 | **Sydney Wang** (IMSA) - Code contributor
