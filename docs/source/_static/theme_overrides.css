@@ -117,3 +117,8 @@ input[type="color"], input[type="date"], input[type="datetime-local"], input[typ
     font-size: 100%;
     font-family: "Open Sans",Lato,proxima-nova,Helvetica Neue,Arial,sans-serif;
 }
+
+
+.highlight2 {
+    foreground: rgb(123, 123, 233);
+}
