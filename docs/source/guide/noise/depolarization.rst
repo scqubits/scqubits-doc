@@ -58,33 +58,54 @@ The default value of the frequency-dependent quality factor is assumed to be
 
     Q_{\rm cap}(\omega) =  10^{6}  \left( \frac{2 \pi \times 6 {\rm GHz} }{ |\omega|} \right)^{0.7}. 
 
+To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
+:ref:`TunableTransmon <qubit_tunable_transmon>`, 
+:ref:`Fluxonium <qubit_fluxonium>`, 
+:ref:`FullZeroPi <qubit_fullzeropi>`, 
+:ref:`ZeroPi <qubit_zeropi>`.
 
-This method can be customized further through various noise related parameters shown below:
+The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
+are ``i``, ``j`` and ``total``. Their properties are described below. 
+
++----------------+---------------+-----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                       |
++================+===============+===================================================================================+
+| i              | 1             | Index of the first state involved in the transition                               |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                              |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
+|                |               |                                                                                   |
+|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
+|                |               |                                                                                   |
+|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
+|                |               | time (or rate).                                                                   |
++----------------+---------------+-----------------------------------------------------------------------------------+
+
+
+.. warning::
+
+    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
+    depolarization time (or rate). See table above for details. 
+
+Other parameters that could be used for further customization are:
 
 +----------------+-----------------------------+------------------------------------------------+
 | Parameter name | Default value               | Description                                    |
 +================+=============================+================================================+
-| i              | 1                           | Initial state index                            |
-+----------------+-----------------------------+------------------------------------------------+
-| j              | 0                           | Final state index                              |
-+----------------+-----------------------------+------------------------------------------------+
 | Q_cap          | :math:`Q_{\rm cap}(\omega)` | Capacitive quality factor                      |
 |                |                             |                                                |
 |                |                             | Can be function of :math:`\omega`, or a number |
 +----------------+-----------------------------+------------------------------------------------+
 | T              | 0.015                       | Temperature (in K)                             |
 +----------------+-----------------------------+------------------------------------------------+
-| total          | True                        | Return both up and down rates                  |
-+----------------+-----------------------------+------------------------------------------------+
 | get_rate       | False                       | Return rate instead of time                    |
 +----------------+-----------------------------+------------------------------------------------+
 
-
-Qubits that support this noise channel include: 
-:ref:`TunableTransmon <qubit_tunable_transmon>`, 
-:ref:`Fluxonium <qubit_fluxonium>`, 
-:ref:`FullZeroPi <qubit_fullzeropi>`, 
-:ref:`ZeroPi <qubit_zeropi>`.
 
 References: [Nguyen2019]_, [Smith2020]_  
 
@@ -114,29 +135,54 @@ quality factor. The default value of the frequency-dependent quality factor is a
 
 where :math:`K_0` is the Bessel function of the second kind. 
 
-This method can be customized further through various noise related parameters shown below:
+
+To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are:
+:ref:`Fluxonium <qubit_fluxonium>`.
+
+The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
+are ``i``, ``j`` and ``total``. Their properties are described below. 
+
++----------------+---------------+-----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                       |
++================+===============+===================================================================================+
+| i              | 1             | Index of the first state involved in the transition                               |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                              |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
+|                |               |                                                                                   |
+|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
+|                |               |                                                                                   |
+|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
+|                |               | time (or rate).                                                                   |
++----------------+---------------+-----------------------------------------------------------------------------------+
+
+
+.. warning::
+
+    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
+    depolarization time (or rate). See table above for details. 
+
+Other parameters that could be used for further customization are:
+
 
 +----------------+-----------------------------+------------------------------------------------+
 | Parameter name | Default value               | Description                                    |
 +================+=============================+================================================+
-| i              | 1                           | Initial state index                            |
-+----------------+-----------------------------+------------------------------------------------+
-| j              | 0                           | Final state index                              |
-+----------------+-----------------------------+------------------------------------------------+
 | Q_ind          | :math:`Q_{\rm ind}(\omega)` | Inductive quality factor                       |
 |                |                             |                                                |
 |                |                             | Can be function of :math:`\omega`, or a number |
 +----------------+-----------------------------+------------------------------------------------+
 | T              | 0.015                       | Temperature (in K)                             |
 +----------------+-----------------------------+------------------------------------------------+
-| total          | True                        | Return both up and down rates                  |
-+----------------+-----------------------------+------------------------------------------------+
 | get_rate       | False                       | Return rate instead of time                    |
 +----------------+-----------------------------+------------------------------------------------+
 
 
-Qubits that support this noise channel include: 
-:ref:`Fluxonium <qubit_fluxonium>`.
 
 References: [Nguyen2019]_, [Smith2020]_  
 
@@ -161,31 +207,54 @@ By default we assume the qubit couples to a infinite transmission line, which le
 
    {\rm Re} Z(\omega) = 50 \Omega.
 
-This method can be customized further through various noise related parameters shown below:
+To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
+:ref:`TunableTransmon <qubit_tunable_transmon>`, 
+:ref:`Fluxonium <qubit_fluxonium>`, 
+:ref:`FullZeroPi <qubit_fullzeropi>`.
+
+
+The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
+are ``i``, ``j`` and ``total``. Their properties are described below. 
+
++----------------+---------------+-----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                       |
++================+===============+===================================================================================+
+| i              | 1             | Index of the first state involved in the transition                               |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                              |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
+|                |               |                                                                                   |
+|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
+|                |               |                                                                                   |
+|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
+|                |               | time (or rate).                                                                   |
++----------------+---------------+-----------------------------------------------------------------------------------+
+
+
+.. warning::
+
+    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
+    depolarization time (or rate). See table above for details. 
+
+Other parameters that could be used for further customization are:
 
 +----------------+---------------+----------------------------------------------------+
 | Parameter name | Default value | Description                                        |
 +================+===============+====================================================+
-| i              | 1             | Initial state index                                |
-+----------------+---------------+----------------------------------------------------+
-| j              | 0             | Final state index                                  |
-+----------------+---------------+----------------------------------------------------+
 | Z              | 50            | Complex Impedance of coupled line (:math:`\Omega`) |
 |                |               |                                                    |
 |                |               | Can be function of :math:`\omega`, or a number     |
 +----------------+---------------+----------------------------------------------------+
 | T              | 0.015         | Temperature (in K)                                 |
 +----------------+---------------+----------------------------------------------------+
-| total          | True          | Return both up and down rates                      |
-+----------------+---------------+----------------------------------------------------+
 | get_rate       | False         | Return rate instead of time                        |
 +----------------+---------------+----------------------------------------------------+
 
-
-Qubits that support this noise channel include: 
-:ref:`TunableTransmon <qubit_tunable_transmon>`, 
-:ref:`Fluxonium <qubit_fluxonium>`, 
-:ref:`FullZeroPi <qubit_fullzeropi>`, 
 
 References: [Schoelkopf2003]_, [Ithier2005]_
 
@@ -206,18 +275,45 @@ Noise due to current noisy biasing current coupled to the qubit via flux. The as
 
 where :math:`M` is the mutual inductance between qubit and the flux line.
 
-This method can be customized further through various noise related parameters shown below:
+To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
+:ref:`TunableTransmon <qubit_tunable_transmon>`, 
+:ref:`Fluxonium <qubit_fluxonium>`, 
+:ref:`FullZeroPi <qubit_fullzeropi>`, 
+:ref:`ZeroPi <qubit_zeropi>`.
+
+The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
+are ``i``, ``j`` and ``total``. Their properties are described below. 
+
++----------------+---------------+-----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                       |
++================+===============+===================================================================================+
+| i              | 1             | Index of the first state involved in the transition                               |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                              |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
+|                |               |                                                                                   |
+|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
+|                |               |                                                                                   |
+|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
+|                |               | time (or rate).                                                                   |
++----------------+---------------+-----------------------------------------------------------------------------------+
 
 
-This method can be customized further through various noise related parameters shown below:
+.. warning::
+
+    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
+    depolarization time (or rate). See table above for details. 
+
+Other parameters that could be used for further customization are:
 
 +----------------+---------------+---------------------------------------------------------------------+
 | Parameter name | Default value | Description                                                         |
 +================+===============+=====================================================================+
-| i              | 1             | Initial state index                                                 |
-+----------------+---------------+---------------------------------------------------------------------+
-| j              | 0             | Final state index                                                   |
-+----------------+---------------+---------------------------------------------------------------------+
 | M              | 400           | Mutual inductance between qubit and flux line (in :math:`\Phi_0/A`) |
 +----------------+---------------+---------------------------------------------------------------------+
 | Z              | 50            | Complex impedance of bias flux line (:math:`\Omega`)                |
@@ -226,17 +322,9 @@ This method can be customized further through various noise related parameters s
 +----------------+---------------+---------------------------------------------------------------------+
 | T              | 0.015         | Temperature (in K)                                                  |
 +----------------+---------------+---------------------------------------------------------------------+
-| total          | True          | Return both up and down rates                                       |
-+----------------+---------------+---------------------------------------------------------------------+
 | get_rate       | False         | Return rate instead of time                                         |
 +----------------+---------------+---------------------------------------------------------------------+
 
-
-Qubits that support this noise channel include: 
-:ref:`TunableTransmon <qubit_tunable_transmon>`, 
-:ref:`Fluxonium <qubit_fluxonium>`, 
-:ref:`FullZeroPi <qubit_fullzeropi>`, 
-:ref:`ZeroPi <qubit_zeropi>`.
 
 References: [Koch2007]_, [Groszkowski2018]_, 
 
@@ -268,15 +356,45 @@ The default real part of admittance is assumed to be
 
 ** This form assumes that the external flux is grouped with the inductive term of the Hamiltonian. In qubits where the flux is grouped with the Josephson term, the noise operator is appropriately transformed.  
 
-This method can be customized further through various noise related parameters shown below:
+To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
+:ref:`TunableTransmon <qubit_tunable_transmon>`, 
+:ref:`Fluxonium <qubit_fluxonium>`, 
+:ref:`FullZeroPi <qubit_fullzeropi>`, 
+:ref:`ZeroPi <qubit_zeropi>`.
+
+The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
+are ``i``, ``j`` and ``total``. Their properties are described below. 
+
++----------------+---------------+-----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                       |
++================+===============+===================================================================================+
+| i              | 1             | Index of the first state involved in the transition                               |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                              |
++----------------+---------------+-----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
+|                |               |                                                                                   |
+|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
+|                |               |                                                                                   |
+|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
+|                |               | time (or rate).                                                                   |
++----------------+---------------+-----------------------------------------------------------------------------------+
+
+
+.. warning::
+
+    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
+    depolarization time (or rate). See table above for details. 
+
+Other parameters that could be used for further customization are:
 
 +----------------+-------------------------------------+------------------------------------------------+
 | Parameter name | Default value                       | Description                                    |
 +================+=====================================+================================================+
-| i              | 1                                   | Initial state index                            |
-+----------------+-------------------------------------+------------------------------------------------+
-| j              | 0                                   | Final state index                              |
-+----------------+-------------------------------------+------------------------------------------------+
 | Y_qp           | :math:`Y_{\rm qp}`                  | Complex admittance (:math:`\Omega`)            |
 |                |                                     |                                                |
 |                |                                     | Can be function of :math:`\omega`, or a number |
@@ -287,17 +405,9 @@ This method can be customized further through various noise related parameters s
 +----------------+-------------------------------------+------------------------------------------------+
 | Delta          | :math:`3.4 \times 10^{-4}` (for Al) | Superconducting gap (eV)                       |
 +----------------+-------------------------------------+------------------------------------------------+
-| total          | True                                | Return both up and down rates                  |
-+----------------+-------------------------------------+------------------------------------------------+
 | get_rate       | False                               | Return rate instead of time                    |
 +----------------+-------------------------------------+------------------------------------------------+
 
-
-Qubits that support this noise channel include: 
-:ref:`TunableTransmon <qubit_tunable_transmon>`, 
-:ref:`Fluxonium <qubit_fluxonium>`, 
-:ref:`FullZeroPi <qubit_fullzeropi>`, 
-:ref:`ZeroPi <qubit_zeropi>`.
 
 References: [Catelani2011]_, [Nguyen2019]_, [Pop2014]_, [Smith2020]_
 
@@ -311,9 +421,7 @@ User-defined noise
 +--------------------------------------------+-----------------------------------------+
 
 All qubits support user defined noise, where both the noise operator as well as an arbitrary spectral density can be provided. 
-
-
-Qubits that support this noise channel include: 
+To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
