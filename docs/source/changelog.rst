@@ -7,11 +7,55 @@
 Change Log
 **********
 
+Version 2.0
++++++++++++++
+
+**Additions**
+    - New graphical user interface ``scqubits.GUI()`` illustrating single-qubit
+      functionality of scqubits.
+    - Introducing ``NamedSlotsNdarray`` as a convenient subclass of ndarray with
+      name-based and value-based slicing, and immediate support for basic plots
+    - Added functionality for extracting dispersive energy parameters (such as Kerr
+      coupling strengths)
+    - Improved support for transition plots (subsystem transitions, sidebands etc.)
+    - Added ``Cos2PhiQubit`` class.
+    - Added ``KerrOscillator`` class
+    - Added ``GenericQubit`` (two-level system) so that toy models such as the
+      Jaynes-Cummings model can be readily realized with ``HilbertSpace``.
+    - Added ``n`` and ``phi`` operators to the Oscillator class
+    - Added helper methods ``convert_to_E_osc`` and ``convert_to_l_osc`` for ``Oscillator``
+      initialization
+    - New and enhanced interface for defining interaction terms in HilbertSpace objects
+      via ``.add_interaction()``
+    - Added option to input interaction as a ``Qobj``, or specify interaction terms as
+      string expressions; also represented in ``HilbertSpace.create()`` GUI
+
+**Improvements**
+    - Convergence for ``ZeroPi`` is now faster, thanks to a correction to the expression
+      for the grid spacing in discretization.py.
+    - Refactored ``ParameterSweep`` class, now allowing for multi-dimensional parameter sweeps
+    - Added a warning describing ``total=True`` being the default in t1 calculations
+
+
+**Bug fixes**
+    - Fix to type conversion error affecting the ``number`` operator in operators.py
+    - Rectified orientation of ``matrix2d`` plots to match axes labels
+    - ``mode`` option for values displayed in matrix element plots was ignored
+
+
+**Internals**
+    - New support for higher-order stencils in discretized derivatives.
+    - Improved formatting of ``__str__`` methods (called when "printing" an scqubits class instance).
+    - Under the hood: use of Python 3.6 compatible type annotations; unified formatting enabled by the ``black`` package
+    - Improvements to fileIO speeding up operations (increased memore cache) and requiring less disk space (avoid literal redundancies in stored data).
+
+
+
 Version 1.3.2
 +++++++++++++
 
 **Bug fixes**
-    - bug fix: `<qubit>.create()` failed in jupyter notebooks due to missing image files
+    - bug fix: ``<qubit>.create()`` failed in jupyter notebooks due to missing image files
     - bug fix: corrected the form of the quasiparticle noise operator
 
 
