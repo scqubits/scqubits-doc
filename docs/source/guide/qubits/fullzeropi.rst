@@ -69,12 +69,6 @@ Calculational methods related to Hamiltonian and energy spectra
     scqubits.FullZeroPi.get_spectrum_vs_paramvals
 
 
-Wavefunctions and visualization of eigenstates
-----------------------------------------------
-
-.. todo:: consider adding this?
-
-
 Implemented operators
 ---------------------
 
@@ -85,8 +79,6 @@ The following operators are implemented for use in matrix element calculations.
     scqubits.FullZeroPi.i_d_dphi_operator
     scqubits.FullZeroPi.phi_operator
     scqubits.FullZeroPi.n_theta_operator
-
-.. todo:: may want to implement additional ops
 
 
 Computation and visualization of matrix elements
