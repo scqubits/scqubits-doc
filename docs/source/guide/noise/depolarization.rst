@@ -67,28 +67,28 @@ To see a detailed signature of this method, see the API description of qubits th
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
 are ``i``, ``j`` and ``total``. Their properties are described below. 
 
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| Parameter name | Default value | Description                                                                       |
-+================+===============+===================================================================================+
-| i              | 1             | Index of the first state involved in the transition                               |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| j              | 0             | Index of the second state involved in the transition                              |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
-|                |               |                                                                                   |
-|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
-|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
-|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
-|                |               |                                                                                   |
-|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
-|                |               | time (or rate).                                                                   |
-+----------------+---------------+-----------------------------------------------------------------------------------+
++----------------+---------------+----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                      |
++================+===============+==================================================================================+
+| i              | 1             | Index of the first state involved in the transition                              |
++----------------+---------------+----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                             |
++----------------+---------------+----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                     |
+|                |               |                                                                                  |
+|                |               | If ``total=False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`       |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
+|                |               |                                                                                  |
+|                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | time (or rate).                                                                  |
++----------------+---------------+----------------------------------------------------------------------------------+
 
 
 .. warning::
 
-    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    By default, ``total=True`` is used when calculating the :math:`T_1` coherence time for this channel.
     This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
     depolarization time (or rate). See table above for details. 
 
@@ -142,28 +142,28 @@ To see a detailed signature of this method, see the API description of qubits th
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
 are ``i``, ``j`` and ``total``. Their properties are described below. 
 
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| Parameter name | Default value | Description                                                                       |
-+================+===============+===================================================================================+
-| i              | 1             | Index of the first state involved in the transition                               |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| j              | 0             | Index of the second state involved in the transition                              |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
-|                |               |                                                                                   |
-|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
-|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
-|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
-|                |               |                                                                                   |
-|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
-|                |               | time (or rate).                                                                   |
-+----------------+---------------+-----------------------------------------------------------------------------------+
++----------------+---------------+----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                      |
++================+===============+==================================================================================+
+| i              | 1             | Index of the first state involved in the transition                              |
++----------------+---------------+----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                             |
++----------------+---------------+----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                     |
+|                |               |                                                                                  |
+|                |               | If ``total=False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`       |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
+|                |               |                                                                                  |
+|                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | time (or rate).                                                                  |
++----------------+---------------+----------------------------------------------------------------------------------+
 
 
 .. warning::
 
-    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    By default, ``total=True`` is used when calculating the :math:`T_1` coherence time for this channel.
     This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
     depolarization time (or rate). See table above for details. 
 
@@ -216,28 +216,28 @@ To see a detailed signature of this method, see the API description of qubits th
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
 are ``i``, ``j`` and ``total``. Their properties are described below. 
 
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| Parameter name | Default value | Description                                                                       |
-+================+===============+===================================================================================+
-| i              | 1             | Index of the first state involved in the transition                               |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| j              | 0             | Index of the second state involved in the transition                              |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
-|                |               |                                                                                   |
-|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
-|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
-|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
-|                |               |                                                                                   |
-|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
-|                |               | time (or rate).                                                                   |
-+----------------+---------------+-----------------------------------------------------------------------------------+
++----------------+---------------+----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                      |
++================+===============+==================================================================================+
+| i              | 1             | Index of the first state involved in the transition                              |
++----------------+---------------+----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                             |
++----------------+---------------+----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                     |
+|                |               |                                                                                  |
+|                |               | If ``total=False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`       |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
+|                |               |                                                                                  |
+|                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | time (or rate).                                                                  |
++----------------+---------------+----------------------------------------------------------------------------------+
 
 
 .. warning::
 
-    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    By default, ``total=True`` is used when calculating the :math:`T_1` coherence time for this channel.
     This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
     depolarization time (or rate). See table above for details. 
 
@@ -284,28 +284,28 @@ To see a detailed signature of this method, see the API description of qubits th
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
 are ``i``, ``j`` and ``total``. Their properties are described below. 
 
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| Parameter name | Default value | Description                                                                       |
-+================+===============+===================================================================================+
-| i              | 1             | Index of the first state involved in the transition                               |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| j              | 0             | Index of the second state involved in the transition                              |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
-|                |               |                                                                                   |
-|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
-|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
-|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
-|                |               |                                                                                   |
-|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
-|                |               | time (or rate).                                                                   |
-+----------------+---------------+-----------------------------------------------------------------------------------+
++----------------+---------------+----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                      |
++================+===============+==================================================================================+
+| i              | 1             | Index of the first state involved in the transition                              |
++----------------+---------------+----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                             |
++----------------+---------------+----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                     |
+|                |               |                                                                                  |
+|                |               | If ``total=False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`       |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
+|                |               |                                                                                  |
+|                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | time (or rate).                                                                  |
++----------------+---------------+----------------------------------------------------------------------------------+
 
 
 .. warning::
 
-    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    By default, ``total=True`` is used when calculating the :math:`T_1` coherence time for this channel.
     This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
     depolarization time (or rate). See table above for details. 
 
@@ -365,28 +365,28 @@ To see a detailed signature of this method, see the API description of qubits th
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
 are ``i``, ``j`` and ``total``. Their properties are described below. 
 
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| Parameter name | Default value | Description                                                                       |
-+================+===============+===================================================================================+
-| i              | 1             | Index of the first state involved in the transition                               |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| j              | 0             | Index of the second state involved in the transition                              |
-+----------------+---------------+-----------------------------------------------------------------------------------+
-| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                      |
-|                |               |                                                                                   |
-|                |               | If ``total==False`` then a transition from state ``i`` to state ``j`` is assumed. |
-|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`        |
-|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.   |
-|                |               |                                                                                   |
-|                |               | If ``total==True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization           |
-|                |               | time (or rate).                                                                   |
-+----------------+---------------+-----------------------------------------------------------------------------------+
++----------------+---------------+----------------------------------------------------------------------------------+
+| Parameter name | Default value | Description                                                                      |
++================+===============+==================================================================================+
+| i              | 1             | Index of the first state involved in the transition                              |
++----------------+---------------+----------------------------------------------------------------------------------+
+| j              | 0             | Index of the second state involved in the transition                             |
++----------------+---------------+----------------------------------------------------------------------------------+
+| total          | True          | Determines how the :math:`T_1` time (or rate) is calculated.                     |
+|                |               |                                                                                  |
+|                |               | If ``total=False`` then a transition from state ``i`` to state ``j`` is assumed. |
+|                |               | Depending on whether :math:`i>j` or :math:`i<j`, the resulting :math:`T_1`       |
+|                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
+|                |               |                                                                                  |
+|                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
+|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | time (or rate).                                                                  |
++----------------+---------------+----------------------------------------------------------------------------------+
 
 
 .. warning::
 
-    By default, ``total==True`` is used when calculating the :math:`T_1` coherence time for this channel.
+    By default, ``total=True`` is used when calculating the :math:`T_1` coherence time for this channel.
     This means that both the excitation and relaxation rates are combined to give an effective :math:`T_1` 
     depolarization time (or rate). See table above for details. 
 
