@@ -62,6 +62,7 @@ See the API for method signatures.
 
 
 Qubits that support this noise channel include: 
+:ref:`Cos2phi <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
@@ -80,6 +81,7 @@ Qubits that support this noise channel include:
 +--------------------------------------------+-----------------------------------------+
 
 Qubits that support this noise channel include: 
+:ref:`Cos2phi <cos2phi_qubit>`,
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
 :ref:`Transmon <qubit_transmon>`, 
@@ -103,6 +105,7 @@ fluctuations of the critical current.
 
 
 Qubits that support this noise channel include: 
+:ref:`Cos2phi <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
