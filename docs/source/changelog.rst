@@ -7,6 +7,21 @@
 Change Log
 **********
 
+
+Version 2.1
++++++++++++++
+
+**Bug Fixes**
+    - Fixed a bug that overwrote `<ParameterSweep>["evals"]` data with transition data when using `plot_transitions()`.
+    - Fixed proper integration of `ParameterSweep` into `CentralDispatch`, enabling proper warnings to the user when internal computed sweep data is out of sync with associated quantum system parameters.
+    - Fixed a bug that could occur when a `ParameterSweep` was applied to a `HilbertSpace` object involving only a single subsystem.
+
+**Under the Hood**
+    - Enable use of `weakref` in `CentralDispatch` for proper garbage collection.
+    - Extended pytests to basic `CentralDispatch` functionality
+
+
+
 Version 2.0
 +++++++++++++
 
