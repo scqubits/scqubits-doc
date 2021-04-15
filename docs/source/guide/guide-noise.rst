@@ -54,9 +54,9 @@ More detailed discussions of the individual supported noise channels can be foun
 .. toctree::
    :maxdepth: 3
 
-   noise/ipynb/visualization.ipynb
    noise/dephasing.rst
    noise/depolarization.rst
    noise/effective_noise.rst
+   noise/ipynb/visualization.ipynb
 
 
