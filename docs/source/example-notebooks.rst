@@ -22,5 +22,5 @@ notebook via Binder:
    :height: 20
    :scale: 200
    :align: center
-   :target: https://mybinder.org/v2/gh/scqubits/scqubits-examples/master
+   :target: https://mybinder.org/v2/gh/scqubits/scqubits-examples/released
 
