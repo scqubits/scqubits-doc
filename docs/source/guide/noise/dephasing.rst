@@ -32,15 +32,15 @@ The resulting dephasing time (away from sweet spots) is given by
 
 with the following parameters:
 
-+-----------------------------+---------------+---------------------------------+
-| Parameter                   | Default Value | Description                     |
-+-----------------------------+---------------+---------------------------------+
-| :math:`\omega_{\rm low}`    |  `1 rad/s`    | Low-frequency cutoff            |
-+-----------------------------+---------------+---------------------------------+
-| :math:`t_{\rm exp}`         |  `1 s`        | Experiment time                 |
-+-----------------------------+---------------+---------------------------------+
++--------------------------+---------------+----------------------+-----------------------+
+| Parameter                | Default Value | Description          | Method Parameter Name |
++==========================+===============+======================+=======================+
+| :math:`\omega_{\rm low}` | `1 rad/s`     | Low-frequency cutoff | ``omega_low``         |
++--------------------------+---------------+----------------------+-----------------------+
+| :math:`t_{\rm exp}`      | `1 s`         | Experiment time      | ``t_exp``             | 
++--------------------------+---------------+----------------------+-----------------------+
 
-The frequency derivatives in the above expressions are calculated from matrix elements of :math:`\partial_\lambda H`. 
+The frequency derivatives in the above expressions are calculated from matrix elements of :math:`\partial_\lambda H`. The `Method Parameter Name` column in the above table describes the argument names that can be passed to various 1/f noise methods (see below) when one wants to use custom parameter values.
 
 The general-purpose scqubits method for calculating 1/f dephasing times due to an arbitrary noise channel
 is given by ``tphi_1_over_f()``. Depending on the qubit of interest, more specific methods for the different kinds
@@ -60,6 +60,8 @@ See the API for method signatures.
 | Default value of  :math:`A_{\lambda}`      |  :math:`10^{-6} \Phi_0`                 |
 +--------------------------------------------+-----------------------------------------+
 
+A custom value of :math:`A_{\lambda}` can be provided to the ``tphi_1_over_f_flux`` method using the ``A_noise`` parameter. 
+See the API documentation of individual qubits for details.
 
 Qubits that support this noise channel include: 
 :ref:`Cos2phi <cos2phi_qubit>`,
@@ -79,6 +81,10 @@ Qubits that support this noise channel include:
 +--------------------------------------------+-----------------------------------------+
 | Default value of  :math:`A_{\lambda}`      |  :math:`10^{-4} e`                      |
 +--------------------------------------------+-----------------------------------------+
+
+A custom value of :math:`A_{\lambda}` can be provided to the ``tphi_1_over_f_ng`` method using the ``A_noise`` parameter. 
+See the API documentation of individual qubits for details.
+
 
 Qubits that support this noise channel include: 
 :ref:`Cos2phi <cos2phi_qubit>`,
@@ -102,6 +108,9 @@ fluctuations of the critical current.
 +--------------------------------------------+-----------------------------------------+
 | Default value of  :math:`A_{\lambda}`      |  :math:`10^{-7} I_{c}`                  |
 +--------------------------------------------+-----------------------------------------+
+
+A custom value of :math:`A_{\lambda}` can be provided to the ``tphi_1_over_f_cc`` method using the ``A_noise`` parameter. 
+See the API documentation of individual qubits for details.
 
 
 Qubits that support this noise channel include: 
