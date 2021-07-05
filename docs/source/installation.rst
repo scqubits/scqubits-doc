@@ -31,7 +31,7 @@ Upgrading to the latest version of scqubits can be done by
 Installing via pip
 ==================
 
-scqubits can also be installed using the Python package manager `pip <http://www.pip-installer.org/>`_.
+scqubits can also be installed using the Python package manager `pip <http://www.pip-installer.org/>`_ (although it should be noted that installing via pip under a conda environment is strongly discouraged, and is not guaranteed to work).
 
 .. code-block:: bash
 
