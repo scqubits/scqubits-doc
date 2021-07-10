@@ -131,7 +131,7 @@ quality factor. The default value of the frequency-dependent quality factor is a
 .. math::
 
     Q_{\rm ind}(\omega) =  500 \times 10^{6} \frac{ K_{0} \left( \frac{h \times 0.5 {\rm GHz}}{2 k_B T} \right) 
-    \sinh \left( \frac{\hbar |\omega| }{2 k_B T} \right)}{K_{0} \left( \frac{\hbar |\omega|}{2 k_B T} \right)\
+    \sinh \left( \frac{h \times 0.5 {\rm GHz} }{2 k_B T} \right)}{K_{0} \left( \frac{\hbar |\omega|}{2 k_B T} \right)\
     \sinh \left( \frac{\hbar |\omega| }{2 k_B T} \right)},
 
 where :math:`K_0` is the Bessel function of the second kind. 
