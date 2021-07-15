@@ -42,6 +42,8 @@ with the following parameters:
 
 The frequency derivatives in the above expressions are calculated from matrix elements of :math:`\partial_\lambda H`. The `Method Parameter Name` column in the above table describes the argument names that can be passed to various 1/f noise methods (see below) when one wants to use custom parameter values.
 
+Currently, at sweet spots, where :math:`\partial_\lambda H` is zero, scqubits returns a ``np.nan`` value as the dephasing time. Higher order corrections will be implemented in the future. 
+
 The general-purpose scqubits method for calculating 1/f dephasing times due to an arbitrary noise channel
 is given by ``tphi_1_over_f()``. Depending on the qubit of interest, more specific methods for the different kinds
 of 1/f noise channels are available. These set appropriate defaults for noise strength :math:`A_{\lambda}`,
@@ -61,7 +63,9 @@ See the API for method signatures.
 +--------------------------------------------+-----------------------------------------+
 
 A custom value of :math:`A_{\lambda}` can be provided to the ``tphi_1_over_f_flux`` method using the ``A_noise`` parameter. 
+Furthermore, by providing indices ``i`` and ``j``, users can specify energy levels of the system that should be used in the calculation. 
 See the API documentation of individual qubits for details.
+
 
 Qubits that support this noise channel include: 
 :ref:`Cos2phi <cos2phi_qubit>`,
@@ -83,6 +87,7 @@ Qubits that support this noise channel include:
 +--------------------------------------------+-----------------------------------------+
 
 A custom value of :math:`A_{\lambda}` can be provided to the ``tphi_1_over_f_ng`` method using the ``A_noise`` parameter. 
+Furthermore, by providing indices ``i`` and ``j``, users can specify energy levels of the system that should be used in the calculation. 
 See the API documentation of individual qubits for details.
 
 
@@ -110,6 +115,7 @@ fluctuations of the critical current.
 +--------------------------------------------+-----------------------------------------+
 
 A custom value of :math:`A_{\lambda}` can be provided to the ``tphi_1_over_f_cc`` method using the ``A_noise`` parameter. 
+Furthermore, by providing indices ``i`` and ``j``, users can specify energy levels of the system that should be used in the calculation. 
 See the API documentation of individual qubits for details.
 
 
