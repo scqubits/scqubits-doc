@@ -15,10 +15,12 @@ primary qubit degrees of freedom to the zeta mode. It is described by the
 Hamiltonian :math:`H = H_{0-\pi} + H_\text{int} + H_\zeta`, where
 
 .. math::
-   &H_{0-\pi} = -2E_\text{CJ}\partial_\phi^2+2E_{\text{C}\Sigma}(i\partial_\theta-n_g)^2 +2E_{C\Sigma}dC_J\,\partial_\phi\partial_\theta\\
-   &\qquad\qquad\qquad+2E_{C\Sigma}(\delta C_J/C_J)\partial_\phi\partial_\theta +2\,\delta E_J \sin\theta\sin(\phi-\phi_\text{ext}/2)\\
-   &H_\text{int} = 2E_{C\Sigma}dC\,\partial_\theta\partial_\zeta + E_L dE_L \phi\,\zeta\\
-   &H_\zeta = \omega_\zeta a^\dagger a
+   H_{0-\pi} =& -2E_\text{CJ}\partial_\phi^2+2E_{\text{C}\Sigma}(i\partial_\theta-n_g)^2
+    +2E_{C\Sigma}dC_J\,\partial_\phi\partial_\theta\\
+     & -2E_\text{J}\cos\theta\cos(\phi-\varphi_\text{ext}/2)+E_L\phi^2+2E_\text{J}
+    + E_J dE_J \sin\theta\sin(\phi-\varphi_\text{ext}/2) \\
+   H_\text{int} =& 2E_{C\Sigma}dC\,\partial_\theta\partial_\zeta + E_L dE_L \phi\,\zeta\\
+   H_\zeta =& \omega_\zeta a^\dagger a
 
 expressed in the phase basis. The definition of the relevant charging energies
 :math:`E_\text{CJ}`, :math:`E_{\text{C}\Sigma}`,
