@@ -14,5 +14,5 @@ SpectrumLookup Class
 SpectrumLookup
 --------------
 
-.. autoclass:: scqubits.core.spec_lookup.SpectrumLookup
+.. autoclass:: scqubits.core.spec_lookup.SpectrumLookupMixin
     :members:
