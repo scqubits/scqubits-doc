@@ -23,7 +23,7 @@ Unless stated otherwise, it is assumed that the depolarizing noise channels sati
 
 .. math::
 
-    \frac{S(-\omega)}{S(\omega)} = \exp{\frac{\hbar \omega}{k_B T}},
+    \frac{S(\omega)}{S(-\omega)} = \exp{\frac{\hbar \omega}{k_B T}},
 
 where :math:`T` is the bath temperature, and :math:`k_B` Boltzmann's constant.
 
