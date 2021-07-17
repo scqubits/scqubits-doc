@@ -13,12 +13,6 @@ Plotting
 .. automodule:: scqubits.utils.plotting
     :members:
 
-Plotting from `ParameterSweep`
-==============================
-
-.. automodule:: scqubits.utils.sweep_plotting
-    :members:
-
 
 QuTiP Operators for Composite Hilbert Spaces
 ============================================
