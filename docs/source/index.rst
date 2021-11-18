@@ -19,8 +19,10 @@ Superconducting Qubits in Python
    development and maintenance. Use of scqubits in research publications is
    appropriately acknowledged by citing:
 
-   *Peter Groszkowski and Jens Koch, 'scqubits:  a Python package for superconducting
-   qubits', arXiv:2107.08552 (2021).* https://arxiv.org/abs/2107.08552
+      | Peter Groszkowski and Jens Koch,
+      | *scqubits:  a Python package for superconducting qubits*,
+      | Quantum 5, 583 (2021).
+      | https://quantum-journal.org/papers/q-2021-11-17-583/
 
    The package provides convenient ways to obtain energy spectra of common superconducting qubits, to plot their energy
    levels as a function of external parameters, to calculate matrix elements and predict coherence times etc. scqubits
