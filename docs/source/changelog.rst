@@ -8,6 +8,69 @@ Change Log
 **********
 
 
+
+Version 2.2.2
++++++++++++++
+
+**Bug Fixes**
+    - Fixed issue that could make import of scqubits fail when optional h5py package
+      was not installed.
+    - Plot options were not properly handled by `plotting.data_vs_paramvals`, leading
+      to poor formatting of `plot_dispersion_vs_paramvals`
+    - In certain scenarios (likely related to dependency version updates), GUI
+      displays were duplicated rather than substituted.
+    - Adjusted calculations mapping dressed-basis to bare-state labels: use (state
+      overlap)^2 instead of (state overlap) for thresholding.
+
+**Under the hood**
+    typing_extensions is new dependency (used for enhanced typing annotations such as
+    `@overload` and `Literal`
+
+
+Version 2.2
++++++++++++++
+
+**Bug Fixes**
+    - Use of `<ParameterSweep>.plot_transitions` could previously lead to a spurious
+      switch of `<ParameterSweep>["evals"]` to transition energies.
+    - Include the +1/2 hbar omega term when diagonalizing fluxonium in the harmonic
+      osc. basis. The omission of this only affected absolute energies, not the energy
+      differences which are the relevant quantities in most cases. However, wavefunction
+      plots for fluxonium were previously incorrectly positioned relative to the potential energy.
+    - Some dispersion calculations previously failed for qubits other than Transmon
+      and  `TunableTransmon`.
+    - Eliminated rare `NamedSlotsNdarray` indexing failure modes.
+    - `ParameterSweep` previously failed for a "sweep" over just one parameter value.
+    - Fixed issue where the depolarization time due to quasiparticle tunneling could
+      be negative.
+    - Fixed issue where accumulating legend label information in multiple plots to the
+      same figure would fail to produce the desired legend.
+
+**Additions**
+    - Support access to `Figure`, `Axes` objects from `scq.GUI()`.
+    - Support access to `Figure`, `Axes` from `ParameterSweep.plot_transitions`.
+    - Support multi-photon transitions in `ParameterSweep.transitions()` and
+      `.plot_transitions()` via new keyword argument `photon_number`
+    - Added functionality for naming quantum system instances and interaction terms
+      via `id_str` at initialization. This supports easier dict-like access to objects
+      interior to `ParameterSweep`. Added deepcopy option to `ParameterSweep` that
+      disconnects global variables from a deep copy saved inside `ParameterSweep`.
+    - Refactored `Explorer` class for usage of new `ParameterSweep`
+    - `supported_noise_channels` and `effective_noise_channels` are now `@classmethods`
+      and can be called either directly through a class, or through a class instance.
+    - `t1_charge_impedance` is no longer returned by `effective_noise_channels` in the
+      case of a `TunableTransmon` and `Transmon` qubits
+    - Added about function that shows basic information about scqubits as well as
+      versions of some of the most important libraries that scqubits relies on.
+    - Extended `pytests` for enhanced coverage.
+
+**Deprecations**
+    - Old version of `Explorer` is still available with deprecation warning, but will
+      be phased out in the future.
+    - Deprecated `omega` parameter for `Oscillator` has been removed.
+
+
+
 Version 2.1
 +++++++++++++
 
