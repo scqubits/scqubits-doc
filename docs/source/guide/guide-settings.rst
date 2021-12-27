@@ -44,9 +44,6 @@ Users can also set up units of the energy scales. This is discussed in the
 :ref:`guide_units` section of the user guide.
 
 
-.. note:: The ``DEFAULT_ENERGY_UNIT`` setting is no longer used - see :ref:`guide_units` for information on how to set energy units. 
-
-
 .. _settings-usage:
 
 Example: Changing Settings

@@ -22,6 +22,3 @@ The current units setting can be obtained with the ``get_units`` function. A new
 
 scqubits also includes several helper functions for convenient conversion from the current system units to and
 from `Hz`. This is accomplished with functions ``to_standard_units`` and ``from_standard_units``.
-
-.. note:: The ``DEFAULT_ENERGY_UNIT`` :ref:`setting <guide-settings>` is no longer used. 
-
