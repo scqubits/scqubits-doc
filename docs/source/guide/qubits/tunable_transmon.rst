@@ -17,7 +17,7 @@ then be used to change the effective Josephson energy of the circuit and thus ma
 
 .. math::
 
-   H = 4E_\text{C}(\hat{n}-n_g)^2+\frac{1}{2}E_\text{J,eff}(\Phi_\text{ext})\sum_n(|n\rangle\langle n+1|+\text{h.c.}),
+   H = 4E_\text{C}(\hat{n}-n_g)^2-\frac{1}{2}E_\text{J,eff}(\Phi_\text{ext})\sum_n(|n\rangle\langle n+1|+\text{h.c.}),
 
 expressed in the charge basis. Here, the parameters are those of the fixed-frequency transmon except for the effective
 Josephson energy
