@@ -32,13 +32,13 @@ The resulting dephasing time (away from sweet spots) is given by
 
 with the following parameters:
 
-+--------------------------+---------------+----------------------+-----------------------+
-| Parameter                | Default Value | Description          | Method Parameter Name |
-+==========================+===============+======================+=======================+
-| :math:`\omega_{\rm low}` | `1 rad/s`     | Low-frequency cutoff | ``omega_low``         |
-+--------------------------+---------------+----------------------+-----------------------+
-| :math:`t_{\rm exp}`      | `1 s`         | Experiment time      | ``t_exp``             | 
-+--------------------------+---------------+----------------------+-----------------------+
++--------------------------+------------------------------+----------------------+-----------------------+
+| Parameter                | Default Value                | Description          | Method Parameter Name |
++==========================+==============================+======================+=======================+
+| :math:`\omega_{\rm low}` | :math:`10^{-9}` `rad/ns`     | Low-frequency cutoff | ``omega_low``         |
++--------------------------+------------------------------+----------------------+-----------------------+
+| :math:`t_{\rm exp}`      | :math:`10^{4}` `ns`          | Experiment time      | ``t_exp``             |
++--------------------------+------------------------------+----------------------+-----------------------+
 
 The frequency derivatives in the above expressions are calculated from matrix elements of :math:`\partial_\lambda H`. The `Method Parameter Name` column in the above table describes the argument names that can be passed to various 1/f noise methods (see below) when one wants to use custom parameter values.
 
