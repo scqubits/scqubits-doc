@@ -27,7 +27,7 @@ The resulting dephasing time (away from sweet spots) is given by
 
 .. math::
 
-   T_{\phi} = \sqrt{2} A_{\lambda} \frac{\partial \omega_{01}}{\partial \lambda}  \sqrt{| \ln \omega_{\rm low} t_{\rm exp} |}
+   1/T_{\phi} = \sqrt{2} A_{\lambda} \frac{\partial \omega_{01}}{\partial \lambda}  \sqrt{| \ln \omega_{\rm low} t_{\rm exp} |}
 
 
 with the following parameters:
