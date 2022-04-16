@@ -269,7 +269,7 @@ Flux-bias line noise
 | :math:`B_\lambda` | :math:`\frac{\partial \hat{H}}{\partial \Phi_x}` |
 +-------------------+--------------------------------------------------+
 
-Noise due to current noisy biasing current coupled to the qubit via flux. The assumed spectral density reads
+Noise due to current fluctuations in the flux-bias line. The assumed spectral density reads
 
 .. math::
 
