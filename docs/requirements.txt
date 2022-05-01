@@ -1,4 +1,4 @@
-sphinx>=3
+sphinx>=4.5
 docutils==0.16
 pygments>=2.4.1
 sphinx_rtd_theme

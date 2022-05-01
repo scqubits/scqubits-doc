@@ -3,111 +3,19 @@
 
 .. _qubit_classes:
 
-***************
-Qubit Classes
-***************
+****************************
+Qubit and Oscillator Classes
+****************************
 
-.. _classes-transmon:
+.. toctree::
 
-Transmon
---------------
-
-.. autoclass:: scqubits.Transmon
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-tunable_transmon:
-
-TunableTransmon
------------------
-
-.. autoclass:: scqubits.TunableTransmon
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-fluxonium:
-
-Fluxonium
-------------
-
-.. autoclass:: scqubits.Fluxonium
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-fluxqubit:
-
-FluxQubit
----------
-
-.. autoclass:: scqubits.FluxQubit
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-zeropi:
-
-ZeroPi
-------
-
-.. autoclass:: scqubits.ZeroPi
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-fullzeropi:
-
-FullZeroPi
---------------
-
-.. autoclass:: scqubits.FullZeroPi
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-oscillator:
-
-Oscillator
---------------
-
-.. autoclass:: scqubits.Oscillator
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-.. _classes-kerroscillator:
-
-KerrOscillator
---------------
-
-.. autoclass:: scqubits.KerrOscillator
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
-----------------------------------
-
-.. _classes-cos2phiqubit:
-
-Cos2PhiQubit
------------------------
-
-.. autoclass:: scqubits.Cos2PhiQubit
-   :members:
-   :inherited-members:
-   :exclude-members: broadcast, deserialize, serialize, get_initdata, receive, widget
-
+   _autosummary/scqubits.core.cos2phi_qubit.Cos2PhiQubit.rst
+   _autosummary/scqubits.core.fluxonium.Fluxonium.rst
+   _autosummary/scqubits.core.flux_qubit.FluxQubit.rst
+   _autosummary/scqubits.core.zeropi_full.FullZeroPi.rst
+   _autosummary/scqubits.core.generic_qubit.GenericQubit.rst
+   _autosummary/scqubits.core.oscillator.KerrOscillator.rst
+   _autosummary/scqubits.core.oscillator.Oscillator.rst
+   _autosummary/scqubits.core.transmon.Transmon.rst
+   _autosummary/scqubits.core.transmon.TunableTransmon.rst
+   _autosummary/scqubits.core.zeropi.ZeroPi.rst

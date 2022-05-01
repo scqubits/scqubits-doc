@@ -13,7 +13,7 @@ Installation
 Installing via conda
 ====================
 
-For Python 3.6, 3.7 and 3.8, installation via conda is supported. This is done by executing
+For Python 3.7, 3.8, 3.9, and 3.10, installation via conda is supported. This is done by executing
 
 .. code-block:: bash
 
@@ -56,7 +56,7 @@ scqubits depends on the following Python open-source libraries:
 +----------------+--------------+-----------------------------------------------------+
 | Package        | Version      | Details                                             |
 +================+==============+=====================================================+
-| **Python**     | 3.6+         | Version 3.6 and higher is supported.                |
+| **Python**     | 3.7+         | Version 3.7 and higher is supported.                |
 +----------------+--------------+-----------------------------------------------------+
 | **NumPy**      | 1.14.2+      | Not tested on lower versions.                       |
 +----------------+--------------+-----------------------------------------------------+

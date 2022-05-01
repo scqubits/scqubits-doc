@@ -17,6 +17,8 @@
 /* Do not draw borders around Python keywords in (e.g. in API section) */
 .rst-content code, .rst-content tt, code {
     border: none;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 /* Font overrides */
