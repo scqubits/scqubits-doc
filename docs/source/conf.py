@@ -44,8 +44,8 @@ extensions = ['sphinx_rtd_theme',
 
 html_show_sourcelink = False
 
-# autodoc_default_options = {'members': True, 'inherited-members': True}
 autodoc_mock_imports = ['qutip', 'pytest', 'ipywidgets', 'IPython', 'tqdm']
+autodoc_typehints = 'description'
 autosummary_generate = True
 
 # Options for sphinx_autodoc_typehints
