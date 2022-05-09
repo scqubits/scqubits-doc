@@ -24,13 +24,14 @@ Contributors
 ============
 
 
-| **Elam Blackwell** (Northwestern University) - Bug hunter
+| **Elam Blackwell** (Northwestern University) - Code contributor, bug hunter
 | **Farid Hassani** (IST Austria) - Bug hunter
 | **Ziwen Huang** (Northwestern University) - Bug hunter
 | **Nicholas Irons** - Code contributor
 | **Pranav Mundahda** (Princeton University) - Bug hunter
+| **Niko Savola** (Aalto University, IQM Quantum Computers) - Code contributor, bug hunter
 | **David Schuster** (University of Chicago) - Code contributor
-| **Jun Sung** (Northwestern University) - Bug hunter
+| **Jun Sung** (Northwestern University) - Code contributor, bug hunter
 | **Sydney Wang** (IMSA) - Code contributor
 | **Daniel Weiss** (Northwestern University) - Code contributor, bug hunter
 | **Xinyuan You** (Northwestern University) - Code contributor, bug hunter
