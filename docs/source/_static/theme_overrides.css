@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 /* override table width restrictions */
 @media screen and (min-width: 767px) {
 
@@ -24,12 +27,12 @@
 
 /* Font overrides */
 h1 {
-    font-size: 34px;
+    font-size: 45px;
     line-height: 34px;
     margin-top: 60px;
     margin-bottom: 50px;
-    font-weight: 700;
-    font-family: "Open Sans", Roboto,ff-tisa-web-pro,Georgia,Arial,sans-serif;
+    font-weight: 300;
+    font-family: Roboto,"Open Sans", ff-tisa-web-pro,Arial,sans-serif;
 }
 
 h2 {
@@ -47,10 +50,14 @@ h3 {
     color: #4d77cf;
 }
 
+b, strong {
+  font-weight: 900;
+}
+
 .rst-content .toctree-wrapper > p.caption, h2, h3, h4, h5, h6, legend {
     margin-top: 50px;
     font-weight: 400;
-    font-family: "Open Sans", Roboto,ff-tisa-web-pro,Georgia,Arial,sans-serif;
+    font-family: Roboto, "Open Sans", ff-tisa-web-pro, Arial, sans-serif;
 }
 
 .rst-content code, .rst-content tt, code, cite {
@@ -63,7 +70,7 @@ h3 {
 }
 
 body {
-    font-family: "Open Sans",sans-serif;
+    font-family: Roboto, "Open Sans",sans-serif;
     font-size: 15px;
     line-height: 24px;
     font-weight: 400;
@@ -106,6 +113,7 @@ html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-co
 }
 
 .rst-content p.rubric {
+  margin-top: 30px;
   margin-bottom: 12px;
   font-weight: 700;
   border-bottom: 1px solid;
