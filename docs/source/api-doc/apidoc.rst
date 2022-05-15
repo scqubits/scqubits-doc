@@ -15,6 +15,7 @@ of scqubits.
 
    modules.rst
    qubit_classes.rst
+   circuit_classes.rst
    _autosummary/scqubits.core.hilbert_space.HilbertSpace
    _autosummary/scqubits.core.param_sweep.ParameterSweep
    gui_classes.rst
