@@ -16,6 +16,14 @@
       margin-top: 24px;
       max-width: 100%;
    }
+
+   .wy-nav-content-wrap {
+      background: rgba(0,0,0,0);
+   }
+}
+
+.wy-nav-content-wrap {
+  background: rgba(0,0,0,0);
 }
 
 /* Do not draw borders around Python keywords in (e.g. in API section) */
@@ -136,7 +144,7 @@ html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-co
 }
 
 .rst-content .section ol.simple li > *, .rst-content .section ol.simple li ol, .rst-content .section ol.simple li ul, .rst-content .section ul.simple li > *, .rst-content .section ul.simple li ol, .rst-content .section ul.simple li ul {
-    margin-top: 15px;
+    margin-top: 5px;
     margin-bottom: 15px;
 }
 

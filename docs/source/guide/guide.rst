@@ -15,6 +15,7 @@ User Guide
    ./ipynb/gui.ipynb
    guide-qubits.rst
    guide-noise.rst
+   ./ipynb/custom_circuit.ipynb
    ./ipynb/hilbertspace.ipynb
    ./ipynb/paramsweep.ipynb
    ./ipynb/paramsweep2.ipynb
