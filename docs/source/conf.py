@@ -116,6 +116,10 @@ todo_include_todos = True
 napoleon_numpy_docstring = True
 napoleon_use_admonition_for_notes = True
 
+nbsphinx_execute_arguments = [
+    "--InlineBackend.figure_formats={'svg', 'pdf'}",
+    "--InlineBackend.rc=figure.dpi=96",
+]
 # Do not print input/output cell numbers
 nbsphinx_prompt_width = "0ex"
 # TODO:  remove the following

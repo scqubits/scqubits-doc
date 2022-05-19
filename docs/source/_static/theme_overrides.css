@@ -59,7 +59,7 @@ h3 {
 }
 
 b, strong {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .rst-content .toctree-wrapper > p.caption, h2, h3, h4, h5, h6, legend {
@@ -72,9 +72,14 @@ b, strong {
     white-space: nowrap;
     font-style: normal;
     font-size: 100%;
-    font-weight: 700;
+    font-weight: 650;
     font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
     color: rgb(0, 90, 130);
+    line-height: 1.5;
+}
+
+div.nboutput.container div.output_area {
+  background: #d3d3d330;
 }
 
 body {
@@ -88,9 +93,9 @@ body {
 .rst-content .linenodiv pre, .rst-content div[class^="highlight"] pre, .rst-content pre.literal-block {
     font-style: normal;
     font-size: 100%;
-    font-weight: 700;
+    font-weight: 500;
     font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,Courier,monospace;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .rst-content code.literal, .rst-content tt.literal {
@@ -106,7 +111,7 @@ body {
 }
 
 .highlight {
-    background: rgb(280, 280, 280);
+    background: aliceblue;
 }
 
 html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.simple) > dt {
@@ -148,6 +153,10 @@ html.writer-html4 .rst-content dl:not(.docutils) > dt, html.writer-html5 .rst-co
     margin-bottom: 15px;
 }
 
+.rst-content .admonition, .rst-content .admonition-todo, .rst-content .attention, .rst-content .caution, .rst-content .danger, .rst-content .error, .rst-content .hint, .rst-content .important, .rst-content .note, .rst-content .seealso, .rst-content .tip, .rst-content .warning {
+    clear: both;
+    box-shadow: 0 .2rem .5rem rgba(0,0,0,.05),0 0 .0625rem rgba(0,0,0,.1);
+}
 .wy-menu-vertical a {
     font-size: 100%;
 }
