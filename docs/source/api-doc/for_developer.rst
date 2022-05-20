@@ -16,9 +16,9 @@ Qubit base classes
 
 .. _classes-qubitbase:
 
-   _autosummary/scqubits.core.qubit_base.QuantumSystem
-   _autosummary/scqubits.core.qubit_base.QubitBaseClass
-   _autosummary/scqubits.core.qubit_base.QubitBaseClass1d
+   _autosummary/scqubits.core.qubit_base.QuantumSystem.rst
+   _autosummary/scqubits.core.qubit_base.QubitBaseClass.rst
+   _autosummary/scqubits.core.qubit_base.QubitBaseClass1d.rst
 
 
 **********************************************************
@@ -42,14 +42,14 @@ CentralDispatch and related classes
 CentralDispatch
 ---------------
 
-   _autosummary/scqubits.core.central_dispatch.CentralDispatch
+   _autosummary/scqubits.core.central_dispatch.CentralDispatch.rst
 
 .. _classes-dispatchclient:
 
 DispatchClient
 ---------------
 
-   _autosummary/scqubits.core.central_dispatch.DispatchClient
+   _autosummary/scqubits.core.central_dispatch.DispatchClient.rst
 
 
 **********************************************************
@@ -61,11 +61,11 @@ Descriptor classes
 WatchedProperty
 ---------------
 
-   _autosummary/scqubits.core.descriptors.WatchedProperty
+   _autosummary/scqubits.core.descriptors.WatchedProperty.rst
 
 .. _classes-readonly:
 
 ReadOnlyProperty
 ----------------
 
-   _autosummary/scqubits.core.descriptors.ReadOnlyProperty
+   _autosummary/scqubits.core.descriptors.ReadOnlyProperty.rst

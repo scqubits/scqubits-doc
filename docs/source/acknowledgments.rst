@@ -3,9 +3,9 @@
 
 .. _acknowledgments:
 
-***********************
-Funding Acknowledgments
-***********************
+*******
+Funding
+*******
 
 We gratefully acknowledge financial support for the continued development of the scqubits library by the Air Force
 Office for Scientific Research under grant no. FA9550-20-1-0271. Previously, creation of the scqubits library was

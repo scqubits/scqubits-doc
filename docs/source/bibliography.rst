@@ -3,9 +3,9 @@
 
 .. _bibliography:
 
-*************
-Bibliography
-*************
+****
+Refs
+****
 
 .. [Brooks2013] Brooks et al., Phys. Rev. A 87, 052306 (2013), https://link.aps.org/doi/10.1103/PhysRevA.87.052306
 .. [Catelani2011] Catelani et al., Phys. Rev. B, 84, 064517 (2011), https://journals.aps.org/prb/abstract/10.1103/PhysRevB.84.064517

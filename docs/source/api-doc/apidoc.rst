@@ -3,9 +3,9 @@
 
 .. _apidoc:
 
-*****************
-API documentation
-*****************
+****
+API
+****
 
 This chapter contains the API documentation consisting of a list of the relevant public classes and functions
 of scqubits.
