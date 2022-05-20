@@ -170,7 +170,7 @@ body {
 }
 
 address, dl, ol, ul {
-	margin-bottom: 3rem;
+	margin-bottom: 2rem;
 }
 
 .sig {
@@ -202,4 +202,9 @@ div.nbinput.container div.prompt pre, div.nboutput.container div.prompt pre {
 	color: #053d5a;
 	/* font-weight: 500; */
 	font-size: 17px;
+}
+
+p {
+	margin-bottom: 0.6rem;
+	margin-top: 0.7rem;
 }
