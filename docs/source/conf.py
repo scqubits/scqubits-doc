@@ -40,6 +40,8 @@ extensions = [
     "nbsphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
+    "IPython.sphinxext.ipython_console_highlighting",
+    "IPython.sphinxext.ipython_directive",
 ]
 
 html_show_sourcelink = False
@@ -75,6 +77,7 @@ html_static_path = ["_static"]
 html_context = {
     "css_files": [
         "_static/theme_overrides.css",  # override wide tables in RTD theme
+        "_static/pygments.css",  # this is a HACK; force sphinx to use this style
     ],
 }
 
@@ -82,11 +85,9 @@ html_context = {
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_theme = "sphinx_rtd_theme"
-html_logo = "./logo/scqubits-logo2.png"
-full_logo = True
+html_theme = "pydata_sphinx_theme"  # "sphinx_rtd_theme"
+html_logo = "./logo/scqubits-logo3.png"  # "./logo/scqubits-logo2.png"
 
-html_theme_options = {"logo_only": True}
 # Add any paths that contain custom themes here, relative to this directory.
 
 # The name for this set of Sphinx documents.  If None, it defaults to
@@ -96,8 +97,9 @@ html_title = "scqubits Documentation"
 # A shorter title for the navigation bar.  Default is the same as html_title.
 html_short_title = "scqubits"
 
+highlight_language = "python"
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = "sphinx"
+pygments_style = "algol_nu"
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
 add_function_parentheses = False
@@ -120,7 +122,9 @@ nbsphinx_execute_arguments = [
     "--InlineBackend.figure_formats={'svg', 'pdf'}",
     "--InlineBackend.rc=figure.dpi=96",
 ]
-# Do not print input/output cell numbers
+
+
 nbsphinx_prompt_width = "0ex"
+nbsphinx_codecell_lexer = "ipython3"
 # TODO:  remove the following
-nbsphinx_ignore_errors = True
+nbsphinx_allow_errors = True
