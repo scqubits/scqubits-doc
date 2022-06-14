@@ -25,8 +25,8 @@ Upgrading to the latest version of scqubits can be done by
 
    conda update -c conda-forge scqubits
 
-
 .. _install-via_pip:
+
 
 Installing via pip
 ==================
@@ -87,8 +87,9 @@ The following packages are optional:
 +------------------------+--------------+-----------------------------------------------------+
 
 
+.. warning::
 
-
+   For Apple M1 machines with ARM64 architecture, scqubits is only compatible with SciPy < 1.7 and Python < 3.9, in addition to the requirements listed above. Please make sure compatible versions of these libraries are installed. Alternatively, user can create conda environments with x86 architecture, where the additional requirements does not apply.
 
 .. _install-verify:
 
