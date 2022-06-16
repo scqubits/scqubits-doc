@@ -126,5 +126,5 @@ nbsphinx_execute_arguments = [
 
 nbsphinx_prompt_width = "0ex"
 nbsphinx_codecell_lexer = "ipython3"
-# TODO:  remove the following
-nbsphinx_allow_errors = True
+# The following only to be enabled for debugging purposes
+# nbsphinx_allow_errors = True
