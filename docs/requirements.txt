@@ -1,7 +1,7 @@
 sphinx>=4.5
-docutils==0.16
+docutils
 pygments>=2.4.1
-pydata-sphinx-theme
+pydata-sphinx-theme==0.8.1
 IPython
 nbsphinx
 sphinxcontrib-napoleon

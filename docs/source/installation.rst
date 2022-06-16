@@ -70,7 +70,8 @@ scqubits depends on the following Python open-source libraries:
 +----------------+--------------+-----------------------------------------------------+
 | **tqdm**       | 4.0+         |  Needed for display of progress bar                 |
 +----------------+--------------+-----------------------------------------------------+
-
+| **sympy**      | 1.7.1+       |  Needed for custom circuit analysis                 |
++----------------+--------------+-----------------------------------------------------+
 
 The following packages are optional:
 
