@@ -111,6 +111,6 @@ p {
 	margin-top: 0.7rem;
 }
 
-.rst-versions.rst-badge {
-	display: none;
+.injected {
+    display: none;
 }
