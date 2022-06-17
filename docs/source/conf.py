@@ -95,6 +95,29 @@ html_title = "scqubits Documentation"
 # A shorter title for the navigation bar.  Default is the same as html_title.
 html_short_title = "scqubits"
 
+
+# Theme options are theme-specific and customize the look and feel of a theme
+# further.  For a list of options available for each theme, see the
+# documentation.
+#
+html_theme_options = {
+    "icon_links": [
+        {
+            "name": "GitHub",
+            "url": "https://github.com/scqubits/scqubits",
+            "icon": "fab fa-github-square",
+        },
+    ],
+    "navbar_align": "left",
+    "navbar_end": ["navbar-icon-links.html", "search-field.html"],
+    "footer_items": ["copyright.html"],
+}
+
+
+myst_heading_anchors = 3
+
+
+
 highlight_language = "python"
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "algol_nu"
