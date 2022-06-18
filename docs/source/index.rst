@@ -22,6 +22,11 @@ If you employ scqubits in your research, please support its continued
 development and maintenance. Use of scqubits in research publications is
 appropriately acknowledged by citing:
 
+   | Sai Pavan Chitta, Tianpu Zhao, Ziwen Huang, Ian Mondragon-Shem, and Jens Koch
+   | *Computer-aided quantization and numerical analysis of superconducting circuits*
+   | arXiv:2206.08320 (2022).
+   | https://arxiv.org/abs/2206.08320
+
    | Peter Groszkowski and Jens Koch,
    | *scqubits:  a Python package for superconducting qubits*,
    | Quantum 5, 583 (2021).
