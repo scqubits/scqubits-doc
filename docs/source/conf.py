@@ -17,6 +17,7 @@ copyright = "2019 and later (latest update: 2022), Jens Koch, Peter Groszkowski"
 author = "Jens Koch, Peter Groszkowski"
 
 import pydata_sphinx_theme
+html_theme = "pydata_sphinx_theme"
 
 # -- General configuration ---------------------------------------------------
 
@@ -27,6 +28,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
+    "sphinx.ext.todo",
+    "sphinx.ext.doctest",
     "sphinx.ext.extlinks",
     "sphinx.ext.viewcode",
     "sphinx_design",
@@ -54,7 +57,6 @@ simplify_optional_unions = True
 master_doc = "index"
 
 
-
 autodoc_mock_imports = ["qutip", "pytest", "ipywidgets", "IPython", "tqdm"]
 autodoc_typehints = "description"
 autosummary_generate = True
@@ -65,9 +67,6 @@ simplify_optional_unions = True
 
 # The master toctree document.
 master_doc = "index"
-
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -80,9 +79,7 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "_templates", "tmp", "**.ipynb_checkpoints", "Thumbs.db", ".DS_Store"]
 
-
 autosummary_generate = True
-
 
 html_logo = "./logo/scqubits-logo3.png"
 html_favicon = "./logo/scqubits-logo3.png"
@@ -96,6 +93,12 @@ html_title = "scqubits Documentation"
 # A shorter title for the navigation bar.  Default is the same as html_title.
 html_short_title = "scqubits"
 
+html_context = {
+    "github_user": "scqubits",
+    "github_repo": "scqubits-doc",
+    "github_version": "rtd",
+    "doc_path": "docs/source",
+}
 
 html_theme_options = {
     "github_url": "https://github.com/scqubits/scubits",
@@ -105,6 +108,11 @@ html_theme_options = {
             "name": "PyPI",
             "url": "https://pypi.org/project/scqubits/",
             "icon": "fas fa-box",
+        },
+        {
+            "name": "conda",
+            "url": "https://anaconda.org/conda-forge/scqubits",
+            "icon": "fas fa-box-open",
         },
     ],
     "use_edit_page_button": True,
@@ -124,12 +132,7 @@ html_sidebars = {
 
 myst_heading_anchors = 2
 
-html_context = {
-    "github_user": "scqubits",
-    "github_repo": "scqubits",
-    "github_version": "rtd",
-    "doc_path": "docs",
-}
+
 
 highlight_language = "python"
 # The name of the Pygments (syntax highlighting) style to use.
@@ -157,7 +160,6 @@ nbsphinx_execute_arguments = [
     "--InlineBackend.rc=figure.dpi=96",
 ]
 
-
 nbsphinx_prompt_width = "0ex"
 nbsphinx_codecell_lexer = "ipython3"
 # The following only to be enabled for debugging purposes
@@ -167,8 +169,4 @@ nbsphinx_codecell_lexer = "ipython3"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-html_css_files = ["custom.css"]
-
-
-
-
+html_css_files = ["theme_overrides.css", "pygments.css"]
