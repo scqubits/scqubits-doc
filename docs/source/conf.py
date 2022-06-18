@@ -1,9 +1,3 @@
-# Configuration file for the Sphinx documentation builder.
-#
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# http://www.sphinx-doc.org/en/master/config
-
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -22,6 +16,8 @@ project = "scqubits"
 copyright = "2019 and later (latest update: 2022), Jens Koch, Peter Groszkowski"
 author = "Jens Koch, Peter Groszkowski"
 
+import pydata_sphinx_theme
+
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -30,12 +26,10 @@ author = "Jens Koch, Peter Groszkowski"
 extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
-    "sphinx.ext.todo",
-    "sphinx.ext.doctest",
     "sphinx.ext.autosummary",
     "sphinx.ext.extlinks",
     "sphinx.ext.viewcode",
-    "sphinx.ext.ifconfig",
+    "sphinx_design",
     "nbsphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
@@ -43,7 +37,23 @@ extensions = [
     "IPython.sphinxext.ipython_directive",
 ]
 
+
+# -- Internationalization ------------------------------------------------
+# specifying the natural language populates some key tags
+language = "en"
+
 html_show_sourcelink = False
+html_sourcelink_suffix = ""
+
+
+# Options for sphinx_autodoc_typehints
+set_type_checking_flag = True
+simplify_optional_unions = True
+
+# The master toctree document.
+master_doc = "index"
+
+
 
 autodoc_mock_imports = ["qutip", "pytest", "ipywidgets", "IPython", "tqdm"]
 autodoc_typehints = "description"
@@ -56,7 +66,12 @@ simplify_optional_unions = True
 # The master toctree document.
 master_doc = "index"
 
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ["_templates"]
 
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This pattern also affects html_static_path and html_extra_path.
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
@@ -65,26 +80,12 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "_templates", "tmp", "**.ipynb_checkpoints", "Thumbs.db", ".DS_Store"]
 
-# -- Options for HTML output -------------------------------------------------
 
-# These folders are copied to the documentation's HTML output
-html_static_path = ["_static"]
-
-# These paths are either relative to html_static_path
-# or fully qualified paths (eg. https://...)
-html_context = {
-    "css_files": [
-        "_static/theme_overrides.css",  # override wide tables in RTD theme
-        "_static/pygments.css",  # this is a HACK; force sphinx to use this style
-    ],
-}
+autosummary_generate = True
 
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-
-html_theme = "pydata_sphinx_theme"  # "sphinx_rtd_theme"
-html_logo = "./logo/scqubits-logo3.png"  # "./logo/scqubits-logo2.png"
+html_logo = "./logo/scqubits-logo3.png"
+html_favicon = "./logo/scqubits-logo3.png"
 
 # Add any paths that contain custom themes here, relative to this directory.
 
@@ -96,30 +97,39 @@ html_title = "scqubits Documentation"
 html_short_title = "scqubits"
 
 
-# Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
-# documentation.
-#
 html_theme_options = {
+    "github_url": "https://github.com/scqubits/scubits",
+    "twitter_url": "https://twitter.com/scqubits",
     "icon_links": [
         {
-            "name": "GitHub",
-            "url": "https://github.com/scqubits/scqubits",
-            "icon": "fab fa-github-square",
+            "name": "PyPI",
+            "url": "https://pypi.org/project/scqubits/",
+            "icon": "fas fa-box",
         },
     ],
-    "navbar_align": "left",
-    "navbar_end": ["navbar-icon-links.html", "search-field.html"],
-    "footer_items": ["copyright.html"],
+    "use_edit_page_button": True,
+    "show_toc_level": 1,
+    "navbar_start": ["navbar-logo"],
+    "navbar_end": ["navbar-icon-links"],
 }
 
 html_sidebars = {
-    "**": ["sidebar-nav-bs.html", "sidebar-ethical-ads.html"]
+    "contribute/index": [
+        "search-field",
+        "sidebar-nav-bs",
+        "custom-template",
+    ],  # This ensures we test for custom sidebars
+    "demo/no-sidebar": [],  # Test what page looks like with no sidebar items
 }
 
-myst_heading_anchors = 3
+myst_heading_anchors = 2
 
-
+html_context = {
+    "github_user": "scqubits",
+    "github_repo": "scqubits",
+    "github_version": "rtd",
+    "doc_path": "docs",
+}
 
 highlight_language = "python"
 # The name of the Pygments (syntax highlighting) style to use.
@@ -152,3 +162,13 @@ nbsphinx_prompt_width = "0ex"
 nbsphinx_codecell_lexer = "ipython3"
 # The following only to be enabled for debugging purposes
 # nbsphinx_allow_errors = True
+
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
+
+
+
+
