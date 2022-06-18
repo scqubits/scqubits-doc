@@ -101,7 +101,7 @@ html_context = {
 }
 
 html_theme_options = {
-    "github_url": "https://github.com/scqubits/scubits",
+    "github_url": "https://github.com/scqubits/scqubits",
     "twitter_url": "https://twitter.com/scqubits",
     "icon_links": [
         {
