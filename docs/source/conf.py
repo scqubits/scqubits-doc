@@ -113,6 +113,9 @@ html_theme_options = {
     "footer_items": ["copyright.html"],
 }
 
+html_sidebars = {
+    "**": ["sidebar-nav-bs.html", "sidebar-ethical-ads.html"]
+}
 
 myst_heading_anchors = 3
 
