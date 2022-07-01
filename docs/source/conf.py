@@ -19,7 +19,7 @@ sys.path.append(os.path.abspath("sphinxext"))
 # -- Project information -----------------------------------------------------
 
 project = "scqubits"
-copyright = "2019 and later (latest update: 2021), Jens Koch, Peter Groszkowski"
+copyright = "2019 and later (latest update: 2022), Jens Koch, Peter Groszkowski"
 author = "Jens Koch, Peter Groszkowski"
 
 # -- General configuration ---------------------------------------------------
@@ -126,5 +126,5 @@ nbsphinx_execute_arguments = [
 
 nbsphinx_prompt_width = "0ex"
 nbsphinx_codecell_lexer = "ipython3"
-# TODO:  remove the following
-nbsphinx_allow_errors = True
+# The following only to be enabled for debugging purposes
+# nbsphinx_allow_errors = True

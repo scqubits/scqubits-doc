@@ -25,6 +25,7 @@ Contributors
 
 
 | **Elam Blackwell** (Northwestern University) - Code contributor, bug hunter
+| **Sai Pavan Chitta** (Northwestern University) - Code contributor
 | **Farid Hassani** (IST Austria) - Bug hunter
 | **Ziwen Huang** (Northwestern University) - Bug hunter
 | **Nicholas Irons** - Code contributor
@@ -35,5 +36,6 @@ Contributors
 | **Sydney Wang** (IMSA) - Code contributor
 | **Daniel Weiss** (Northwestern University) - Code contributor, bug hunter
 | **Xinyuan You** (Northwestern University) - Code contributor, bug hunter
+| **Tianpu Zhao** (Northwestern University) - Code and documentation contributor
 | **Athena Zheng** (IMSA) - Code contributor
 
