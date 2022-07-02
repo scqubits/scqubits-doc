@@ -98,6 +98,7 @@ html_context = {
     "github_repo": "scqubits-doc",
     "github_version": "rtd",
     "doc_path": "docs/source",
+    "default_mode": "light"
 }
 
 html_theme_options = {
