@@ -8,6 +8,39 @@ Change Log
 **********
 
 
+Version 3.0
++++++++++++
+
+**Additions**
+
+    - Add circuit and symbolic_circuit modules, introducing the Circuit class for symbolic and numerical analysis of custom circuits
+    - Add official support for Python 3.9 and 3.10
+    - Improved GUI for single qubits (incl., e.g., a Dropdown menu with parameter choices from papers)
+    - Improved Explorer class
+    - Additional options for specifying initial and final states in transitions and plot_transitions inside ParameterSweep
+    - Additional helper functions in ParameterSweep: get_subsys(index), subsys_by_id_str(id_str), subsys_evals_count(index), dressed_evals_count
+    - ParameterSweep offers a new option ignore_low_overlap
+    - Improved status information output when using parallel processing of ParameterSweep data
+
+**Deprecations**
+
+    - Remove deprecation support for outdated InteractionTerm / HilbertSpace interface
+    - Remove deprecation support for outdated Explorer interface
+
+**Bug Fixes**
+
+    - Fixed incorrect output/return from supported_noise_channels for the FullZeroPi qubit
+    - Fixed accidental support of h5py without safeguard (remains optional)
+    - Fixed ordering bug in de-serialization of OrderedDict which could prevent reading of ParameterSweep objects
+    - Fixed plotting issue in which presence of nans could reduce the intended plot range
+
+**Under the Hood**
+
+    - Remove _evec_dtype attribute from qubit classes
+    - Eliminated code duplication for SpectrumLookup between HilbertSpace and ParameterSweep . Both classes now use SpectrumLookupMixin
+    - ParameterSweep now has read-only property hilbertspace
+    - Added quantitative pytest for FullZeroPi
+
 
 Version 2.2.2
 +++++++++++++
@@ -22,7 +55,7 @@ Version 2.2.2
     - Adjusted calculations mapping dressed-basis to bare-state labels: use (state
       overlap)^2 instead of (state overlap) for thresholding.
 
-**Under the hood**
+**Under the Hood**
     typing_extensions is new dependency (used for enhanced typing annotations such as
     `@overload` and `Literal`
 
