@@ -25,14 +25,15 @@ html_theme = "pydata_sphinx_theme"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "sphinx_design",
     "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
     "sphinx.ext.todo",
     "sphinx.ext.doctest",
+    "sphinx.ext.autosummary",
     "sphinx.ext.extlinks",
     "sphinx.ext.viewcode",
-    "sphinx_design",
+    "sphinx.ext.ifconfig",
     "nbsphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
@@ -48,6 +49,9 @@ language = "en"
 html_show_sourcelink = False
 html_sourcelink_suffix = ""
 
+autodoc_mock_imports = ["qutip", "pytest", "ipywidgets", "IPython", "tqdm"]
+autodoc_typehints = "description"
+autosummary_generate = True
 
 # Options for sphinx_autodoc_typehints
 set_type_checking_flag = True
@@ -56,14 +60,6 @@ simplify_optional_unions = True
 # The master toctree document.
 master_doc = "index"
 
-
-autodoc_mock_imports = ["qutip", "pytest", "ipywidgets", "IPython", "tqdm"]
-autodoc_typehints = "description"
-autosummary_generate = True
-
-# Options for sphinx_autodoc_typehints
-set_type_checking_flag = True
-simplify_optional_unions = True
 
 # The master toctree document.
 master_doc = "index"
