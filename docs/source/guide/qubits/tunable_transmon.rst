@@ -48,6 +48,7 @@ Calculational methods related to Hamiltonian and energy spectra
 ---------------------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.TunableTransmon.hamiltonian
     scqubits.TunableTransmon.eigenvals
@@ -59,6 +60,7 @@ Wavefunctions and visualization of eigenstates
 ----------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.TunableTransmon.numberbasis_wavefunction
     scqubits.TunableTransmon.wavefunction
@@ -72,6 +74,8 @@ Implemented operators
 The following operators are implemented for use in matrix element calculations.
 
 .. autosummary::
+   :toctree: ../../_generated/
+
     scqubits.TunableTransmon.n_operator
     scqubits.TunableTransmon.exp_i_phi_operator
     scqubits.TunableTransmon.cos_phi_operator
@@ -83,6 +87,7 @@ Computation and visualization of matrix elements
 ------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.TunableTransmon.matrixelement_table
     scqubits.TunableTransmon.plot_matrixelements
@@ -94,6 +99,7 @@ Estimation of coherence times
 -----------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.TunableTransmon.plot_coherence_vs_paramvals
     scqubits.TunableTransmon.plot_t1_effective_vs_paramvals

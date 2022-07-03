@@ -1,4 +1,4 @@
-﻿scqubits.core.symbolic\_circuit
+scqubits.core.symbolic\_circuit
 ===============================
 
 .. automodule:: scqubits.core.symbolic_circuit

@@ -61,9 +61,6 @@ simplify_optional_unions = True
 master_doc = "index"
 
 
-# The master toctree document.
-master_doc = "index"
-
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
@@ -113,9 +110,10 @@ html_theme_options = {
         },
     ],
     "use_edit_page_button": True,
-    "show_toc_level": 1,
     "navbar_start": ["navbar-logo"],
     "navbar_end": ["navbar-icon-links"],
+    "navigation_depth": 2,
+    "collapse_navigation": True
 }
 
 html_sidebars = {

@@ -64,6 +64,7 @@ Calculational methods related to Hamiltonian and energy spectra
 ---------------------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.FullZeroPi.hamiltonian
     scqubits.FullZeroPi.eigenvals
@@ -77,6 +78,7 @@ Implemented operators
 The following operators are implemented for use in matrix element calculations.
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.FullZeroPi.i_d_dphi_operator
     scqubits.FullZeroPi.phi_operator
@@ -87,6 +89,7 @@ Computation and visualization of matrix elements
 ------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.FullZeroPi.matrixelement_table
     scqubits.FullZeroPi.plot_matrixelements
@@ -100,5 +103,6 @@ Utility method for setting charging energies
 --------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.set_EC_via_ECS

@@ -34,13 +34,14 @@ From within Jupyter notebook, a transmon instance can alternatively be created w
 
    transmon = scqubits.Transmon.create()
 
-This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
+This functionality is enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.
 
 Calculational methods related to Hamiltonian and energy spectra
 ---------------------------------------------------------------
 
 .. autosummary::
+    :toctree: ../../_generated/
 
     scqubits.Transmon.hamiltonian
     scqubits.Transmon.eigenvals
@@ -52,6 +53,7 @@ Wavefunctions and visualization of eigenstates
 ----------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Transmon.numberbasis_wavefunction
     scqubits.Transmon.wavefunction
@@ -65,6 +67,8 @@ Implemented operators
 The following operators are implemented for use in matrix element calculations.
 
 .. autosummary::
+   :toctree: ../../_generated/
+
     scqubits.Transmon.n_operator
     scqubits.Transmon.exp_i_phi_operator
     scqubits.Transmon.cos_phi_operator
@@ -76,6 +80,7 @@ Computation and visualization of matrix elements
 ------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Transmon.matrixelement_table
     scqubits.Transmon.plot_matrixelements
@@ -87,6 +92,7 @@ Estimation of coherence times
 -----------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Transmon.plot_coherence_vs_paramvals
     scqubits.Transmon.plot_t1_effective_vs_paramvals

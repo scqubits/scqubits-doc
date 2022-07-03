@@ -41,7 +41,7 @@ appropriately acknowledged by citing:
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :hidden:
 
    installation.rst
