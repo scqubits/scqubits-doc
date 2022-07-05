@@ -125,10 +125,6 @@ html_sidebars = {
     "demo/no-sidebar": [],  # Test what page looks like with no sidebar items
 }
 
-myst_heading_anchors = 2
-
-
-
 highlight_language = "python"
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = "algol_nu"
