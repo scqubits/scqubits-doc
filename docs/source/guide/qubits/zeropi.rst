@@ -55,6 +55,7 @@ Calculational methods related to Hamiltonian and energy spectra
 ---------------------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.hamiltonian
     scqubits.ZeroPi.eigenvals
@@ -66,6 +67,7 @@ Wavefunctions and visualization of eigenstates
 ----------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.wavefunction
     scqubits.ZeroPi.plot_wavefunction
@@ -77,6 +79,8 @@ Implemented operators
 The following operators are implemented for use in matrix element calculations.
 
 .. autosummary::
+   :toctree: ../../_generated/
+
     scqubits.ZeroPi.i_d_dphi_operator
     scqubits.ZeroPi.phi_operator
     scqubits.ZeroPi.n_theta_operator
@@ -89,6 +93,7 @@ Computation and visualization of matrix elements
 ------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.matrixelement_table
     scqubits.ZeroPi.plot_matrixelements
@@ -100,6 +105,7 @@ Utility method for setting charging energies
 --------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.set_EC_via_ECS
 
@@ -108,6 +114,7 @@ Utility method for setting charging energies
 --------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.set_EC_via_ECS
 
@@ -116,6 +123,7 @@ Estimation of coherence times
 -----------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.ZeroPi.plot_coherence_vs_paramvals
     scqubits.ZeroPi.plot_t1_effective_vs_paramvals

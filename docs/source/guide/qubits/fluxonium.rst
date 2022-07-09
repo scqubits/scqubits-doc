@@ -45,6 +45,7 @@ Calculational methods related to Hamiltonian and energy spectra
 ---------------------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Fluxonium.hamiltonian
     scqubits.Fluxonium.eigenvals
@@ -56,6 +57,7 @@ Wavefunctions and visualization of eigenstates
 ----------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Fluxonium.wavefunction
     scqubits.Fluxonium.plot_wavefunction
@@ -67,6 +69,8 @@ Implemented operators
 The following operators are implemented for use in matrix element calculations.
 
 .. autosummary::
+   :toctree: ../../_generated/
+
     scqubits.Fluxonium.n_operator
     scqubits.Fluxonium.phi_operator
     scqubits.Fluxonium.exp_i_phi_operator
@@ -78,6 +82,7 @@ Computation and visualization of matrix elements
 ------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Fluxonium.matrixelement_table
     scqubits.Fluxonium.plot_matrixelements
@@ -89,6 +94,7 @@ Estimation of coherence times
 -----------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Fluxonium.plot_coherence_vs_paramvals
     scqubits.Fluxonium.plot_t1_effective_vs_paramvals

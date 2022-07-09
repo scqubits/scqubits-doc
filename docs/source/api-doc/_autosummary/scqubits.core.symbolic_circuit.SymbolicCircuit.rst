@@ -1,4 +1,4 @@
-﻿SymbolicCircuit
+SymbolicCircuit
 ===============
 
 .. _SymbolicCircuit:
@@ -29,6 +29,8 @@
       SymbolicCircuit.generate_symbolic_hamiltonian
       SymbolicCircuit.generate_symbolic_lagrangian
       SymbolicCircuit.is_any_branch_parameter_symbolic
+      SymbolicCircuit.purely_harmonic_transformation
+      SymbolicCircuit.round_symbolic_expr
       SymbolicCircuit.serialize
       SymbolicCircuit.update_param_init_val
       SymbolicCircuit.variable_transformation_matrix

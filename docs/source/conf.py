@@ -25,14 +25,15 @@ html_theme = "pydata_sphinx_theme"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "sphinx_design",
     "sphinx.ext.napoleon",
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
     "sphinx.ext.todo",
     "sphinx.ext.doctest",
+    "sphinx.ext.autosummary",
     "sphinx.ext.extlinks",
     "sphinx.ext.viewcode",
-    "sphinx_design",
+    "sphinx.ext.ifconfig",
     "nbsphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
@@ -48,15 +49,6 @@ language = "en"
 html_show_sourcelink = False
 html_sourcelink_suffix = ""
 
-
-# Options for sphinx_autodoc_typehints
-set_type_checking_flag = True
-simplify_optional_unions = True
-
-# The master toctree document.
-master_doc = "index"
-
-
 autodoc_mock_imports = ["qutip", "pytest", "ipywidgets", "IPython", "tqdm"]
 autodoc_typehints = "description"
 autosummary_generate = True
@@ -67,6 +59,7 @@ simplify_optional_unions = True
 
 # The master toctree document.
 master_doc = "index"
+
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -117,9 +110,10 @@ html_theme_options = {
         },
     ],
     "use_edit_page_button": True,
-    "show_toc_level": 1,
     "navbar_start": ["navbar-logo"],
     "navbar_end": ["navbar-icon-links"],
+    "navigation_depth": 2,
+    "collapse_navigation": True
 }
 
 html_sidebars = {
@@ -130,10 +124,6 @@ html_sidebars = {
     ],  # This ensures we test for custom sidebars
     "demo/no-sidebar": [],  # Test what page looks like with no sidebar items
 }
-
-myst_heading_anchors = 2
-
-
 
 highlight_language = "python"
 # The name of the Pygments (syntax highlighting) style to use.

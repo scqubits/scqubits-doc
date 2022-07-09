@@ -112,6 +112,7 @@ Calculational methods related to Hamiltonian and energy spectra
 ---------------------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Cos2PhiQubit.hamiltonian
     scqubits.Cos2PhiQubit.eigenvals
@@ -123,6 +124,7 @@ Wavefunctions and visualization of eigenstates and the potential
 ----------------------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Cos2PhiQubit.wavefunction
     scqubits.Cos2PhiQubit.plot_wavefunction
@@ -135,6 +137,7 @@ Implemented operators
 The following operators are implemented for use in matrix element calculations.
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Cos2PhiQubit.n_1_operator
     scqubits.Cos2PhiQubit.n_2_operator
@@ -152,6 +155,7 @@ Computation and visualization of matrix elements
 ------------------------------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Cos2PhiQubit.matrixelement_table
     scqubits.Cos2PhiQubit.plot_matrixelements
@@ -163,6 +167,7 @@ Estimation of coherence times
 -----------------------------
 
 .. autosummary::
+   :toctree: ../../_generated/
 
     scqubits.Cos2PhiQubit.plot_coherence_vs_paramvals
     scqubits.Cos2PhiQubit.plot_t1_effective_vs_paramvals
