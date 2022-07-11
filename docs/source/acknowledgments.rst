@@ -36,7 +36,7 @@ Technologies (CAPST).
    |.. image:: graphics/doe.png                       |   Department of Energy                                         |
    |   :align: left                                   |                                                                |
    |   :width: 0.6in                                  |                                                                |
-   |   :target:https://www.energy.gov/                |                                                                |
+   |   :target: https://www.energy.gov/               |                                                                |
    +--------------------------------------------------+----------------------------------------------------------------+
    |.. image:: graphics/CAPST.png                     |   Center for Applied Physics and Superconducting Technologies  |
    |   :align: left                                   |                                                                |
