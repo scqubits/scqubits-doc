@@ -8,6 +8,70 @@ Change Log
 **********
 
 
+Version 3.0.3
++++++++++++++
+
+**Bug fixes [all for GUI]**
+- `get_operator_names` has been eliminated from the operator dropdown menu
+- "State No." sliders for `FluxQubit`, `ZeroPi`, and `Cos2PhiQubit` do not exclude the ground state anymore.
+- Fixed a bug where the plot was not being erased after switching to another qubit while in manual-update mode.
+- Changing to a non-manual scqubit now switches manual-mode off.
+- Fixed a bug where the maximum state number could be larger than `hilbertdim`.
+
+**Under the hood**
+- Initialization of a circuit instance now does not globally switch to latex output (avoids unnecessary slowdowns with regular, non-sympy, output.
+
+
+Version 3.0.2
++++++++++++++
+
+**Additions**
+* `Circuit` now implements multiprocessing in routines like `get_evals_vs_paramvals` when specifying `num_cpus=2` or higher as optional keyword argument.
+* The class `Circuit` is now “frozen” to prevent accidental creation of new instance attributes. Doing `<circuit instance>.non_existing_attribute = 3` will now raise an error message instead of creating a new attribute.
+* New threshold setting `scqubits.settings.SYM_INVERSION_MAX_NODES`  (default: `=3`) decides whether the capacitance matrix is inverted symbolically (number of nodes ≤ threshold) or numerically (number of nodes > threshold). This avoids apparent hang-ups due to generation of massive symbolic expressions for matrix inverses.
+
+**Bug fixes**
+* Branches are now distinguished by a unique id. This solves an issue of incorrect spanning trees when two branches of the same type were connected across the same set of nodes.
+* Fixed a bug in plotting routines which led to an `Exception` for cases with two or more layers in the system hierarchy.
+* Fixed a bug that could break `Subsystem` instances when the symbolic Hamiltonian had no potential terms.
+* `GUI`: establish correct clearing when turning manual plot on or when switching to another plot while on manual update.
+
+**Under the hood**
+* All numerical diagonalization is now delayed until explicitly required. Changing circuit parameters thus does not incur a repeated runtime cost anymore.
+* When hierarchical diagonalization is used, the bare eigensystems for each subsystems are now stored and reused for calculations, and only replaced by a new set when necessary. This dramatically improves the performance of wavefunction plotting, identity wrapping, etc.
+* If the circuit parameters are not updated, successive diagonalizations are skipped for all subsystems.
+* Implemented `eigsh_safe` (wrapper for scipy.sparse.linalg.eigsh) that orthogonalizes the eigenvectors when degenerate eigenvalues are detected. In rare cases of actual degeneracies in the spectrum, sparse matrix methods could have given incorrect results because `scipy.sparse.linalg.eigsh` does not guarantee orthogonality of eigenvectors in degenerate subspaces.
+
+**Deprecations**
+* The `Circuit.from_yaml` method will be phased out. Instead simply use the regular instance creation method `scq.Circuit(...)` with the same arguments as in the `from_yaml` class method.
+
+
+
+Version 3.0.1
++++++++++++++
+
+**Additions**
+
+    - Modified `SymbolicCircuit` and `Circuit` classes to simulate linear LC circuits efficiently.
+    - Added the option `grids_dict` to `plot_wavefunction`, which provides an option to define a custom grid for `wavefunction` plots.
+    - File input/output is now functional for the Circuit class, which will enable users to store `Circuit` objects to file.
+
+**Bug Fixes**
+
+    - `sym_external_fluxes` now functions as expected for circuits with capacitive sub-circuits; external fluxes are now distributed in a deterministic way by default.
+    - Fixed and improved functions that display symbolic Hamiltonians, Lagrangians, potentials, etc.; added factor 2pi for displayed external fluxes to reflect units correctly.
+    - Fixed the representation of cosine operator for periodic variables which previously resulted in an erroneous shift of pi in the `wavefunction` plots.
+    - Multiple corrections to plot functionality of `Circuit` class.
+    - GUI: fixed issue with “update” button for slow qubits.
+    - GUI: fixed bad range default for `wavefunction` plots of fluxonium.
+
+**Under the Hood**
+
+    - Changed the way to calculate the junction potential matrix in `Circuit` class, which now uses `expm` to evaluate the cosine terms.
+    - f-strings are now used for most of the string manipulations in `Circuit` and `SymbolicCircuit` class.
+    - Fixed the overall energy shift in the eigenvalues by incorporating omega/2 for every harmonic oscillator.
+
+
 Version 3.0
 +++++++++++
 
