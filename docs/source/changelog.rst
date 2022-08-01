@@ -11,7 +11,7 @@ Change Log
 Version 3.0.3
 +++++++++++++
 
-**Bug fixes [all for GUI]**
+**Bug fixes for GUI**
 
     - `get_operator_names` has been eliminated from the operator dropdown menu
     - "State No." sliders for `FluxQubit`, `ZeroPi`, and `Cos2PhiQubit` do not exclude the ground state anymore.
