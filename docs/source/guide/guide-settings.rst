@@ -41,6 +41,7 @@ scqubits has a few internal parameters that can be changed by the user:
 | ``SYM_INVERSION_MAX_NODES``  | int (default: 3)             | Threshold number of nodes above which the capacitance matrix is   |
 |                              |                              | inverted numerically                                              |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
+
 Users can also set up units of the energy scales. This is discussed in the
 :ref:`guide_units` section of the user guide.
 
