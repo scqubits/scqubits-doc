@@ -37,6 +37,7 @@ extensions = [
     "nbsphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
+    "sphinx.ext.autosectionlabel",
     "IPython.sphinxext.ipython_console_highlighting",
     "IPython.sphinxext.ipython_directive",
 ]
@@ -74,8 +75,8 @@ exclude_patterns = ["_build", "_templates", "tmp", "**.ipynb_checkpoints", "Thum
 
 autosummary_generate = True
 
-html_logo = "./logo/scqubits-logo3.png"
-html_favicon = "./logo/scqubits-logo3.png"
+html_logo = "./logo/scqubits-logo4.png"
+html_favicon = "./logo/scqubits-logo-icon.png"
 
 # Add any paths that contain custom themes here, relative to this directory.
 

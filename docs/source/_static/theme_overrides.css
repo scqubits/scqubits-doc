@@ -3,7 +3,7 @@
 
 h1 {
     font-size: 45px;
-    margin-top: 60px;
+    margin-top: 10px;
     margin-bottom: 50px;
     font-weight: 300;
     font-family: Roboto,"Open Sans", ff-tisa-web-pro,Arial,sans-serif;
@@ -72,8 +72,22 @@ body {
 	background: rgb(247,248,249) !important;
 }
 
+.navbar-brand img {
+  max-width: 70%;
+  height: auto;
+  width: 60%;
+}
+
+nav.bd-links .active:hover > a, nav.bd-links .active > a {
+  background-color: #f3f3f3;
+}
+
 address, dl, ol, ul {
 	margin-bottom: 2rem;
+}
+
+ol.simple p, ul.simple p {
+  margin-bottom: 10px;
 }
 
 .sig {

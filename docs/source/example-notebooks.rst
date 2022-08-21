@@ -3,9 +3,9 @@
 
 .. _example-notebooks:
 
-*********
-Tutorials
-*********
+****************
+Jupyter Examples
+****************
 
 A variety of examples that show how scqubits can be used are contained in the github repository `scqubits-examples`
 found `here <https://github.com/scqubits/scqubits-examples>`_. 

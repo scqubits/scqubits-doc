@@ -53,6 +53,7 @@ More detailed discussions of the individual supported noise channels can be foun
 
 .. toctree::
    :maxdepth: 3
+   :hidden:
 
    noise/dephasing.rst
    noise/depolarization.rst
