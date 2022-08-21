@@ -2,7 +2,7 @@ sphinx>=4.5
 docutils
 pygments>=2.4.1
 pydata-sphinx-theme==0.9
-IPython
+ipython
 nbsphinx
 sphinxcontrib-napoleon
 sphinx-autodoc-typehints
