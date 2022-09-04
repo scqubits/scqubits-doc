@@ -100,6 +100,11 @@ html_theme_options = {
     "twitter_url": "https://twitter.com/scqubits",
     "icon_links": [
         {
+            "name": "YouTube",
+            "url": "https://www.youtube.com/channel/UCI43mhRw6oY01FbPuOc5CVQ",
+            "icon": "fas fa-youtube",
+        },
+        {
             "name": "PyPI",
             "url": "https://pypi.org/project/scqubits/",
             "icon": "fas fa-box",
