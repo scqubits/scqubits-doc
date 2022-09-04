@@ -102,7 +102,7 @@ html_theme_options = {
         {
             "name": "YouTube",
             "url": "https://www.youtube.com/channel/UCI43mhRw6oY01FbPuOc5CVQ",
-            "icon": "fas fa-youtube",
+            "icon": "fa fa-youtube",
         },
         {
             "name": "PyPI",
