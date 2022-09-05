@@ -8,6 +8,18 @@ Change Log
 **********
 
 
+Version 3.1
++++++++++++
+
+**Additions**
+
+    - GUI now includes functionality to plot coherence time estimates for various qubits
+
+**Under the hood**
+
+    - Speedup for diagonalization of Transmon and TunableTransmon by recognizing the Hamiltonian matrix as tridiagonal.
+
+
 Version 3.0.3
 +++++++++++++
 
