@@ -26,9 +26,11 @@ Contributors
 
 | **Elam Blackwell** (Northwestern University) - Code contributor, bug hunter
 | **Sai Pavan Chitta** (Northwestern University) - Code contributor
+| **Sam Frank** (Northwestern University) - Code contributor
 | **Farid Hassani** (IST Austria) - Bug hunter
 | **Ziwen Huang** (Northwestern University) - Bug hunter
 | **Nicholas Irons** - Code contributor
+| **Ella Li** - Code contributor
 | **Pranav Mundahda** (Princeton University) - Bug hunter
 | **Niko Savola** (Aalto University, IQM Quantum Computers) - Code contributor, bug hunter
 | **David Schuster** (University of Chicago) - Code contributor
