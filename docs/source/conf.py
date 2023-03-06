@@ -49,7 +49,7 @@ language = "en"
 html_show_sourcelink = False
 html_sourcelink_suffix = ""
 
-autodoc_mock_imports = ["qutip", "pytest", "ipywidgets", "IPython", "tqdm"]
+autodoc_mock_imports = ["qutip", "pytest", "tqdm"]
 autodoc_typehints = "description"
 autosummary_generate = True
 
