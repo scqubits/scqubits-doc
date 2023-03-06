@@ -10,7 +10,7 @@ h1 {
 }
 
 h2 {
-    margin-top: 60px;
+    margin-top: 70px !important;
     margin-bottom: 28px;
     font-size: 32px;
     line-height: 32px;
@@ -45,7 +45,7 @@ b, strong {
 }
 
 div.nboutput.container div.output_area {
-  background: #d3d3d330;
+  background: #e0e0e0;
 }
 
 body {
@@ -108,6 +108,9 @@ pre {
 	font-size: 95%;
 	line-height: 1.5em;
     background-color: aliceblue;
+    padding-left: 20px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 div.nbinput.container div.prompt pre, div.nboutput.container div.prompt pre {
@@ -122,6 +125,22 @@ div.nbinput.container div.prompt pre, div.nboutput.container div.prompt pre {
 }
 
 p {
-	margin-bottom: 0.6rem;
-	margin-top: 0.7rem;
+	margin-bottom: 1.6rem;
+	margin-top: 1.6rem;
+    margin-left: 15px;
+}
+
+div.nbinput.container div.input_area {
+    margin-left: 20px;
+}
+
+div.nboutput.container div.output_area {
+    margin-left: 15px;
+}
+
+div.nbinput.container div.input_area div[class*=highlight] > pre {
+    padding-left: 20px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin: 0;
 }
