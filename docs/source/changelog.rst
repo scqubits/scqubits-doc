@@ -8,6 +8,39 @@ Change Log
 **********
 
 
+Version 3.1.1
++++++++++++++
+
+**ADDITIONS**
+
+    - Enhanced support for interfacing with QuTiP/mesolve: for simulation of time evolution it is often preferable to work with matrices in the dressed eigenenergy basis (in the absence of a time-dependent drive).
+    - To simplify this, all qubits (i.e., `QuantumSystem` children) now offer an `energy_esys` keyword argument, and introduce `HilbertSpace.op_in_dressed_eigenbasis`.
+    - Add fit method `Transmon.find_EJ_EC` that extracts EJ, EC of a transmon, based on given E01 and anharmonicity.
+    - Add `E01`, `anharmonicity` as attributes to all qubits inheriting from `QubitBaseClass`.
+
+
+**BUG FIXES**
+
+    - Fixed a bug affecting certain matrix element parameter sweeps that required recomputing of operators under parameter changes (#114 and #177).
+    - Fixed a bug where `energy_by_bare_index` could throw an exception because np.int32 is not recognized by isinstance(myvar, int)  (#172).
+    - Fix for inconsistencies in global signs used for harmonic oscillator and discrete charge basis, originating in definitions of charge-basis lowering/raising operators; e^(i theta) is raising operator. Related fix in harm. osc. momentum operator sign (#166).
+    - Corrected `Transmon.d_hamiltonian_d_flux` to account for the shift in generalized flux (#178).
+    - Various GUI bug fixes.
+    - Various docstring typo fixes (incl. #165).
+
+
+**UNDER THE HOOD**
+
+    - Renamed branch master → main.
+    - Constrain changes to matplotlib settings to scqubits.
+    - Account for scipy deprecation: `linalg.eigh` option `eigvals` -> `subset_by_index`.
+    - Introduce check for existence of lookup in `HilbertSpace` and `ParameterSweep`; emit meaningful exception message otherwise.
+    - Phase out `HilbertSpace.subsys_list` in favor of `subsystem_list` (#160).
+    - Remove deprecated `HilbertSpace.lookup` interface and corresponding adapter class.
+    - Distinguish preslicing reset for `ParameterSweep` and `HilbertSpace` (#170).
+    - Changed pytest data for `ZeroPi`, `FullZeroPi`, `Cos2Phi` to account for the sign fix in 3c1c5914e41d944d8234a8cfc8f7ef2f5ae7b67e.
+    - Increase required pathos version to 0.3.0 to fix the multiprocessing issue in python 3.7.
+
 Version 3.1
 +++++++++++
 
@@ -33,7 +66,7 @@ Version 3.0.3
 
 **Under the hood**
 
-- Initialization of a circuit instance now does not globally switch to latex output (avoids unnecessary slowdowns with regular, non-sympy, output.
+    - Initialization of a circuit instance now does not globally switch to latex output (avoids unnecessary slowdowns with regular, non-sympy, output.
 
 
 Version 3.0.2
@@ -47,10 +80,10 @@ Version 3.0.2
 
 **Bug fixes**
 
-* Branches are now distinguished by a unique id. This solves an issue of incorrect spanning trees when two branches of the same type were connected across the same set of nodes.
-* Fixed a bug in plotting routines which led to an `Exception` for cases with two or more layers in the system hierarchy.
-* Fixed a bug that could break `Subsystem` instances when the symbolic Hamiltonian had no potential terms.
-* `GUI`: establish correct clearing when turning manual plot on or when switching to another plot while on manual update.
+    - Branches are now distinguished by a unique id. This solves an issue of incorrect spanning trees when two branches of the same type were connected across the same set of nodes.
+    - Fixed a bug in plotting routines which led to an `Exception` for cases with two or more layers in the system hierarchy.
+    - Fixed a bug that could break `Subsystem` instances when the symbolic Hamiltonian had no potential terms.
+    - `GUI`: establish correct clearing when turning manual plot on or when switching to another plot while on manual update.
 
 **Under the hood**
 
