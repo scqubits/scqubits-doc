@@ -45,7 +45,7 @@ b, strong {
 }
 
 div.nboutput.container div.output_area {
-  background: #e0e0e0;
+  background: #f8f9fa;
 }
 
 body {
@@ -120,7 +120,6 @@ div.nbinput.container div.prompt pre, div.nboutput.container div.prompt pre {
 
 .bd-toc .onthispage {
 	color: #053d5a;
-	/* font-weight: 500; */
 	font-size: 17px;
 }
 
@@ -130,17 +129,38 @@ p {
     margin-left: 15px;
 }
 
-div.nbinput.container div.input_area {
-    margin-left: 20px;
-}
-
-div.nboutput.container div.output_area {
-    margin-left: 15px;
-}
-
 div.nbinput.container div.input_area div[class*=highlight] > pre {
-    padding-left: 20px !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     margin: 0;
+}
+
+div.nbinput.container, div.nboutput.container {
+    margin-left: 15px;
+    padding-left: 15px;
+}
+
+div.nblast.container {
+    padding-left: 15px;
+}
+
+div.nbinput.container {
+    padding-left: 15px;
+}
+
+.toc-entry>.nav-link.active {
+    font-weight: 600;
+    color: #0d5e77;
+    background-color: aliceblue;
+    border-left: 6px solid var(--pst-color-primary);
+}
+
+nav.bd-links .active:hover>a, nav.bd-links .active>a {
+    font-weight: 600;
+    color: #0d5e77;
+}
+
+nav.bd-links .active:hover > a, nav.bd-links .active > a {
+    background-color: aliceblue;
+    border-left: 6px solid var(--pst-color-primary);
 }
