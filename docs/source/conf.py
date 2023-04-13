@@ -10,6 +10,8 @@ import sys
 sys.path.insert(0, os.path.abspath("../../../scqubits"))
 sys.path.append(os.path.abspath("sphinxext"))
 
+import scqubits
+
 # -- Project information -----------------------------------------------------
 
 project = "scqubits"
