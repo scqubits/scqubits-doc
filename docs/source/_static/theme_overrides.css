@@ -107,7 +107,7 @@ p.rubric {
 pre {
 	font-size: 95%;
 	line-height: 1.5em;
-    background-color: aliceblue;
+    background-color: #fafdff;
     padding-left: 20px !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
@@ -138,6 +138,7 @@ div.nbinput.container div.input_area div[class*=highlight] > pre {
 div.nbinput.container, div.nboutput.container {
     margin-left: 15px;
     padding-left: 15px;
+    border: none !important;
 }
 
 div.nblast.container {
