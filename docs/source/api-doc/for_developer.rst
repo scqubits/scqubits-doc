@@ -14,7 +14,7 @@ The following classes are mainly of interest for developers.
 Qubit base classes
 *******************************
 
-.. _classes-qubitbase:
+.. toctree::
 
    _autosummary/scqubits.core.qubit_base.QuantumSystem.rst
    _autosummary/scqubits.core.qubit_base.QubitBaseClass.rst
