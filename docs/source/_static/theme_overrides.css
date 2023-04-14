@@ -138,8 +138,10 @@ div.nbinput.container div.input_area div[class*=highlight] > pre {
 div.nbinput.container, div.nboutput.container {
     margin-left: 15px;
     padding-left: 15px;
-    border: none !important;
+    border-left: 3px solid #e0e0e0;
 }
+
+
 
 div.nblast.container {
     padding-left: 15px;
