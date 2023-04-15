@@ -3,9 +3,9 @@
 
 .. _install:
 
-**************
-Installation
-**************
+*******
+Install
+*******
 
 
 .. _install-via_conda:
@@ -13,7 +13,7 @@ Installation
 Installing via conda
 ====================
 
-For Python 3.7, 3.8, 3.9, and 3.10, installation via conda is supported. This is done by executing
+For Python 3.7, 3.8, 3.9, and 3.10, scqubits can be installed via conda by executing
 
 .. code-block:: bash
 
@@ -31,7 +31,8 @@ Upgrading to the latest version of scqubits can be done by
 Installing via pip
 ==================
 
-scqubits can also be installed using the Python package manager `pip <http://www.pip-installer.org/>`_ (although it should be noted that installing via pip under a conda environment is strongly discouraged, and is not guaranteed to work).
+scqubits can be installed using the Python package manager `pip <http://www.pip-installer.org/>`_ (Note: when working
+inside a conda environment, pip installs can lead to environment inconsistencies and should be avoided.)
 
 .. code-block:: bash
 
@@ -102,8 +103,8 @@ The following packages are optional:
 
 .. _install-verify:
 
-Verifying the Installation
-==========================
+Verifying the Install
+=====================
 
 scqubits includes a set of tests that can be executed to verify that installation was successful:
 

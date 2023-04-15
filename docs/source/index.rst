@@ -14,7 +14,7 @@ scqubits is an open-source Python library for simulating superconducting qubits.
 Getting Started
 ***************
 
-After :ref:`Installation` of scqubits, check out the
+After :ref:`Install` of scqubits, check out the
 :ref:`User Guide`, as well as the :ref:`Jupyter Examples`.
 
 We are also building up a set of `YouTube Tutorials <https://www.youtube.com/channel/UCI43mhRw6oY01FbPuOc5CVQ>`_.
