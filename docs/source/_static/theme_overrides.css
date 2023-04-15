@@ -5,7 +5,7 @@ h1 {
     font-size: 45px;
     margin-top: 10px;
     margin-bottom: 50px;
-    font-weight: 300;
+    font-weight: 600;
     font-family: Roboto,"Open Sans", ff-tisa-web-pro,Arial,sans-serif;
 }
 
@@ -13,8 +13,9 @@ h2 {
     margin-top: 70px !important;
     margin-bottom: 28px;
     font-size: 32px;
+    font-weight: 600 !important;
     line-height: 32px;
-    color: #4d77cf;
+    color: #4d6db2;
 }
 
 h3 {
@@ -26,6 +27,11 @@ h3 {
 
 b, strong {
   font-weight: 700;
+}
+
+.section-nav {
+    padding-left: 0;
+    border: none;
 }
 
 .rst-content .toctree-wrapper > p.caption, h2, h3, h4, h5, h6, legend {
@@ -46,6 +52,18 @@ b, strong {
 
 div.nboutput.container div.output_area {
   background: #f8f9fa;
+}
+
+.bd-sidebar {
+    padding-top: 1em;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    background: #f8f8f8;
+}
+
+.bd-toc {
+    background: #fcfcfc;
 }
 
 body {
@@ -118,9 +136,23 @@ div.nbinput.container div.prompt pre, div.nboutput.container div.prompt pre {
 	visibility: hidden;
 }
 
+div.nbinput.container div.input_area {
+    border: none;
+}
+
+html[data-theme="light"] .highlight pre {
+    line-height: 125%;
+    border: none;
+}
+
 .bd-toc .onthispage {
 	color: #053d5a;
 	font-size: 17px;
+}
+
+.tocsection {
+    border: none;
+    padding: .3rem 1.5rem;
 }
 
 p {
@@ -138,24 +170,31 @@ div.nbinput.container div.input_area div[class*=highlight] > pre {
 div.nbinput.container, div.nboutput.container {
     margin-left: 15px;
     padding-left: 15px;
-    border-left: 3px solid #e0e0e0;
+    border: none;
 }
 
-
-
 div.nblast.container {
+    padding-bottom: 5px;
     padding-left: 15px;
+    border: none;
 }
 
 div.nbinput.container {
     padding-left: 15px;
 }
 
+div.nbinput.container div.input_area {
+    border: none;
+}
+
+div.nbinput.container, div.nboutput.container {
+    border: none;
+}
+
 .toc-entry>.nav-link.active {
     font-weight: 600;
     color: #0d5e77;
     background-color: aliceblue;
-    border-left: 6px solid var(--pst-color-primary);
 }
 
 nav.bd-links .active:hover>a, nav.bd-links .active>a {
@@ -165,5 +204,27 @@ nav.bd-links .active:hover>a, nav.bd-links .active>a {
 
 nav.bd-links .active:hover > a, nav.bd-links .active > a {
     background-color: aliceblue;
+}
+
+li.toctree-l1.current.active, li.toctree-l1.current.active.has-children {
+    background: aliceblue;
     border-left: 6px solid var(--pst-color-primary);
+}
+
+.input_area.highlight-ipython3.notranslate {
+    border: none !important;
+    border-left: 2px solid #e0e0e0 !important;
+}
+
+.output_area.docutils.container {
+    border: none !important;
+    border-left: 2px solid #e0e0e0 !important;
+}
+
+div#navbar-collapsible {
+    font-size: larger;
+}
+
+li.toctree-l1.current.active.nav-item {
+    border: none;
 }
