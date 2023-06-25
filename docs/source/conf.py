@@ -15,10 +15,11 @@ import scqubits
 # -- Project information -----------------------------------------------------
 
 project = "scqubits"
-copyright = "2019 and later (latest update: 2022), Jens Koch, Peter Groszkowski"
+copyright = "2019 and later (latest update: 2023), Jens Koch, Peter Groszkowski"
 author = "Jens Koch, Peter Groszkowski"
 
 import pydata_sphinx_theme
+
 html_theme = "pydata_sphinx_theme"
 
 # -- General configuration ---------------------------------------------------
@@ -73,18 +74,31 @@ templates_path = ["_templates"]
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ["_build", "_templates", "tmp", "**.ipynb_checkpoints", "Thumbs.db", ".DS_Store"]
+exclude_patterns = [
+    "_build",
+    "_templates",
+    "tmp",
+    "**.ipynb_checkpoints",
+    "Thumbs.db",
+    ".DS_Store",
+]
 
 autosummary_generate = True
 
-html_logo = "./logo/scqubits-logo4.png"
-html_favicon = "./logo/scqubits-logo-icon.png"
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ["_static"]
+html_css_files = ["theme_overrides.css", "pygments.css"]
+
+html_logo = "./_static/scqubits-logo.svg"
+html_favicon = "./_static/scqubits-logo-icon.png"
 
 # Add any paths that contain custom themes here, relative to this directory.
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = "scqubits Documentation"
+html_title = "scqubits documentation"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 html_short_title = "scqubits"
@@ -94,10 +108,15 @@ html_context = {
     "github_repo": "scqubits-doc",
     "github_version": "rtd",
     "doc_path": "docs/source",
-    "default_mode": "light"
+    "default_mode": "light",
 }
 
 html_theme_options = {
+    "logo": {
+        "alt_text": "scqubits logo",
+        "image_light": "scqubits-logo.svg",
+        "image_dark": "scqubits-logo.svg",
+    },
     "github_url": "https://github.com/scqubits/scqubits",
     "twitter_url": "https://twitter.com/scqubits",
     "icon_links": [
@@ -121,7 +140,7 @@ html_theme_options = {
     "navbar_start": ["navbar-logo"],
     "navbar_end": ["navbar-icon-links"],
     "navigation_depth": 2,
-    "collapse_navigation": True
+    "collapse_navigation": True,
 }
 
 html_sidebars = {
@@ -130,7 +149,7 @@ html_sidebars = {
         "sidebar-nav-bs",
         "custom-template",
     ],  # This ensures we test for custom sidebars
-    "demo/no-sidebar": [],  # Test what page looks like with no sidebar items
+    "demo/no-sidebar": [],
 }
 
 highlight_language = "python"
@@ -163,9 +182,3 @@ nbsphinx_prompt_width = "0ex"
 nbsphinx_codecell_lexer = "ipython3"
 # The following only to be enabled for debugging purposes
 # nbsphinx_allow_errors = True
-
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
-html_css_files = ["theme_overrides.css", "pygments.css"]
