@@ -1,8 +1,8 @@
 .. scqubits
    Copyright (C) 2017 and later, Jens Koch & Peter Groszkowski
 
-Flux Qubit
-==============
+`FluxQubit`
+===========
 
 .. _qubit_flux_qubit:
 

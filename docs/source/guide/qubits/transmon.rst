@@ -4,8 +4,8 @@
 
 .. _qubit_transmon:
 
-Transmon Qubit
-==============
+`Transmon`
+==========
 
 .. figure:: ../../graphics/transmon.png
    :align: center

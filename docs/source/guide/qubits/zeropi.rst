@@ -3,8 +3,8 @@
 
 .. _qubit_zeropi:
 
-Zero-Pi Qubit  (decoupled from zeta mode)
-=========================================
+`ZeroPi`
+========
 
 .. figure:: ../../graphics/zeropi.png
    :align: center

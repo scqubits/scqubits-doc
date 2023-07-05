@@ -3,8 +3,8 @@
 
 .. _cos2phi_qubit:
 
-Cos2phi Qubit
-=========================
+`Cos2PhiQubit`
+==============
 
 .. figure:: ../../graphics/cos2phiqubit.png
    :align: center 

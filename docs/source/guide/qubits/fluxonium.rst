@@ -3,8 +3,8 @@
 
 .. _qubit_fluxonium:
 
-Fluxonium Qubit
-===============
+`Fluxonium`
+===========
 
 .. figure:: ../../graphics/fluxonium.png
    :align: center

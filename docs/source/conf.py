@@ -43,6 +43,7 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     "IPython.sphinxext.ipython_console_highlighting",
     "IPython.sphinxext.ipython_directive",
+    "sphinx_copybutton"
 ]
 
 
@@ -62,7 +63,7 @@ set_type_checking_flag = True
 simplify_optional_unions = True
 
 # The master toctree document.
-master_doc = "index"
+master_doc = "contents"
 
 
 # List of patterns, relative to source directory, that match files and
@@ -116,6 +117,7 @@ html_theme_options = {
         "alt_text": "scqubits logo",
         "image_light": "scqubits-logo.svg",
         "image_dark": "scqubits-logo.svg",
+        "link": "../index"
     },
     "github_url": "https://github.com/scqubits/scqubits",
     "twitter_url": "https://twitter.com/scqubits",
@@ -139,7 +141,8 @@ html_theme_options = {
     "use_edit_page_button": True,
     "navbar_start": ["navbar-logo"],
     "navbar_end": ["navbar-icon-links"],
-    "navigation_depth": 2,
+    "navigation_depth": 5,
+    "show_nav_level": 5,
     "collapse_navigation": True,
 }
 

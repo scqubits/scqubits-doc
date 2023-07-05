@@ -18,5 +18,5 @@ of scqubits.
    circuit_classes.rst
    _autosummary/scqubits.core.hilbert_space.HilbertSpace
    _autosummary/scqubits.core.param_sweep.ParameterSweep
-   gui_classes.rst
+      gui_classes.rst
    for_developer.rst

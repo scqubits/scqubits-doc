@@ -3,8 +3,8 @@
 
 .. _qubit_fullzeropi:
 
-Full Zero-Pi Qubit  (incl. coupling to zeta mode)
-=================================================
+`FullZeroPi`
+============
 
 .. figure:: ../../graphics/fullzeropi.png
    :align: center

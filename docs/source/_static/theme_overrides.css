@@ -209,6 +209,7 @@ nav.bd-links .active:hover > a, nav.bd-links .active > a {
 li.toctree-l1.current.active, li.toctree-l1.current.active.has-children {
     background: aliceblue;
     border-left: 6px solid var(--pst-color-primary);
+    margin-left: -6px;
 }
 
 .input_area.highlight-ipython3.notranslate {
@@ -227,4 +228,18 @@ div#navbar-collapsible {
 
 li.toctree-l1.current.active.nav-item {
     border: none;
+}
+
+.toctree-wrapper>ul {
+    padding-left: 40px;
+}
+
+img {
+    padding-left: 30px;
+    border: 0;
+    max-width: 100%;
+}
+
+nav.bd-links p.caption {
+    color: #001575;
 }

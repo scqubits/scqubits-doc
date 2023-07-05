@@ -50,65 +50,13 @@ appropriately acknowledged by citing:
 
 
 .. toctree::
-   :maxdepth: 2
    :hidden:
-   :caption: GETTING STARTED
 
-   ./installation.rst
-   ./guide/gui/ipynb/gui.ipynb
-   ./guide/basics/basics.ipynb
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: COMMON QUBITS, CIRCUITS
-
-   ./guide/qubits/guide-qubits.rst
-   ./guide/noise/guide-noise.rst
-   Single-Qubit Parameter Sweep <./guide/parametersweep/ipynb/paramsweep.ipynb>
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: CUSTOM CIRCUIT
-
-   ./guide/circuit/ipynb/custom_circuit_root.ipynb
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: COMPOSITE SYSTEMS
-
-   ./guide/hilbertspace/ipynb/hilbertspace.ipynb
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: EXPLORING PARAMETERS
-
-   Simple Sweeps (1d, single qubit) <./guide/parametersweep/ipynb/paramsweep.ipynb>
-   General Sweeps: ParameterSweep class  <./guide/parametersweep/ipynb/paramsweep2.ipynb>
-   ./guide/explorer/ipynb/explorer.ipynb
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: SETTINGS
-
-   ./guide/settings/ipynb/parallel.ipynb
-   ./guide/settings/guide-plot-options.rst
-   ./guide/settings/guide-units.rst
-   Global Settings <./guide/settings/guide-settings.rst>
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: DATA
-
-   ./guide/storage/ipynb/storage.ipynb
+   User Guide <index.rst>
+   example-notebooks.rst
+   installation.rst
+   api-doc/apidoc.rst
+   changelog.rst
+   contributors.rst
+   acknowledgments.rst
+   bibliography.rst

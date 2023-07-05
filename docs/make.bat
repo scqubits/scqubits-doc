@@ -7,6 +7,12 @@ REM Command file for Sphinx documentation
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
+
+if %1 == "clean" (
+    del source\_generated\* /F /Q
+    del source\apidoc\_autosummary\* /F /Q
+)
+
 set SOURCEDIR=source
 set BUILDDIR=build
 
@@ -25,7 +31,7 @@ if errorlevel 9009 (
 	exit /b 1
 )
 
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O% -j auto
 goto end
 
 :help

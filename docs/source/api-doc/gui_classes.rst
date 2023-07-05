@@ -9,6 +9,6 @@ GUI Classes and Functions
 
 .. toctree::
 
-   _autosummary/scqubits.ui.explorer_widget.Explorer.rst
+   _autosummary/scqubits.explorer.explorer_widget.Explorer.rst
    _autosummary/scqubits.ui.gui.GUI.rst
    _autosummary/scqubits.ui.hspace_widget.HilbertSpaceUi.rst

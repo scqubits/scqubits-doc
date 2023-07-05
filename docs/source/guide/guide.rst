@@ -23,19 +23,64 @@ relevant classes and functions of scqubits.
 .. toctree::
    :maxdepth: 2
    :hidden:
+   :caption: GETTING STARTED
 
-   ./ipynb/gui.ipynb
-   ./ipynb/basics.ipynb
-   guide-qubits.rst
-   guide-noise.rst
-   ./ipynb/custom_circuit_root.ipynb
-   ./ipynb/hilbertspace.ipynb
-   ./ipynb/paramsweep.ipynb
-   ./ipynb/paramsweep2.ipynb
-   ./ipynb/explorer.ipynb
-   guide-plot-options.rst
-   guide-units.rst
-   ./ipynb/storage.ipynb
-   ./ipynb/parallel.ipynb
-   guide-settings.rst
+   ../installation.rst
+   ./gui/ipynb/gui.ipynb
+   ./basics/basics.ipynb
 
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: COMMON QUBITS, CIRCUITS
+
+   qubits/guide-qubits.rst
+   noise/guide-noise.rst
+   Single-Qubit Parameter Sweep <./parametersweep/ipynb/paramsweep.ipynb>
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: CUSTOM CIRCUIT
+
+   ./circuit/ipynb/custom_circuit_root.ipynb
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: COMPOSITE SYSTEMS
+
+   ./hilbertspace/ipynb/hilbertspace.ipynb
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: EXPLORING PARAMETERS
+
+   Simple Sweeps (1d, single qubit) <./parametersweep/ipynb/paramsweep.ipynb>
+   General Sweeps: ParameterSweep class  <./parametersweep/ipynb/paramsweep2.ipynb>
+   ./explorer/ipynb/explorer.ipynb
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: SETTINGS
+
+   ./settings/ipynb/parallel.ipynb
+   ./settings/guide-plot-options.rst
+   ./settings/guide-units.rst
+   Global Settings <./settings/guide-settings.rst>
+
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: DATA
+
+   ./storage/ipynb/storage.ipynb
+   ./parametersweep/ipynb/namedslots.ipynb
