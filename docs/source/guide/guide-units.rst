@@ -22,9 +22,10 @@ The current units setting can be obtained with the ``get_units`` function. A new
 scqubits also includes several helper functions for convenient conversion from the current system units to and
 from `Hz`. This is accomplished with functions ``to_standard_units`` and ``from_standard_units``.
 
-***************
+
 Examples
-***************
+--------
+
 Defining ``EJ`` and ``EC`` would refer to $E_J / 2\\pi$ and $E_C /2\\pi$ in literature. Written in code looks like::
 
    scqubits.set_units('GHz')
