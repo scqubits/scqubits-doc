@@ -15,4 +15,5 @@ matplotlib>=3.0.0
 h5py>=2.7.1
 cycler
 sphinx-design
+sphinx-copybutton
 scqubits@git+https://github.com/scqubits/scqubits.git
