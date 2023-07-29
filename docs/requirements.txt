@@ -13,4 +13,4 @@ matplotlib>=3.0.0
 h5py>=2.7.1
 cycler
 sphinx-design
-scqubits
+scqubits==3.0
