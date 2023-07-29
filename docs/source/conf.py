@@ -142,7 +142,7 @@ html_theme_options = {
     "navbar_start": ["navbar-logo"],
     "navbar_end": ["navbar-icon-links"],
     "navigation_depth": 5,
-    "show_nav_level": 5,
+    "show_nav_level": 3,
     "collapse_navigation": True,
 }
 

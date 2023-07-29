@@ -100,6 +100,7 @@ appropriately acknowledged by citing:
    :hidden:
    :caption: SETTINGS
 
+   Eigensolver options & GPU <./guide/settings/ipynb/custom_diagonalization.ipynb>
    ./guide/settings/ipynb/parallel.ipynb
    ./guide/settings/guide-plot-options.rst
    ./guide/settings/guide-units.rst

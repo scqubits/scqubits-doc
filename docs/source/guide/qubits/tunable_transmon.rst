@@ -3,8 +3,8 @@
 
 .. _qubit_tunable_transmon:
 
-`Tunable Transmon`
-==================
+`TunableTransmon`
+=================
 
 .. figure:: ../../graphics/tunable_transmon.png
    :align: center
