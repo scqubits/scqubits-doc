@@ -8,6 +8,29 @@ Change Log
 **********
 
 
+Version 3.2
++++++++++++
+
+**ADDITIONS**
+
+    -
+    - Overhaul of the graphical user interfaces, including `scqubits.GUI`, `scqubits.Explorer`, and `scqubits.HilbertSpace.create`
+
+**BUG FIXES**
+
+    - Fixed a bug affecting numerical results in certain `ParameterSweep` cases. The problem arises in cases where the
+      operators appearing in `InteractionTerm` need updating under parameter changes. (Not applicable to `Transmon`, `TunableTransmon`,
+      or `Oscillator`, but relevant for `Fluxonium`, for example.)
+    - Fixed a bug that could result in repeated Matplotlib warnings about missing fonts
+    - Fixed bug that could prevent progress bar visibility settings to take effect
+
+**UNDER THE HOOD**
+
+    - Removed `nan` checks inside
+    - Added missing flux-noise support to `FluxQubit`
+    - Docstring fixes and additions, improvements to type annotations
+
+
 Version 3.1.1
 +++++++++++++
 
