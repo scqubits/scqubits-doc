@@ -32,6 +32,7 @@ relevant classes and functions of scqubits.
    ./ipynb/hilbertspace.ipynb
    ./ipynb/paramsweep.ipynb
    ./ipynb/paramsweep2.ipynb
+   ./ipynb/custom_diagonalization.ipynb
    ./ipynb/explorer.ipynb
    guide-plot-options.rst
    guide-units.rst
