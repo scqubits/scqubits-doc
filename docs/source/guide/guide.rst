@@ -71,6 +71,7 @@ relevant classes and functions of scqubits.
    :hidden:
    :caption: SETTINGS
 
+   ./settings/ipynb/custom_diagonalization.ipynb
    ./settings/ipynb/parallel.ipynb
    ./settings/guide-plot-options.rst
    ./settings/guide-units.rst
