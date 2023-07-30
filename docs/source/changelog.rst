@@ -8,12 +8,14 @@ Change Log
 **********
 
 
+
 Version 3.2
 +++++++++++
 
 **ADDITIONS**
 
-    -
+    - New diagonalization module allows users to easily customize how, and what library is used to calculate the eigenvalues and eigenvectors of the various quantum systems that scqubits implements (custom Circuits and FullZeroPi are not yet supported). Both sparse and dense diagonalization procedures from libraries such as scipy, primme, and cupy (which offers GPU support), are exposed, and can be easily selected with different sets of predefined options and parameters. Completely arbitrary diagonalization functions can be also set by the user.
+    - Added support for 1/f flux noise dephasing time calculation to the `FluxQubit` class.
     - Overhaul of the graphical user interfaces, including `scqubits.GUI`, `scqubits.Explorer`, and `scqubits.HilbertSpace.create`
 
 **BUG FIXES**
@@ -23,6 +25,7 @@ Version 3.2
       or `Oscillator`, but relevant for `Fluxonium`, for example.)
     - Fixed a bug that could result in repeated Matplotlib warnings about missing fonts
     - Fixed bug that could prevent progress bar visibility settings to take effect
+    - Fixed a bug that could change how the T1 coherence time due to a flux bias line was calculated in a `TunableTransmon` qubit.
 
 **UNDER THE HOOD**
 
@@ -63,6 +66,7 @@ Version 3.1.1
     - Distinguish preslicing reset for `ParameterSweep` and `HilbertSpace` (#170).
     - Changed pytest data for `ZeroPi`, `FullZeroPi`, `Cos2Phi` to account for the sign fix in 3c1c5914e41d944d8234a8cfc8f7ef2f5ae7b67e.
     - Increase required pathos version to 0.3.0 to fix the multiprocessing issue in python 3.7.
+
 
 Version 3.1
 +++++++++++
