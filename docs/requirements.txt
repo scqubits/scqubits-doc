@@ -16,4 +16,4 @@ h5py>=2.7.1
 cycler
 sphinx-design
 sphinx-copybutton
-scqubits@git+https://github.com/scqubits/scqubits.git
+scqubits==3.2
