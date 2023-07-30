@@ -7,8 +7,6 @@ scQubits documentation
 
 scqubits is an open-source Python library for simulating superconducting qubits.
 
-Get the latest info on updates and releases by joining our mailing list:
-
 .. grid:: auto
 
     .. grid-item::
