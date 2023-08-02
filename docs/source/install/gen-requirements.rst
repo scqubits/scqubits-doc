@@ -16,6 +16,8 @@ scqubits depends on the following Python open-source libraries:
 +================+==============+=====================================================+
 | **Python**     | 3.7+         | Version 3.7 and higher is supported.                |
 +----------------+--------------+-----------------------------------------------------+
+| **pathos**     |              | Required for multiprocessing                        |
++------------------------+--------------+---------------------------------------------+
 | **NumPy**      | 1.14.2+      | Not tested on lower versions.                       |
 +----------------+--------------+-----------------------------------------------------+
 | **SciPy**      | 1.1.0+       | Not tested on lower versions.                       |
@@ -43,8 +45,6 @@ The following packages are optional:
 | pytest                 | 5.3+         | For running the test suite.                         |
 +------------------------+--------------+-----------------------------------------------------+
 | matplotlib-label-lines | 0.3.6+       | For smart labelling of matrix element plots         |
-+------------------------+--------------+-----------------------------------------------------+
-| pathos                 |              | For multiprocessing                                 |
 +------------------------+--------------+-----------------------------------------------------+
 
 .. warning::
