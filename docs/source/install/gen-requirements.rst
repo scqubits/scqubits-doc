@@ -16,6 +16,8 @@ scqubits depends on the following Python open-source libraries:
 +================+==============+=====================================================+
 | **Python**     | 3.7+         | Version 3.7 and higher is supported.                |
 +----------------+--------------+-----------------------------------------------------+
+| **pathos**     |              | Required for multiprocessing                        |
++------------------------+--------------+---------------------------------------------+
 | **NumPy**      | 1.14.2+      | Not tested on lower versions.                       |
 +----------------+--------------+-----------------------------------------------------+
 | **SciPy**      | 1.1.0+       | Not tested on lower versions.                       |
@@ -45,7 +47,8 @@ The following packages are optional:
 | matplotlib-label-lines | 0.3.6+       | For smart labelling of matrix element plots         |
 +------------------------+--------------+-----------------------------------------------------+
 
-
 .. warning::
 
-   For Apple M1 machines with ARM64 architecture, scqubits is only compatible with SciPy < 1.7 and Python < 3.9, in addition to the requirements listed above. Please make sure compatible versions of these libraries are installed. Alternatively, user can create conda environments with x86 architecture, where the additional requirements does not apply.
+   For Apple M1 and M2 machines with ARM64 architecture, scqubits is only compatible with SciPy < 1.7.0, >=1.7.3,
+   in addition to the requirements listed above. Please make sure compatible versions of these libraries are installed.
+   Alternatively, create a conda environment for x86 architecture, where additional constraints does not apply.
