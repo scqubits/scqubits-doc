@@ -49,9 +49,9 @@ Capacitive noise corresponds to noise coming from a lossy capacitance. The assum
 
 .. math::
 
-    S(\omega) = \frac{\omega \hbar}{|\omega| C_J Q_{\rm cap}(\omega)} \left(1 + \coth \frac{\hbar |\omega|}{2 k_B T} \right)
+    S(\omega) = \frac{2 \hbar}{C Q_{\rm cap}(\omega)} \left(\frac{ \coth \frac{\hbar |\omega|}{2 k_B T}}{1 + \exp\left({-\frac{\hbar \omega}{k_B T}}\right)} \right)
 
-where :math:`C_J` is the relevant capacitance, and :math:`Q_{\rm cap}` the corresponding capacitive quality factor.
+where :math:`C` is the relevant capacitance, and :math:`Q_{\rm cap}` the corresponding capacitive quality factor.
 The default value of the frequency-dependent quality factor is assumed to be
 
 .. math::
@@ -61,9 +61,7 @@ The default value of the frequency-dependent quality factor is assumed to be
 To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
 :ref:`Cos2phi <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
-:ref:`FullZeroPi <qubit_fullzeropi>`, 
-:ref:`TunableTransmon <qubit_tunable_transmon>`, 
-:ref:`ZeroPi <qubit_zeropi>`.
+:ref:`TunableTransmon <qubit_tunable_transmon>`.
 
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
 are ``i``, ``j`` and ``total``. Their properties are described below. 
@@ -108,7 +106,7 @@ Other parameters that could be used for further customization are:
 +----------------+-----------------------------+------------------------------------------------+
 
 
-References: [Nguyen2019]_, [Smith2020]_  
+References: [Smith2020]_ (and see [Nguyen2019]_ for a related discussion)
 
 Inductive noise
 -----------------------
@@ -123,9 +121,9 @@ Inductive noise due to lossy inductance. The assumed spectral density reads
 
 .. math::
 
-    S(\omega) = \frac{\omega \hbar}{|\omega| L_{J} Q_{\rm ind}(\omega)} \left(1 + \coth \frac{\hbar |\omega|}{2 k_B T} \right)
+    S(\omega) = \frac{2 \hbar}{L Q_{\rm ind}(\omega)} \left(\frac{ \coth \frac{\hbar |\omega|}{2 k_B T}}{1 + \exp\left({-\frac{\hbar \omega}{k_B T}}\right)} \right)
 
-where :math:`L_J` is the relevant inductance or superinductance, and :math:`Q_{\rm ind}` the corresponding inductive
+where :math:`L` is the relevant inductance or superinductance, and :math:`Q_{\rm ind}` the corresponding inductive
 quality factor. The default value of the frequency-dependent quality factor is assumed to be
 
 .. math::
