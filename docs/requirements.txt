@@ -17,4 +17,4 @@ sphinx-autodoc-typehints
 sphinx-copybutton
 sphinx-design
 sphinxcontrib-napoleon
-scqubits==3.2
+scqubits==3.3
