@@ -7,7 +7,24 @@
 Change Log
 **********
 
+Version 3.3
++++++++++++
 
+**ADDITIONS**
+
+    - The custom diagonalization module now also supports the `jax` library. 
+    - Custom diagonalization is now possible for the `FullZeroPi` qubit. 
+
+**BUG FIXES**
+
+    - Fixed how `op_in_dressed_eigenbasis` sets operator dimensions.
+
+**UNDER THE HOOD**
+
+    - Initial work on QuTiP 5 compatibility 
+    - Initial work to allow for custom diagonalization in the `Circuit` module in the near future.
+    - Updates on how annotations are handled in some cases.
+    - Automatic generation of `__all__` list in the `__init__.py`.
 
 Version 3.2
 +++++++++++
