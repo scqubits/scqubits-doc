@@ -110,15 +110,6 @@ Utility method for setting charging energies
     scqubits.ZeroPi.set_EC_via_ECS
 
 
-Utility method for setting charging energies
---------------------------------------------
-
-.. autosummary::
-   :toctree: ../../_generated/
-
-    scqubits.ZeroPi.set_EC_via_ECS
-
-
 Estimation of coherence times
 -----------------------------
 
