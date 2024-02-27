@@ -14,7 +14,7 @@ Developers
 
 
 | `Jens Koch <https://sites.northwestern.edu/koch/>`_ (Northwestern University)
-| Peter Groszkowski (University of Chicago)
+| Peter Groszkowski (Oak Ridge National Laboratory)
 
 
 .. _developers-contributors:
