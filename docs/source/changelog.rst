@@ -7,6 +7,44 @@
 Change Log
 **********
 
+Version 4.0
++++++++++++
+
+**ADDITIONS**
+
+Following additions are for the `Circuit` module:
+
+    - Support for custom diagonalization.
+    - Coherence time calculations for a general circuit, with the argument `generate_noise_methods`.
+    - Ability to provide circuit parameters using physical units and multiplier prefixes.
+    - Helper function `hamiltonian_for_qutip_dynamics` to easily simulate time dynamics for a given parameter.
+    - Ability to set basis for extended variables for each subsystem individually when hierarchical diagonalization is used.
+    - Can instantiate `Circuit` instance with a symbolic Hamiltonian.
+    - Flux grouping when external flux is time dependent for superconducting loops in a circuit.
+    - New info method to give a description of the `Circuit` instance.
+    - Make certain attributes read-only, which need to be changed using the `configure` method.
+    - Ability to change the spanning tree by defining a custom set of `closure_branches`.
+    - The `plot_wavefunction` now supports options to plot the real, imaginary, absolute-square and absolute value of a wavefunction when applicable.
+
+**BUG FIXES**
+
+    - Fix diagonalization for purely harmonic systems using the `Circuit` module
+    - Fix bugs in `Circuit` plotting routines.
+    - `Circuit` module supports parallel processing.
+    - Fix bugs when defining custom variable transformation in `Circuit` module.
+    - Fix typos in `ZeroPi` related to custom diagonalization
+    - Fixed a bug in `plot_wavefunction`  method `Circuit` , where the user-provided `grids_dict` argument was not applied in the plot.
+
+**UNDER THE HOOD**
+
+    - More efficient evaluation of eigenvalues for purely harmonic circuits.
+    - More efficient attribute updates for the `Circuit` instance.
+    - Using `pyparsing` instead of `pyyaml` to parse the input string for the `Circuit` module.
+    - Initial work on making the `Circuit` instance writable to file.
+    - Refactoring and improving code quality.
+    - Improve the accuracy of `_evaluate_symbolic_expr`
+
+
 Version 3.3
 +++++++++++
 
