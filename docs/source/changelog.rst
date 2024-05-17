@@ -21,13 +21,13 @@ Version 4.1
     - Fix crashes for oscillator subsystems in hierarchical diagonalization, in `exp_i_operator`.
     - Fix $2\pi$ factor in external flux terms in purely harmonic subsystems.
     - Fix crashes, related to the warning attribute which is not defined for `HilbertSpace` object.
-    - Fix Github actions for `macos-latest` runs, which failed for `qutip` version 5.0.
+    - Fix Github actions for `macos-latest` runs, which failed for `qutip` version 5.
 
 **UNDER THE HOOD**
 
     - Updates and clean up of Github tests.
     - No longer require `cython<3.0`.
-    - Added python-version specific `qutip` installs that guarantee full support .
+    - Added python-version specific `qutip` installs that guarantee full support.
 
 
 Version 4.0

@@ -5,7 +5,7 @@ h5py>=2.7.1
 IPython
 ipykernel
 ipywidgets
-matplotlib>=3.0.0
+matplotlib>=3.5.1
 nbsphinx
 numpy>=1.14.2
 pathos
@@ -17,4 +17,4 @@ sphinx-autodoc-typehints
 sphinx-copybutton
 sphinx-design
 sphinxcontrib-napoleon
-scqubits==4.0
+scqubits==4.1
