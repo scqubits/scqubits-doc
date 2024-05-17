@@ -15,7 +15,7 @@ import scqubits
 # -- Project information -----------------------------------------------------
 
 project = "scqubits"
-copyright = "2019 and later (latest update: 2023), Jens Koch, Peter Groszkowski"
+copyright = "2019 and later (latest update: 2024), Jens Koch, Peter Groszkowski"
 author = "Jens Koch, Peter Groszkowski"
 
 import pydata_sphinx_theme
