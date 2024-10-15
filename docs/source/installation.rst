@@ -13,7 +13,7 @@ Install
 Installing via conda
 ====================
 
-For Python 3.7, 3.8, 3.9, and 3.10, scqubits can be installed via conda by executing
+scqubits can be installed via conda by executing
 
 .. code-block:: bash
 
