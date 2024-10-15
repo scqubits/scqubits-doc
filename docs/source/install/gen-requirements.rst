@@ -14,19 +14,19 @@ scqubits depends on the following Python open-source libraries:
 +----------------+--------------+-----------------------------------------------------+
 | Package        | Version      | Details                                             |
 +================+==============+=====================================================+
-| **Python**     | 3.7+         | Version 3.7 and higher is supported.                |
+| **Python**     | 3.9+         | Version 3.9 and higher is supported.                |
 +----------------+--------------+-----------------------------------------------------+
-| **pathos**     |              | Required for multiprocessing                        |
+| **pathos**     | 0.3+         | Required for multiprocessing                        |
 +------------------------+--------------+---------------------------------------------+
 | **NumPy**      | 1.14.2+      | Not tested on lower versions.                       |
 +----------------+--------------+-----------------------------------------------------+
-| **SciPy**      | 1.1.0+       | Not tested on lower versions.                       |
+| **SciPy**      | 1.5+         | Not tested on lower versions.                       |
 +----------------+--------------+-----------------------------------------------------+
-| **Matplotlib** | 3.0.0+       | Some plotting does not work on lower versions.      |
+| **Matplotlib** | 3.5.1+       | Some plotting does not work on lower versions.      |
 +----------------+--------------+-----------------------------------------------------+
-| **QuTiP**      | 4.3+         |  Needed for composite Hilbert spaces.               |
+| **QuTiP**      | 4.3.1+       |  Needed for composite Hilbert spaces.               |
 +----------------+--------------+-----------------------------------------------------+
-| **Cython**     | 0.28.5+      |  Required by QuTiP                                  |
+| **Cython**     | 0.29.2+      |  Required by QuTiP                                  |
 +----------------+--------------+-----------------------------------------------------+
 | **tqdm**       | 4.0+         |  Needed for display of progress bar                 |
 +----------------+--------------+-----------------------------------------------------+
