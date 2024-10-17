@@ -7,6 +7,27 @@
 Change Log
 **********
 
+Version 4.2
++++++++++++
+
+**ADDITIONS**
+
+    - Allow loops with capacitances when dynamical flux grouping is used in custom circuits.
+    - Allow setting branch parameters with negative values, helpful for higher order junctions in custom circuits.
+
+**BUG FIXES**
+
+    - Fix prefactor for evaluations noise spectral density for quasiparticle noise - adds an additional factor of :math:`\hbar/e^2`.
+    - Fix error in symbolic Hamiltonian for multi-harmonic junctions.
+
+**UNDER THE HOOD**
+
+    - Support for `numpy`>=2.0.
+    - Fix type annotations for certain functions, code cleanup.
+    - Updates to various testing functions.
+    - Internal updates to the custom diagonalization module.
+
+
 Version 4.1
 +++++++++++
 
@@ -19,7 +40,7 @@ Version 4.1
 
     - Fix compatibility with `qutip` version 5. 
     - Fix crashes for oscillator subsystems in hierarchical diagonalization, in `exp_i_operator`.
-    - Fix $2\pi$ factor in external flux terms in purely harmonic subsystems.
+    - Fix :math:`2\pi` factor in external flux terms in purely harmonic subsystems.
     - Fix crashes, related to the warning attribute which is not defined for `HilbertSpace` object.
     - Fix Github actions for `macos-latest` runs, which failed for `qutip` version 5.
 
@@ -286,7 +307,7 @@ Version 2.2
 **Bug Fixes**
     - Use of `<ParameterSweep>.plot_transitions` could previously lead to a spurious
       switch of `<ParameterSweep>["evals"]` to transition energies.
-    - Include the +1/2 hbar omega term when diagonalizing fluxonium in the harmonic
+    - Include the :math:`/frac{1}{1}hbar` omega term when diagonalizing fluxonium in the harmonic
       osc. basis. The omission of this only affected absolute energies, not the energy
       differences which are the relevant quantities in most cases. However, wavefunction
       plots for fluxonium were previously incorrectly positioned relative to the potential energy.
