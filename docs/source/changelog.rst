@@ -13,7 +13,7 @@ Version 4.2
 **ADDITIONS**
 
     - Allow loops with capacitances when dynamical flux grouping is used in custom circuits.
-    - Allow setting branch parameters with negative values, helpful for higher order junctions in custom circuits.
+    - Allow setting branch parameters with negative values - a feature useful for higher order junctions in custom circuits.
 
 **BUG FIXES**
 
