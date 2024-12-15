@@ -46,7 +46,21 @@ extensions = [
     "sphinx_copybutton"
 ]
 
+mathjax3_config = {
+    'tex': {
+        'inlineMath': [['$', '$'], ['\\(', '\\)']],
+        'displayMath': [['$$', '$$'], ['\\[', '\\]']],
+        'processEscapes': True,
+        'processEnvironments': True
+    },
+    'options': {
+        'ignoreHtmlClass': 'tex2jax_ignore|mathjax_ignore|document',
+        'processHtmlClass': 'tex2jax_process|mathjax_process'
+    },
+    'loader': {'load': ['[tex]/ams']}
+}
 
+mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
 # -- Internationalization ------------------------------------------------
 # specifying the natural language populates some key tags
 language = "en"
