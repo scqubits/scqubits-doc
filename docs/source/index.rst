@@ -57,7 +57,7 @@ appropriately acknowledged by citing:
    | Sai Pavan Chitta, Tianpu Zhao, Ziwen Huang, Ian Mondragon-Shem, and Jens Koch
    | *Computer-aided quantization and numerical analysis of superconducting circuits*
    | arXiv:2206.08320 (2022).
-   | https://arxiv.org/abs/2206.08320
+   | https://iopscience.iop.org/article/10.1088/1367-2630/ac94f2
 
    | Peter Groszkowski and Jens Koch,
    | *scqubits:  a Python package for superconducting qubits*,
