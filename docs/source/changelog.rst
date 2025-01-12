@@ -7,6 +7,41 @@
 Change Log
 **********
 
+Version 4.3
++++++++++++
+
+**ADDITIONS**
+
+    - Meshgrids can now be directly generated in the `Parameters` class by `meshgrids_by_paramname`
+    - `HilbertSpace.dressed_state_component()` and `ParameterSweep.dressed_state_component()`. These provide the probability of occupying particular bare states when the 
+      system is in an eigenstate.
+    - For a non-dispersively coupled system, the eigenstates labeling by overlap might fail. Instead, we can use the branch analysis method to get a reliable labeling, 
+      following Dumas et al. (2024). Try this functionality by `HilbertSpace.generate_lookup(ordering="LX")` or `ParameterSweep(..., labeling_scheme="LX")`. For more info 
+      about the use and the implementation, please refer to the documentation and the docstrings.
+    - Migrated to `pyproject.toml` from `setup.py` for installation with pip.
+
+**BUG FIXES**
+
+    - Fix #193. We use `id_str` to identify subsystems instead of the subsystem object for `subsys_update_info`. We perform multiple checks when initializing the object to 
+      make sure this is secure. 
+    - Fix parameter functions for parametric driving in the Circuit module.
+    - Fix configure method in `SymbolicCircuit`, now does not reset the instance when run with no arguments.
+    - Fix bugs #193 and #209 related to`ParameterSweep`.
+    - Fix compatibility of `Circuit` module with `HilbertSpace`, bugs #253 and #254.
+    - Fix #211, a bug that could occur when `op_in_dressed_eigenbasis` was called without prior lookup generation.
+    - `SymbolicCircuit` instances now do not need to be re-initiated when their `configure` method fails (e.g., because of incorrect parameters).
+
+**UNDER THE HOOD**
+
+    - `SpectrumLookupMixin.reset_preslicing()` now resets the slice to a tuple of multi-dimensional slices
+    - `ParameterSweep._preslicing_reset()` is redundant (exactly the same as `SpectrumLookupMixin.reset_preslicing()`) and is replaced.
+    - A more rigorous implementation for `SpectrumLookupMixin.all_params_fixed()` for all different supported slicing methods
+    - `ParameterSweep` now keeps the original instance when `deepcopy=True`.
+    - Reduce redundant diagonalizations when `ParamtersSweep` is used with the `hilbert_space` object of a `Circuit` instance.
+    - Added plotting tests and refactor code for `Circuit` instance.
+    - Type annotations fixes and code cleanup.
+
+
 Version 4.2
 +++++++++++
 
