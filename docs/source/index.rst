@@ -100,6 +100,7 @@ appropriately acknowledged by citing:
    :caption: COMPOSITE SYSTEMS
 
    ./guide/hilbertspace/ipynb/hilbertspace.ipynb
+   ./guide/hilbertspace/ipynb/branch_analysis.ipynb
 
 
 .. toctree::

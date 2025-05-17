@@ -54,6 +54,7 @@ relevant classes and functions of scqubits.
    :caption: COMPOSITE SYSTEMS
 
    ./hilbertspace/ipynb/hilbertspace.ipynb
+   ./hilbertspace/ipynb/branch_analysis.ipynb
 
 
 .. toctree::
