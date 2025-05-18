@@ -16,7 +16,7 @@ Version 4.3.1
     - Fixed issue where setting `ext_basis` did not work for purely harmonic subsystems.
     - Fixed issue with inconsistent eigenenergies of the subsystem when parent's parameters were changed.
 
-** UNDER THE HOOD**
+**UNDER THE HOOD**
 
     - Updated Github Actions workflow to account for the deprecations.
     - Updated the local `meta.yaml` to match corresponding file in `scqubits-feedstock`.
