@@ -27,9 +27,9 @@ where :math:`i,j \in \{1,2\}, E_\text{C}=\tfrac{e^2}{2}C^{-1}` and
    -C_{J3} & C_{J2}+C_{g2}+C_{J3}
    \end{matrix}\right).
    
-:math:`C_{Ji}` refers to the capacitance of the :math:`i^\text{th}` junction and :math:`C_{gi}` refers to the capacitance to ground of the :math:`i^\text{th}` island. For simplicity, the Hamiltonian is written here in a mixed basis, however for the purposes of numerical diagonalization in the ``FluxQubit`` class, the charge basis is employed for both variables. The user must specify a charge-number cutoff ``ncut``, chosen large enough so that convergence is achieved.
+:math:`C_{Ji}` refers to the capacitance of the :math:`i^\text{th}` junction and :math:`C_{gi}` refers to the capacitance to ground of the :math:`i^\text{th}` island. The Hamiltonian above uses a mixed-basis notation (phase variables for the Josephson terms, charge variables for the charging energy). For numerical diagonalization, the ``FluxQubit`` class works entirely in the charge basis for both degrees of freedom. The user must specify a charge-number cutoff ``ncut``, chosen large enough for convergence.
 
-An instance of the flux qubit is initialized as follows::
+An instance of the flux qubit is initialized as follows. Here, the third Josephson junction is taken to be smaller than the other two by a factor :math:`\alpha`, the standard junction-asymmetry parameter for the three-junction flux qubit::
 
    EJ = 35.0
    alpha = 0.6

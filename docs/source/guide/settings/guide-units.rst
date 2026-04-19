@@ -22,3 +22,9 @@ The current units setting can be obtained with the ``get_units`` function. A new
 
 scqubits also includes several helper functions for convenient conversion from the current system units to and
 from `Hz`. This is accomplished with functions ``to_standard_units`` and ``from_standard_units``.
+
+.. warning::
+
+   Coherence-time formulas treat the Hamiltonian energies directly as frequencies, so the units setting must match
+   the energy scale used when defining qubit parameters. Inconsistent units produce incorrect coherence times
+   silently — no error is raised.
