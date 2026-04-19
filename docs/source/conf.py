@@ -15,7 +15,7 @@ import scqubits
 # -- Project information -----------------------------------------------------
 
 project = "scqubits"
-copyright = "2019 and later (latest update: 2024), Jens Koch, Peter Groszkowski"
+copyright = "2019 and later (latest update: 2026), Jens Koch, Peter Groszkowski"
 author = "Jens Koch, Peter Groszkowski"
 
 import pydata_sphinx_theme
@@ -78,7 +78,7 @@ autosummary_generate = True
 
 # Options for sphinx_autodoc_typehints
 set_type_checking_flag = True
-simplify_optional_unions = True
+simplify_optional_unions = False
 
 # The master toctree document.
 master_doc = "contents"
