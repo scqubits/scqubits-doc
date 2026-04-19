@@ -57,6 +57,30 @@ intersphinx_mapping = {
     "traitlets": ("https://traitlets.readthedocs.io/en/stable", None),
 }
 
+# Suppress nitpicky warnings for short-form references that recur in
+# upstream scqubits docstrings (bare class names instead of fully
+# qualified). Listed here so the nitpicky build is actionable; remove
+# entries once the corresponding docstrings get fully qualified upstream.
+nitpick_ignore_regex = [
+    # nitpick_ignore_regex uses re.fullmatch, so each pattern must match
+    # the entire target string. Suppresses noise from upstream scqubits
+    # docstrings that use bare class names instead of fully qualified ones.
+    ("py:class", r"(HilbertSpace|SpectrumData|ParameterSweep|QuantumSystem|QuantumSys)"),
+    ("py:class", r"(NamedSlotsNdarray|Parameters|GIndexTuple|GIndex|Serializable|IOData|DataStore)"),
+    ("py:class", r"(Transmon|TunableTransmon|Fluxonium|FluxQubit|ZeroPi|FullZeroPi|Cos2PhiQubit)"),
+    ("py:class", r"(Oscillator|KerrOscillator|GenericQubit)"),
+    ("py:class", r"(Circuit|SymbolicCircuit|Branch|Node|Coupler|Subsystem)"),
+    ("py:class", r"(Figure|Axes)"),
+    ("py:class", r"(optional|callable|iterable|sequence|All|default:.*)"),
+    ("py:attr", r"(flux|truncated_dim|ng|ncut|EJ|EC|EL|EJmax|cutoff|grid|n_g)"),
+    ("py:meth", r"(supported_noise_channels|effective_noise_channels)"),
+    ("py:obj", r"scqubits\..*"),
+    ("py:data", r"scqubits\..*"),
+    ("py:data", r"(CENTRAL_DISPATCH|EVENTS|DIAG_METHODS|MODE_FUNC_DICT)"),
+    ("py:data", r"constants\..*"),
+    ("py:data", r"typing\.Union.*"),
+]
+
 
 # -- Internationalization ------------------------------------------------
 # specifying the natural language populates some key tags

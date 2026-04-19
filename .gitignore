@@ -11,6 +11,7 @@
 *.pdf
 
 /docs/build/
+/docs/_build/
 /examples/.ipynb_checkpoints/
 /docs/source/guide/ipynb/.ipynb_checkpoints/
 /docs/source/api-doc/_autosummary/
@@ -20,3 +21,9 @@
 /docs/source/guide/circuit/ipynb/.ipynb_checkpoints/
 /docs/source/guide/explorer/ipynb/.ipynb_checkpoints/
 /docs/source/guide/parametersweep/ipynb/.ipynb_checkpoints/
+
+# Claude Code working files (per-user, not project artifacts)
+/.claude/
+/.cleanup/
+/CLAUDE.md
+/env-history.yml
