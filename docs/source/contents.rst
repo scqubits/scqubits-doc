@@ -15,7 +15,7 @@ Getting Started
 ***************
 
 After :ref:`Install` of scqubits, check out the
-:ref:`User Guide`, as well as the :ref:`Jupyter Examples`.
+:doc:`User Guide <index>`, as well as the :doc:`Jupyter Examples <example-notebooks>`.
 
 We are also building up a set of `YouTube Tutorials <https://www.youtube.com/channel/UCI43mhRw6oY01FbPuOc5CVQ>`_.
 
