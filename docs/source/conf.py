@@ -37,6 +37,7 @@ extensions = [
     "sphinx.ext.extlinks",
     "sphinx.ext.viewcode",
     "sphinx.ext.ifconfig",
+    "sphinx.ext.intersphinx",
     "nbsphinx",
     "sphinx.ext.mathjax",
     "sphinx_autodoc_typehints",
@@ -46,6 +47,16 @@ extensions = [
     "sphinx_copybutton"
 ]
 
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "numpy": ("https://numpy.org/doc/stable", None),
+    "scipy": ("https://docs.scipy.org/doc/scipy", None),
+    "matplotlib": ("https://matplotlib.org/stable", None),
+    "qutip": ("https://qutip.readthedocs.io/en/qutip-5.0.x", None),
+    "sympy": ("https://docs.sympy.org/latest", None),
+    "traitlets": ("https://traitlets.readthedocs.io/en/stable", None),
+}
+
 
 # -- Internationalization ------------------------------------------------
 # specifying the natural language populates some key tags
@@ -54,7 +65,7 @@ language = "en"
 html_show_sourcelink = False
 html_sourcelink_suffix = ""
 
-autodoc_mock_imports = ["qutip", "pytest", "tqdm", "numpy"]
+autodoc_mock_imports = ["qutip", "pytest", "tqdm"]
 autodoc_typehints = "description"
 autodoc_type_aliases = {
     "QuantumSys": "scqubits.utils.typedefs.QuantumSys",
