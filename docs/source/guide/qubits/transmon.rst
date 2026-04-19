@@ -30,7 +30,7 @@ An instance of the transmon qubit is initialized as follows::
                                  ng=0.3,
                                  ncut=31)
 
-From within Jupyter notebook, a transmon instance can alternatively be created with::
+From within a Jupyter notebook, a transmon instance can alternatively be created with::
 
    transmon = scqubits.Transmon.create()
 

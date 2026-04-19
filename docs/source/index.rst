@@ -40,12 +40,12 @@ We are also building up a set of `YouTube Tutorials <https://www.youtube.com/cha
 Overview
 ********
 
-The package provides convenient ways to obtain energy spectra of common superconducting qubits, to plot their energy
-levels as a function of external parameters, to calculate matrix elements and predict coherence times etc. scqubits
+The package provides convenient tools for computing energy spectra of common superconducting qubits, plotting energy
+levels as a function of external parameters, evaluating matrix elements, and predicting coherence times. scqubits
 further offers an interface to QuTiP, making it easy to work with composite Hilbert spaces consisting of multiple
 coupled superconducting qubits and harmonic modes.
 
-scqubits performs numerics utilizing Numpy and Scipy; plotting capabilities rely on Matplotlib.
+scqubits relies on NumPy and SciPy for numerical computations, and on Matplotlib for plotting.
 
 Citations
 *********
