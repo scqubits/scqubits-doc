@@ -28,8 +28,8 @@ This example illustrates the use for the case of a ``TunableTransmon`` qubit::
         ng=0.3,
         ncut=150
     )
-    transmon.supported_noise_channels()
-    transmon.tphi_1_over_f_flux()
+    tune_tmon.supported_noise_channels()
+    tune_tmon.tphi_1_over_f_flux()
     
 
 The last call to the method ``tphi_1_over_f_flux()`` returns an estimate of the pure dephasing time due
