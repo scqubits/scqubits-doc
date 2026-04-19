@@ -47,7 +47,7 @@ An instance of the flux qubit is initialized as follows::
                                  ncut = 10)
 
 
-From within Jupyter notebook, a flux qubit instance can alternatively be created with::
+From within a Jupyter notebook, a flux qubit instance can alternatively be created with::
 
    fluxqubit = scqubits.FluxQubit.create()
 
