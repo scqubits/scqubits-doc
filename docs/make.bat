@@ -8,9 +8,9 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
 
-if %1 == "clean" (
-    del source\_generated\* /F /Q
-    del source\apidoc\_autosummary\* /F /Q
+if "%1" == "clean" (
+    if exist source\_generated del /F /Q source\_generated\*
+    if exist source\api-doc\_autosummary del /F /Q source\api-doc\_autosummary\*
 )
 
 set SOURCEDIR=source
