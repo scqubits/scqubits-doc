@@ -8,6 +8,7 @@ ipywidgets
 matplotlib>=3.5.1
 nbsphinx
 numpy>=1.14.2
+pandoc
 pathos
 pygments>=2.4.1
 pydata-sphinx-theme==0.9

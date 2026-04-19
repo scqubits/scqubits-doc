@@ -54,8 +54,15 @@ language = "en"
 html_show_sourcelink = False
 html_sourcelink_suffix = ""
 
-autodoc_mock_imports = ["qutip", "pytest", "tqdm"]
+autodoc_mock_imports = ["qutip", "pytest", "tqdm", "numpy"]
 autodoc_typehints = "description"
+autodoc_type_aliases = {
+    "QuantumSys": "scqubits.utils.typedefs.QuantumSys",
+}
+autodoc_default_options = {
+    "exclude-members": "_ctypes, _ctypes.data, _ctypes.shape, _ctypes.strides, _ctypes.data_as, _ctypes.shape_as, _ctypes.strides_as"
+}
+autosectionlabel_prefix_document = True
 autosummary_generate = True
 
 # Options for sphinx_autodoc_typehints
@@ -84,7 +91,6 @@ exclude_patterns = [
     ".DS_Store",
 ]
 
-autosummary_generate = True
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

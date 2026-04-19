@@ -1,22 +1,22 @@
-.. scqubits
-   Copyright (C) 2017 and later, Jens Koch & Peter Groszkowski
+   .. scqubits
+      Copyright (C) 2017 and later, Jens Koch & Peter Groszkowski
 
-.. _scqubits_modules:
+   .. _scqubits_modules:
 
-***************
-Modules
-***************
+   ***************
+   Modules
+   ***************
 
-.. toctree::
-   :maxdepth: 3
+   .. toctree::
+      :maxdepth: 3
 
-.. autosummary::
-   :toctree: _autosummary
-   :template: custom_module.rst
-   :recursive:
+   .. autosummary::
+      :toctree: _autosummary
+      :template: custom_module.rst
+      :recursive:
 
-   scqubits.core
-   scqubits.io_utils
-   scqubits.settings
-   scqubits.ui
-   scqubits.utils
+      scqubits.core
+      scqubits.io_utils
+      scqubits.settings
+      scqubits.ui
+      scqubits.utils

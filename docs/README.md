@@ -9,10 +9,8 @@ The built documentation is available online, see https://scqubits.readthedocs.io
 Build requirements
 ------------------
 
-* Sphinx: http://sphinx-doc.org/  version 2.2+
-* sphinx_rtd_theme
-* numpydoc
-* nbsphinx
+* Sphinx: http://sphinx-doc.org/ 
+* see requirements.txt
 
 In a conda environment use:
     
