@@ -50,7 +50,7 @@ To upgrade to the latest version of scqubits one can execute
 ARM64 Compatibility
 ===================
 
-Apple M1 machines with arm64 architecture, scqubits is only compatible with SciPy < 1.7 and Python < 3.9, in addition to
+On Apple M1 machines with arm64 architecture, scqubits is only compatible with SciPy < 1.7 and Python < 3.9, in addition to
 the requirements listed below. Alternatively, it is possible to create conda environments with x86 architecture.
 
 
