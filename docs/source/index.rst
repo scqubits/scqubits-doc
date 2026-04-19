@@ -130,3 +130,4 @@ appropriately acknowledged by citing:
    :caption: DATA
 
    ./guide/storage/ipynb/storage.ipynb
+   ./guide/parametersweep/ipynb/namedslots.ipynb
