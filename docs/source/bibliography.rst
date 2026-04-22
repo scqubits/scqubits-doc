@@ -20,4 +20,4 @@ Refs
 .. [Schoelkopf2003] Schoelkopf et al., Quantum noise in mesoscopic physics, pp. 175-203. (2003), https://link.springer.com/chapter/10.1007/978-94-010-0089-5_9
 .. [Smith2020] Smith et al., npj Quantum Information 6.1 (2020), https://www.nature.com/articles/s41534-019-0231-2
 .. [Zhu2013] Zhu et al., PRB 87, 024510 (2013), https://link.aps.org/doi/10.1103/PhysRevB.87.024510
-
+.. [Dumas2024] Dumas et al., Phys. Rev. X 14, 041023 (2024), https://journals.aps.org/prx/abstract/10.1103/PhysRevX.14.041023
