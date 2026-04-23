@@ -68,7 +68,7 @@ See the API documentation of individual qubits for details.
 
 
 Qubits that support this noise channel include: 
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
@@ -92,7 +92,7 @@ See the API documentation of individual qubits for details.
 
 
 Qubits that support this noise channel include: 
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 
 :ref:`Transmon <qubit_transmon>`, 
@@ -120,7 +120,7 @@ See the API documentation of individual qubits for details.
 
 
 Qubits that support this noise channel include: 
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`FluxQubit <qubit_flux_qubit>`, 
 :ref:`FullZeroPi <qubit_fullzeropi>`, 

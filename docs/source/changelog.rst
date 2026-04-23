@@ -12,13 +12,13 @@ Version 4.3.1
 
 **BUG FIXES**
 
-    - Fixed issue with `Circui`t module not utilizing custom diagonalization methods from `diag.py`.
+    - Fixed issue with `Circuit` module not utilizing custom diagonalization methods from `diag.py`.
     - Fixed issue where setting `ext_basis` did not work for purely harmonic subsystems.
     - Fixed issue with inconsistent eigenenergies of the subsystem when parent's parameters were changed.
 
 **UNDER THE HOOD**
 
-    - Updated Github Actions workflow to account for the deprecations.
+    - Updated GitHub Actions workflow to account for the deprecations.
     - Updated the local `meta.yaml` to match corresponding file in `scqubits-feedstock`.
 
 
@@ -52,7 +52,7 @@ Version 4.3
     - `ParameterSweep._preslicing_reset()` is redundant (exactly the same as `SpectrumLookupMixin.reset_preslicing()`) and is replaced.
     - A more rigorous implementation for `SpectrumLookupMixin.all_params_fixed()` for all different supported slicing methods
     - `ParameterSweep` now keeps the original instance when `deepcopy=True`.
-    - Reduce redundant diagonalizations when `ParamtersSweep` is used with the `hilbert_space` object of a `Circuit` instance.
+    - Reduce redundant diagonalizations when `ParameterSweep` is used with the `hilbert_space` object of a `Circuit` instance.
     - Added plotting tests and refactor code for `Circuit` instance.
     - Type annotations fixes and code cleanup.
 
@@ -92,11 +92,11 @@ Version 4.1
     - Fix crashes for oscillator subsystems in hierarchical diagonalization, in `exp_i_operator`.
     - Fix :math:`2\pi` factor in external flux terms in purely harmonic subsystems.
     - Fix crashes, related to the warning attribute which is not defined for `HilbertSpace` object.
-    - Fix Github actions for `macos-latest` runs, which failed for `qutip` version 5.
+    - Fix GitHub actions for `macos-latest` runs, which failed for `qutip` version 5.
 
 **UNDER THE HOOD**
 
-    - Updates and clean up of Github tests.
+    - Updates and clean up of GitHub tests.
     - No longer require `cython<3.0`.
     - Added python-version specific `qutip` installs that guarantee full support.
 
@@ -237,7 +237,7 @@ Version 3.0.3
     - `get_operator_names` has been eliminated from the operator dropdown menu
     - "State No." sliders for `FluxQubit`, `ZeroPi`, and `Cos2PhiQubit` do not exclude the ground state anymore.
     - Fixed a bug where the plot was not being erased after switching to another qubit while in manual-update mode.
-    - Changing to a non-manual scqubit now switches manual-mode off.
+    - Changing to a non-manual qubit now switches manual-mode off.
     - Fixed a bug where the maximum state number could be larger than `hilbertdim`.
 
 **Under the hood**
@@ -449,7 +449,7 @@ Version 2.0
     - New support for higher-order stencils in discretized derivatives.
     - Improved formatting of ``__str__`` methods (called when "printing" an scqubits class instance).
     - Under the hood: use of Python 3.6 compatible type annotations; unified formatting enabled by the ``black`` package
-    - Improvements to fileIO speeding up operations (increased memore cache) and requiring less disk space (avoid literal redundancies in stored data).
+    - Improvements to fileIO speeding up operations (increased memory cache) and requiring less disk space (avoid literal redundancies in stored data).
 
 
 

@@ -1,7 +1,7 @@
 .. scqubits
    Copyright (C) 2019, Jens Koch & Peter Groszkowski
 
-.. _geneneral_requirements:
+.. _general_requirements:
 
 General Requirements
 =====================
@@ -14,7 +14,7 @@ scqubits depends on the following Python open-source libraries:
 +----------------+--------------+-----------------------------------------------------+
 | Package        | Version      | Details                                             |
 +================+==============+=====================================================+
-| **Python**     | 3.9+         | Version 3.9 and higher is supported.                |
+| **Python**     | 3.10+        | Version 3.10 and higher is supported.               |
 +----------------+--------------+-----------------------------------------------------+
 | **pathos**     | 0.3+         | Required for multiprocessing                        |
 +----------------+--------------+-----------------------------------------------------+
@@ -49,6 +49,6 @@ The following packages are optional:
 
 .. warning::
 
-   For Apple M1 and M2 machines with ARM64 architecture, scqubits is only compatible with SciPy < 1.7.0, >=1.7.3,
-   in addition to the requirements listed above. Please make sure compatible versions of these libraries are installed.
-   Alternatively, create a conda environment for x86 architecture, where additional constraints does not apply.
+   On Apple Silicon (M1/M2, ARM64) machines, scqubits caps SciPy at ``<= 1.13.1``. pip enforces this automatically
+   when installing on macOS. Alternatively, create a conda environment for x86 architecture, where this cap does
+   not apply.

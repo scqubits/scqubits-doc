@@ -29,7 +29,7 @@ channels that can actually be calculated for any given qubit, to see a list of t
 could be used. Users can also explicitly specify what noise processes should be included in effective noise calculations. 
 
 
-Calculating :math:`T_1` and :math:`T_2` can be done via a methods ``t1_effective`` and ``t2_effective`` respectively. 
+Calculating :math:`T_1` and :math:`T_2` can be done via the methods ``t1_effective`` and ``t2_effective`` respectively.
 
 For more information on the method signatures, see the 
 :ref:`API documentation <apidoc>`

@@ -11,8 +11,8 @@
    :width: 4in
 
 The flux-tunable transmon qubit [Koch2007]_ is a simple modification of the
-fixed-frequency transmon obtained. It is obtained by
-replacing the Josephson junction by a SQUID loop of two Josephson junctions. A flux threaded through this loop can
+fixed-frequency transmon. It is obtained by
+replacing the Josephson junction with a SQUID loop of two Josephson junctions. A flux threaded through this loop can
 then be used to change the effective Josephson energy of the circuit and thus make the transmon tunable.
 
 .. math::
@@ -26,7 +26,7 @@ where :math:`E_\text{J,max} = E_\text{J1} + E_\text{J2}` is the maximum Josephso
 :math:`d=(E_\text{J1}-E_\text{J2})/(E_\text{J1}+E_\text{J2})`
 is the relative junction asymmetry.
 
-An instance of a tunable transmon qubit is created like this::
+An instance of a tunable transmon qubit is created as follows::
 
    tune_tmon = scqubits.TunableTransmon(
       EJmax=50.0,
@@ -37,11 +37,11 @@ An instance of a tunable transmon qubit is created like this::
       ncut=30
    )
 
-From within Jupyter notebook, a GUI-based creation is supported via::
+From within a Jupyter notebook, a GUI-based creation is supported via::
 
    tune_tmon = scqubits.TunableTransmon.create()
 
-This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
+This functionality is enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.
 
 Calculational methods related to Hamiltonian and energy spectra

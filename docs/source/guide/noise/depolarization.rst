@@ -15,11 +15,11 @@ The rate of a transition from state :math:`i` to state :math:`j` can be expresse
    \Gamma_{ij} = \frac{1}{\hbar^2} |\langle i| B_{\lambda} |j \rangle|^2 S(\omega_{ij}),
 
 where :math:`B_\lambda` is the noise operator, and :math:`S(\omega_{ij})` the spectral density function evaluated at
-the angular frequency associated with the transition frequeny, :math:`\omega_{ij} = \omega_{j} - \omega_{i}`.
+the angular frequency associated with the transition frequency, :math:`\omega_{ij} = \omega_{j} - \omega_{i}`.
 :math:`\omega_{ij}` is positive in the case of  decay (the qubit emits energy to the bath), and negative in case of
 excitations (the qubit absorbs energy from the bath).
 
-Unless stated otherwise, it is assumed that the depolarizing noise channels satisfy detailed balanced. This implies
+Unless stated otherwise, it is assumed that the depolarizing noise channels satisfy detailed balance. This implies
 
 .. math::
 
@@ -30,10 +30,10 @@ where :math:`T` is the bath temperature, and :math:`k_B` Boltzmann's constant.
 
 .. note::
 
-    By default all :math:`t_1` methods estimate the coherence depolarization times from the sum of the upward and downard rates.  
-    This behavior is controlled by the arugment `total`, which can be modified by the user. For example, setting `total=False` 
+    By default all :math:`t_1` methods estimate the coherence depolarization times from the sum of the upward and downward rates.
+    This behavior is controlled by the argument `total`, which can be modified by the user. For example, setting `total=False`
     will calculate only a single-directional transition rate from the state indexed `i` to the state indexed `j` (both of which
-    cal also be changed by the user through providing their values as arguments) 
+    can also be changed by the user through providing their values as arguments)
 
 
 Capacitive noise
@@ -59,7 +59,7 @@ The default value of the frequency-dependent quality factor is assumed to be
     Q_{\rm cap}(\omega) =  10^{6}  \left( \frac{2 \pi \times 6 {\rm GHz} }{ |\omega|} \right)^{0.7}. 
 
 To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`TunableTransmon <qubit_tunable_transmon>`.
 
@@ -136,7 +136,7 @@ where :math:`K_0` is the Bessel function of the second kind.
 
 
 To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are:
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`.
 
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 
@@ -201,7 +201,7 @@ Noise from a charge coupling to an impedance :math:`Z(\omega)`. The assumed spec
 
     S(\omega) = \frac{\hbar \omega}{{\rm Re} Z(\omega)} \left(1 + \coth \frac{\hbar |\omega|}{2 k_B T} \right).
 
-By default we assume the qubit couples to a infinite transmission line, which leads to 
+By default we assume the qubit couples to an infinite transmission line, which leads to
 
 .. math::
 
@@ -337,7 +337,7 @@ Quasiparticle-tunneling noise
 | :math:`B_\lambda` | :math:`\sin(\hat{\phi}/2)`  (see note ** below)  |
 +-------------------+--------------------------------------------------+
 
-Noise due to quasiparticle tunelling. The assumed spectral density reads
+Noise due to quasiparticle tunneling. The assumed spectral density reads
 
 .. math::
 

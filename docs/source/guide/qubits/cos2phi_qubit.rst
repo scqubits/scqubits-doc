@@ -95,16 +95,16 @@ An instance of the cos2phi qubit is initialized as follows::
                                          zeta_cut = 30)
 
 
-From within Jupyter notebook, a cos2phi qubit instance can alternatively be created
+From within a Jupyter notebook, a cos2phi qubit instance can alternatively be created
 with::
 
-   cos2phi_qubit = scqubits.Cosi2PhiQubit.create()
+   cos2phi_qubit = scqubits.Cos2PhiQubit.create()
 
 .. figure:: ../../graphics/cos2phiqubit-create.png
    :align: center
    :width: 8in
 
-This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
+This functionality is enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.
 
 
