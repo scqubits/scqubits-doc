@@ -104,7 +104,7 @@ with::
    :align: center
    :width: 8in
 
-This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
+This functionality is enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.
 
 

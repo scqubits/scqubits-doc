@@ -51,7 +51,7 @@ From within a Jupyter notebook, a flux qubit instance can alternatively be creat
 
    fluxqubit = scqubits.FluxQubit.create()
 
-This functionality is  enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
+This functionality is enabled if the ``ipywidgets`` package is installed, and displays GUI forms prompting for
 the entry of the required parameters.
 
 

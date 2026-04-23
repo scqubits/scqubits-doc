@@ -59,7 +59,7 @@ The default value of the frequency-dependent quality factor is assumed to be
     Q_{\rm cap}(\omega) =  10^{6}  \left( \frac{2 \pi \times 6 {\rm GHz} }{ |\omega|} \right)^{0.7}. 
 
 To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`, 
 :ref:`TunableTransmon <qubit_tunable_transmon>`.
 
@@ -136,7 +136,7 @@ where :math:`K_0` is the Bessel function of the second kind.
 
 
 To see a detailed signature of this method, see the API description of qubits that support this particular noise channel. These are:
-:ref:`Cos2phi <cos2phi_qubit>`,
+:ref:`Cos2PhiQubit <cos2phi_qubit>`,
 :ref:`Fluxonium <qubit_fluxonium>`.
 
 The parameters that determine what transitions are taken into account during the calculation of :math:`T_1` due to this channel, 

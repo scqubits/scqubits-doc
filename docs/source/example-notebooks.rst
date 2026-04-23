@@ -7,7 +7,7 @@
 Jupyter Examples
 ****************
 
-A variety of examples that show how scqubits can be used are contained in the github repository `scqubits-examples`
+A variety of examples that show how scqubits can be used are contained in the GitHub repository `scqubits-examples`
 found `here <https://github.com/scqubits/scqubits-examples>`_. 
 
 Users can easily clone it to their local file system by executing::
