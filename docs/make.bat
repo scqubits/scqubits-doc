@@ -9,8 +9,8 @@ if "%SPHINXBUILD%" == "" (
 )
 
 if "%1" == "clean" (
-    if exist source\_generated del /F /Q source\_generated\*
-    if exist source\api-doc\_autosummary del /F /Q source\api-doc\_autosummary\*
+    if exist source\_generated rmdir /S /Q source\_generated
+    if exist source\api-doc\_autosummary rmdir /S /Q source\api-doc\_autosummary
 )
 
 set SOURCEDIR=source
