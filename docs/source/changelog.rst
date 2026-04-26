@@ -7,6 +7,69 @@
 Change Log
 **********
 
+Version 4.3.2
++++++++++++++
+
+**ADDITIONS**
+
+    - Named constructors for `Circuit` from a YAML description:
+      `Circuit.from_yaml_file(path, ...)` (path on disk) and
+      `Circuit.from_yaml_string(yaml_text, ...)` (inline YAML). These
+      are the recommended replacements for the legacy
+      `Circuit(input_string=..., from_file=True/False)` form.
+    - New typed exception `ConfigureError` (subclass of `RuntimeError`)
+      raised by `Circuit.configure(...)` when reconfiguration fails.
+      The previous configuration is restored automatically and the
+      original cause is attached via `raise ... from exc`. The earlier
+      bare `except:` that silently swallowed errors during rollback is
+      gone.
+
+**DEPRECATIONS**
+
+    - The `from_file: bool` flag on `Circuit(input_string=..., from_file=...)`
+      now emits a `DeprecationWarning` whenever it is passed explicitly.
+      The legacy form continues to work but will be removed in a future
+      release; callers should migrate to `Circuit.from_yaml_file(...)`
+      or `Circuit.from_yaml_string(...)`.
+    - The `return_expr=True` flag on `sym_lagrangian`, `sym_hamiltonian`,
+      `sym_potential`, and `sym_interaction` is deprecated. Use the new
+      `*_expr` siblings (`sym_lagrangian_expr`, `sym_hamiltonian_expr`,
+      `sym_potential_expr`, `sym_interaction_expr`) which return the
+      symbolic expression directly. The flagged form continues to work
+      but emits a `DeprecationWarning`.
+
+**UNDER THE HOOD**
+
+    - Internal reorganization of the `Circuit` machinery.
+      Implementation modules previously at top-level
+      `scqubits.core.circuit_routines`, `scqubits.core.circuit_noise`,
+      `scqubits.core.circuit_plotting`, `scqubits.core.circuit_sym_methods`,
+      `scqubits.core.circuit_input`, and `scqubits.core.circuit_utils`
+      now live under the private subpackage
+      `scqubits.core.circuit_internals.*`. End-users are unaffected:
+      `circuit_input` and `circuit_utils` are kept as
+      re-export shims (the public free functions
+      `assemble_circuit`, `assemble_transformation_matrix`,
+      `sawtooth_operator`, `sawtooth_potential`, `truncation_template`,
+      `example_circuit`, the YAML parsing constants, etc., remain
+      importable from the same paths). The mixin-only shims
+      (`circuit_routines`, `circuit_noise`, `circuit_plotting`,
+      `circuit_sym_methods`) were removed; they only re-exported
+      classes (`CircuitRoutines`, `NoisyCircuit`, `CircuitPlot`,
+      `CircuitSymMethods`) that have no end-user use case.
+    - `CircuitRoutines` was split into four sibling mixins
+      (`SubsystemTreeMixin`, `HamiltonianAssemblyMixin`,
+      `LifecycleMixin`, plus the residual `CircuitRoutines`) covering
+      subsystem-tree construction, Hamiltonian assembly /
+      eigensystem computation, parameter sync / dispatch, and
+      Hilbert-space basics, respectively. Public `Circuit` /
+      `Subsystem` API and behaviour are unchanged.
+    - Numerical refactor regression test: a new characterization-test
+      suite (`scqubits/tests/test_circuit_characterization.py`) pins
+      `Circuit.hamiltonian()` and `Circuit.eigenvals(...)` against
+      committed `.npy` golden fixtures for four representative
+      circuits, plus five lifecycle-dispatch tests.
+
 Version 4.3.1
 +++++++++++++
 
