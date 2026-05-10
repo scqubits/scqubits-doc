@@ -23,6 +23,39 @@ Version 4.3.2
       original cause is attached via `raise ... from exc`. The earlier
       bare `except:` that silently swallowed errors during rollback is
       gone.
+    - `Circuit.operator(name, *, energy_esys=False)` -- typed
+      dispatcher that resolves to the dynamic per-variable operator
+      methods (`n1_operator`, `θ1_operator`, `cosθ1_operator`, etc.)
+      bound during `_configure`. The dynamic methods themselves are
+      bound via `types.MethodType` and are therefore invisible to
+      `mypy` / IDE autocomplete / `sphinx-autodoc`; the new accessor
+      restores static-tooling visibility. The dynamic methods stay
+      for back-compat.
+    - `NoisyCircuit.channels()` -- explicit registry of installed
+      noise-channel methods, returned as a `dict[str, Callable]`
+      mapping each generated method name (e.g. `t1_capacitive`,
+      `t1_inductive3`, `tphi_1_over_f_flux1`) to its bound callable.
+      `Circuit.supported_noise_channels()` now reads from this
+      registry instead of walking `self.__dict__` and substring
+      matching on names.
+
+**FIXES**
+
+    - `Circuit(symbolic_hamiltonian=...).configure(transformation_matrix=...)`
+      now raises `ValueError`. Previously the keyword argument was
+      silently dropped on this construction path (the
+      `_configure_sym_hamiltonian` branch did not consume
+      `transformation_matrix`, but the validation in
+      `Circuit.configure` omitted the keyword from the rejected list
+      even though the existing error message already named it as
+      forbidden). The other three keywords already rejected on this
+      path -- `closure_branches`, `use_dynamic_flux_grouping`,
+      `generate_noise_methods` -- are unchanged.
+    - `_evaluate_matrix_sawtooth_terms` now uses the per-term
+      coefficient when assembling a multi-term sawtooth potential.
+      Previously every term picked up the first coefficient of the
+      outer expression, so circuits with multiple `JJs` branches at
+      different `EJ` values produced an incorrect matrix.
 
 **DEPRECATIONS**
 
@@ -67,8 +100,63 @@ Version 4.3.2
     - Numerical refactor regression test: a new characterization-test
       suite (`scqubits/tests/test_circuit_characterization.py`) pins
       `Circuit.hamiltonian()` and `Circuit.eigenvals(...)` against
-      committed `.npy` golden fixtures for four representative
-      circuits, plus five lifecycle-dispatch tests.
+      committed `.npy` golden fixtures.  Originally four
+      representative circuits; expanded to seven with `ungrounded`
+      (sigma-mode coverage), `ml_coupled` (mutual inductance), and
+      `jj2` (higher-order Josephson junction) fixtures.  Each
+      fixture now also writes a JSON sidecar carrying the first six
+      eigenvalues + gaps and the Hamiltonian's shape, trace, and
+      Frobenius norm, so reviewers of numerical-change PRs can see
+      what actually moved instead of reading a binary diff.
+    - The `CircuitRoutines` mixin chain was further consolidated.
+      A single `CircuitProtocol` (in
+      `scqubits/core/circuit_internals/_protocols.py`) now declares
+      the cross-mixin attribute and method surface that the five
+      sibling mixins (`LifecycleMixin`, `SubsystemTreeMixin`,
+      `HamiltonianAssemblyMixin`, `CircuitSymMethods`, `CircuitPlot`)
+      previously each redeclared inside their own
+      `if TYPE_CHECKING:` blocks. At runtime `CircuitProtocol` is an
+      empty class (its body is gated under `TYPE_CHECKING`); the
+      addition to the MRO is a no-op.
+    - Josephson cosine/sine matrix evaluation pipeline lifted from
+      `HamiltonianAssemblyMixin` into a sibling module
+      `scqubits/core/circuit_internals/junction_assembly.py`.
+      `HamiltonianAssemblyMixin` keeps two thin wrapper methods
+      (`_evaluate_matrix_cosine_terms`,
+      `_evaluate_matrix_sawtooth_terms`) so the existing call surface
+      is preserved.
+    - The 18-attribute "what flows from the symbolic to the
+      numerical layer" contract is now pinned by a class-level
+      constant `SymbolicCircuit._STAGE2_ATTRIBUTES`. Adding a new
+      attribute that should propagate from `SymbolicCircuit` to
+      `Circuit` requires updating only that tuple; a parametrized
+      regression test (`TestRecomputationContract`) flags any name
+      that fails to reach a freshly-constructed `Circuit`.
+    - `Circuit._clear_unnecessary_attribs` is now driven by an
+      explicit registry (`self._dynamic_var_attribs`) populated by
+      `_install_var_properties`, replacing the prior string-substring
+      matching on attribute names. Adding a new per-variable property
+      kind no longer requires updating two unrelated places.
+    - The vestigial `Node.marker` field and its dead-code writer
+      `_mark_nodes_by_subgraph` have been removed; `_independent_modes`
+      uses pure return values.
+    - New developer's manual at the repository root
+      (`CIRCUIT_DEVELOPER_MANUAL.md`, ~1500 lines) covers the
+      circuit module's internal structure, mixin composition, graph
+      algorithms, hierarchical-diagonalization flow, parameter
+      lifecycle and central dispatch, noise model, plotting,
+      symbolic methods, public API surface, performance hot paths,
+      extension recipes, and a "where to look for what" lookup
+      table. Audited by an independent reviewer.
+    - New project-level docstring linter
+      (`tools/docstring_lint.py`) and accompanying GitHub Actions
+      workflow (`.github/workflows/docstring-lint.yml`) check
+      docstring rules (placeholder phrases, types duplicated into
+      Parameters / Returns sections that the signature already
+      declares, refactor-history phrasing, empty numpydoc section
+      headers). The CI workflow runs in `--compare-to origin/main`
+      mode, so only docstring issues newly introduced by a PR can
+      fail the build.
 
 Version 4.3.1
 +++++++++++++

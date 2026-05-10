@@ -13,3 +13,4 @@ Circuit Classes
    _autosummary/scqubits.core.symbolic_circuit.SymbolicCircuit.rst
    _autosummary/scqubits.core.symbolic_circuit_graph.Node.rst
    _autosummary/scqubits.core.symbolic_circuit_graph.Branch.rst
+   _autosummary/scqubits.core.symbolic_circuit_graph.Coupler.rst
