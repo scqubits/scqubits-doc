@@ -162,8 +162,8 @@ The ``mode`` argument trades cost for confidence.
 Reading the report
 ==================
 
-:meth:`.estimate_convergence` returns a :class:`.ConvergenceReport`. Its most
-useful fields are:
+:meth:`.Transmon.estimate_convergence` returns a :class:`.ConvergenceReport`. Its
+most useful fields are:
 
 ``aggregate_status``
     The overall verdict, equal to the worst per-level status. One of
@@ -291,4 +291,4 @@ misleading result.
 The defaults that control the diagnostics (refinement step, cluster threshold,
 safety factor, gap floor, default mode) live in :mod:`scqubits.settings` under
 the ``CONVERGENCE_*`` names and can be adjusted globally; see the
-:ref:`guide_settings` section.
+:ref:`guide-settings` section.
