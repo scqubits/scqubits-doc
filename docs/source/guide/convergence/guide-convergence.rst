@@ -26,12 +26,10 @@ comparison.
 
 .. note::
 
-   This is the first release of the framework. It currently covers the
-   **energy spectrum** of the :class:`.Transmon`. Wavefunction, matrix-element,
-   and coherence-time diagnostics, and support for the other qubit classes and
-   custom :class:`.Circuit` objects, are planned. The API and the structured
-   report described below were designed to accommodate those additions without
-   change.
+   Convergence diagnostics are available for the :class:`.Transmon`, covering
+   the energy spectrum, wavefunctions, matrix elements, and coherence rates.
+   Calling ``estimate_convergence`` on a qubit class that does not support it
+   raises :class:`TypeError`.
 
 
 The basic workflow
@@ -192,12 +190,59 @@ most useful fields are:
     levels, and the mode/refinement used. This keeps a verdict tied to the
     backend it was produced with.
 
+``derived``
+    When derived quantities are requested (see below), a mapping from each
+    requested quantity name to its own :class:`.ConvergenceReport`; ``None``
+    otherwise.
+
 Each :class:`.LevelVerdict` carries a ``status``, a ``status_scope``
 (``absolute`` or ``observed_gap_scale``), an ``abs_err_est_GHz`` estimate, an
 optional ``eps_gap_est``, a ``truncation_channel`` (the physical source of the
 error, e.g. ``charge``), an ``estimator_method`` (how the estimate was obtained,
 e.g. ``one_step`` or ``ratio_test``), any ``warnings``, and an ``evidence``
 label.
+
+
+Derived quantities
+------------------
+
+By default the report covers the energy spectrum. Pass ``include_derived=True``
+together with ``derived_quantities`` to additionally assess any of
+``"wavefunctions"``, ``"matrix_elements"``, and ``"coherence"``; each comes back
+as its own :class:`.ConvergenceReport` under ``report.derived``::
+
+    report = tmon.estimate_convergence(
+        n_levels=5,
+        mode="verify",
+        target_abs_GHz=1e-4,
+        include_derived=True,
+        derived_quantities=["wavefunctions", "matrix_elements", "coherence"],
+    )
+    print(report.derived["wavefunctions"].aggregate_status)
+    print(report.derived["matrix_elements"].aggregate_status)
+    print(report.derived["coherence"].aggregate_status)
+
+These reuse the same refinement diagonalization as the energy check, so they add
+little cost, and they require ``mode='verify'`` or ``'strict'`` because a
+refinement comparison is needed. In each sub-report ``eps_gap_est`` holds the
+dimensionless change of the quantity between cutoffs.
+
+**Wavefunctions** -- per level, the overlap deficit (one minus the wavefunction
+overlap) for isolated levels, or the subspace angle for a near-degenerate
+cluster, which is robust to eigenvector rotations within the block.
+
+**Matrix elements** -- per level, the worst relative change of that level's
+matrix-element row and column across every operator named by
+``get_operator_names``. Because an operator weights the wavefunction, this can be
+a stricter test than the bare overlap: an unbounded operator such as the charge
+:math:`\hat n` amplifies a poorly-converged high-charge tail that the overlap
+barely notices.
+
+**Coherence** -- one verdict per noise channel (those returned by
+``effective_noise_channels``, plus the aggregate :math:`T_1` and :math:`T_2`
+rates), with the channel named in ``estimator_method``. Rates are compared first:
+a channel whose rate falls below the noise floor carries a ``noise_floor``
+warning instead of a lifetime claim.
 
 
 The evidence ladder
@@ -266,29 +311,10 @@ For a publication-grade check, demand the ratio test::
     print(report.per_level[0].evidence)   # 'calibrated' if asymptotic
 
 
-Current scope and what is coming
-================================
+Settings
+========
 
-This release implements the **energy** sub-channel for the :class:`.Transmon`.
-The framework is staged:
-
-* **Energies** (this release): verified-refinement convergence of the eigenvalue
-  spectrum, with quick / verify / strict modes.
-* **Wavefunctions and matrix elements** (planned): convergence of eigenvectors
-  and of operator matrix elements, using subspace comparisons for near-degenerate
-  clusters. These will be exposed through ``include_derived=True`` together with
-  ``derived_quantities=["wavefunctions", "matrix_elements"]``.
-* **Coherence estimates** (planned): convergence of :math:`T_1`, :math:`T_2`,
-  and the underlying noise rates -- rates compared first, lifetimes reported only
-  after the rate has converged.
-* **More qubits and custom circuits** (planned): the same API for all hard-coded
-  qubits and for user-defined :class:`.Circuit` objects.
-
-Requesting an unimplemented channel (for example ``include_derived=True`` in this
-release) raises a clear :class:`NotImplementedError` rather than returning a
-misleading result.
-
-The defaults that control the diagnostics (refinement step, cluster threshold,
-safety factor, gap floor, default mode) live in :mod:`scqubits.settings` under
-the ``CONVERGENCE_*`` names and can be adjusted globally; see the
-:ref:`guide-settings` section.
+The defaults that control the diagnostics -- refinement step, cluster threshold,
+safety factor, gap floor, rate floor, and default mode -- live in
+:mod:`scqubits.settings` under the ``CONVERGENCE_*`` names and can be adjusted
+globally; see the :ref:`guide-settings` section.
