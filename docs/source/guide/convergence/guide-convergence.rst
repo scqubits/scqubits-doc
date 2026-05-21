@@ -198,7 +198,8 @@ most useful fields are:
 Each :class:`.LevelVerdict` carries a ``status``, a ``status_scope``
 (``absolute`` or ``observed_gap_scale``), an ``abs_err_est_GHz`` estimate, an
 optional ``eps_gap_est``, a ``truncation_channel`` (the physical source of the
-error, e.g. ``charge``), an ``estimator_method`` (how the estimate was obtained,
+error, e.g. ``charge_tail`` or ``FD_stencil``), an ``estimator_method`` (how the
+estimate was obtained,
 e.g. ``one_step`` or ``ratio_test``), any ``warnings``, and an ``evidence``
 label.
 
