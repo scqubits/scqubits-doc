@@ -21,7 +21,7 @@ the cutoff I have chosen, how accurate is the result, and what should I do if it
 is not accurate enough?* The recommended way to get a trustworthy answer is
 **verified refinement**: scqubits re-runs your calculation at a larger cutoff and
 compares. Cheap estimates are also available for fast feedback, but they are
-labelled as such and are never presented as a substitute for an actual
+labeled as such and are never presented as a substitute for an actual
 comparison.
 
 .. note::
@@ -110,7 +110,7 @@ absolute energy, choose the observed-gap scope::
     )
 
 Here the per-level error is divided by the local spectral gap (the smaller of the
-gaps to the neighbouring levels), floored at ``g_floor_GHz`` (default
+gaps to the neighboring levels), floored at ``g_floor_GHz`` (default
 :math:`10^{-3}` GHz = 1 MHz) to avoid dividing by an accidentally tiny gap. The
 default relative target is :math:`10^{-3}`.
 
@@ -147,7 +147,7 @@ The ``mode`` argument trades cost for confidence.
     spectrum is in the asymptotic (geometrically converging) regime before
     trusting a tail-extrapolated error estimate. When the ratio test succeeds the
     evidence is upgraded to ``calibrated``; when it cannot confirm asymptotic
-    behaviour it falls back to the one-step ``verified_empirical`` estimate and
+    behavior it falls back to the one-step ``verified_empirical`` estimate and
     records a warning. Use it for publication-grade or automated workflows.
 
 ::
