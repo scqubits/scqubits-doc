@@ -27,10 +27,10 @@ labeled as such and are never presented as a substitute for an actual comparison
 
    Convergence diagnostics are available for :class:`.Transmon`,
    :class:`.TunableTransmon`, :class:`.Fluxonium`, :class:`.FluxQubit`,
-   :class:`.ZeroPi`, and :class:`.FullZeroPi`, covering the energy spectrum and --
-   on request -- the wavefunctions, matrix elements, and coherence rates. Coupled
-   :class:`.HilbertSpace` systems are supported as well (see
-   :ref:`guide_convergence_composite`). Calling ``estimate_convergence`` on a
+   :class:`.ZeroPi`, :class:`.FullZeroPi`, and :class:`.Cos2PhiQubit`, covering the
+   energy spectrum and -- on request -- the wavefunctions, matrix elements, and
+   coherence rates. Coupled :class:`.HilbertSpace` systems are supported as well
+   (see :ref:`guide_convergence_composite`). Calling ``estimate_convergence`` on a
    class that does not support it raises :class:`TypeError`.
 
 
