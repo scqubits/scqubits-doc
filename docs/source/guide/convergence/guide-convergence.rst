@@ -26,9 +26,9 @@ labeled as such and are never presented as a substitute for an actual comparison
 .. note::
 
    Convergence diagnostics are available for :class:`.Transmon`,
-   :class:`.TunableTransmon`, :class:`.Fluxonium`, :class:`.FluxQubit`, and
-   :class:`.ZeroPi`, covering the energy spectrum and -- on request -- the
-   wavefunctions, matrix elements, and coherence rates. Coupled
+   :class:`.TunableTransmon`, :class:`.Fluxonium`, :class:`.FluxQubit`,
+   :class:`.ZeroPi`, and :class:`.FullZeroPi`, covering the energy spectrum and --
+   on request -- the wavefunctions, matrix elements, and coherence rates. Coupled
    :class:`.HilbertSpace` systems are supported as well (see
    :ref:`guide_convergence_composite`). Calling ``estimate_convergence`` on a
    class that does not support it raises :class:`TypeError`.
@@ -687,6 +687,15 @@ itself set ``underconverged``.
 are authoritative. ``quick`` skips the composite re-diagonalization: it runs the
 hybridization screen and each subsystem's own quick check, and reports the
 composite truncation as verify-recommended (never an unqualified ``converged``).
+
+**FullZeroPi.** The hierarchical :class:`.FullZeroPi` -- an interior
+:class:`.ZeroPi` coupled to a zeta oscillator -- is checked the same two-layer
+way. Layer 1 delegates to the interior ZeroPi's own check (its phi grid box/
+spacing and theta charge cutoff, with the FD diagnostics above), attached under
+``report.derived["interior_zeropi"]``; layer 2 refines the coupling cutoffs
+``zeropi_cutoff`` (how many 0-pi levels enter the coupling, channel
+``composite_coupling``) and ``zeta_cutoff`` (the zeta Fock cutoff, channel
+``HO_tail``). Pass ``assume_inner_converged=True`` to skip the interior check.
 
 
 Settings
