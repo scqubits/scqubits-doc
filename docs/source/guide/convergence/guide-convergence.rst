@@ -31,7 +31,7 @@ labeled as such and are never presented as a substitute for an actual comparison
    energy spectrum and -- on request -- the wavefunctions, matrix elements, and
    coherence rates. Coupled :class:`.HilbertSpace` systems are supported as well
    (see :ref:`guide_convergence_composite`), as are custom :class:`.Circuit`
-   instances that are not hierarchically diagonalized (see
+   instances, including hierarchically diagonalized ones (see
    :ref:`guide_convergence_circuit`). Calling ``estimate_convergence`` on a class
    that does not support it raises :class:`TypeError`.
 
@@ -723,12 +723,20 @@ dominant channel names the cutoff to grow::
 As for the other multi-coordinate qubits, quick mode is verify-recommended (a
 coupled circuit basis has no clean cheap estimator).
 
+**Hierarchical diagonalization.** When the circuit is hierarchically diagonalized,
+the check is two-layer, like :class:`.HilbertSpace`: layer 2 refines each top-level
+subsystem's ``truncated_dim`` (channel ``composite_coupling``) and re-diagonalizes
+the dressed spectrum; layer 1 delegates to each subsystem's own
+``estimate_convergence`` (attached under ``report.derived["subsystem:<id>"]``, and
+skipped by ``assume_subsystems_converged=True``). The aggregate is the worse of the
+two layers. A *nested* hierarchically diagonalized subsystem is recorded as
+unchecked, to be verified separately.
+
 .. note::
 
-   Convergence checking for **hierarchically diagonalized** circuits is not yet
-   supported and raises :class:`NotImplementedError`. Either run the circuit
-   without hierarchical diagonalization (``system_hierarchy=None``), or check the
-   individual leaf subsystems via ``circuit.subsystems[i].estimate_convergence(...)``.
+   A circuit returns at most ``truncated_dim`` eigenvalues, so ``n_levels`` (plus
+   one buffer level in the observed-gap scope) must not exceed ``truncated_dim``;
+   otherwise ``estimate_convergence`` raises :class:`ValueError`.
 
 
 Settings
