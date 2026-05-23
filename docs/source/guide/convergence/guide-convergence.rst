@@ -28,9 +28,10 @@ labeled as such and are never presented as a substitute for an actual comparison
    Convergence diagnostics are available for :class:`.Transmon`,
    :class:`.TunableTransmon`, :class:`.Fluxonium`, :class:`.FluxQubit`, and
    :class:`.ZeroPi`, covering the energy spectrum and -- on request -- the
-   wavefunctions, matrix elements, and coherence rates. Calling
-   ``estimate_convergence`` on a qubit class that does not support it raises
-   :class:`TypeError`.
+   wavefunctions, matrix elements, and coherence rates. Coupled
+   :class:`.HilbertSpace` systems are supported as well (see
+   :ref:`guide_convergence_composite`). Calling ``estimate_convergence`` on a
+   class that does not support it raises :class:`TypeError`.
 
 
 The basic workflow
@@ -600,6 +601,92 @@ For a publication-grade check, demand the asymptoticity test::
 which prints::
 
     verified_empirical
+
+
+.. _guide_convergence_composite:
+
+Coupled subsystems (HilbertSpace)
+=================================
+
+A :class:`.HilbertSpace` truncates in **two layers**, and
+``hs.estimate_convergence(...)`` checks both:
+
+* **Layer 1 -- subsystem-internal.** Each subsystem carries its own basis cutoff
+  (``ncut``, ``cutoff``, a grid). Every capable subsystem is checked with its own
+  :meth:`~.ConvergenceCheckable.estimate_convergence` -- at ``truncated_dim`` plus
+  the refinement reach, so the extra levels a composite refinement pulls in are
+  themselves verified -- and the per-subsystem report is attached under
+  ``report.derived["subsystem:<id>"]``. Oscillators have no internal cutoff and
+  are skipped. Pass ``assume_subsystems_converged=True`` to skip this layer when
+  subsystem convergence has been established separately.
+
+* **Layer 2 -- composite truncation.** Each subsystem's ``truncated_dim`` sets how
+  many of its levels enter the product space. This is verified by refining one
+  ``truncated_dim`` at a time, re-diagonalizing the *whole* composite, and
+  comparing cluster-matched spectra -- a single composite refinement that counts
+  subsystem and coupling leakage exactly once, rather than double-counting a
+  per-subsystem leakage plus a separate coupling term. The channel is
+  ``composite_coupling`` and the dominant subsystem is the one to grow.
+
+The ``aggregate_status`` is the worst of the composite verdict and every
+subsystem verdict: the composite cannot be more converged than its parts.
+
+::
+
+    import scqubits as scq
+
+    tmon = scq.Transmon(EJ=20.0, EC=0.3, ng=0.0, ncut=31, truncated_dim=3)
+    osc = scq.Oscillator(E_osc=5.0, truncated_dim=3)
+    hs = scq.HilbertSpace([tmon, osc])
+    hs.add_interaction(
+        g=0.6, op1=tmon.n_operator, op2=osc.creation_operator, add_hc=True
+    )
+
+    report = hs.estimate_convergence(n_levels=3, mode="verify", target_abs_GHz=1e-5)
+    print(report)
+
+With the resonator truncated to only three levels the composite is
+underconverged. The report names the subsystem to grow, flags the near-resonance,
+and attaches the (converged) subsystem report underneath::
+
+    aggregate: underconverged   (worst level: 0)
+      level 0: underconverged   evidence=verified_empirical channel=composite_coupling abs_err=1.14e-04  eps_gap=  -    via one_step
+      level 1: underconverged   evidence=verified_empirical channel=composite_coupling abs_err=4.86e-03  eps_gap=  -    via one_step
+      level 2: underconverged   evidence=verified_empirical channel=composite_coupling abs_err=3.17e-03  eps_gap=  -    via one_step
+      channel_breakdown_GHz: {'composite_coupling': '6.43e-03'}
+      recommendation: composite truncation dominates: increase truncated_dim of 'Oscillator_1' from 3 to at least 5 and re-run (it sets how many of that subsystem's levels enter the product space)
+      recommendation: hybridization screen: near-resonant coupling (eta ~= 1.1) between bare product states of 'Transmon_1' and 'Oscillator_1'; product-state labels are unreliable -- rely on cluster-safe matching and full composite refinement
+      derived [subsystem:Transmon_1]:
+        aggregate: converged   (worst level: 0)
+          level 0: converged        evidence=verified_empirical channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
+          level 1: converged        evidence=verified_empirical channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
+          level 2: converged        evidence=verified_empirical channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
+          level 3: converged        evidence=verified_empirical channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
+          level 4: converged        evidence=verified_empirical channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
+          channel_breakdown_GHz: {'charge_tail': '2.47e-13'}
+
+Raising the resonator (and transmon) ``truncated_dim`` -- here to 8 -- reaches
+``converged``.
+
+**Hybridization screen.** When subsystems are coupled near resonance, the bare
+product-state labels :math:`|a,b\rangle` mix strongly. For each two-body
+interaction :math:`g\,A\otimes B` the report computes a dimensionless
+hybridization parameter
+
+.. math::
+
+   \eta_{ab\to a'b'} = \frac{|g|\,|\langle a'|A|a\rangle|\,|\langle b'|B|b\rangle|}
+        {\max\{|(E_a+E_b)-(E_{a'}+E_{b'})|,\ g_{\rm floor}\}},
+
+and warns when it is large (as above). A large :math:`\eta` means the product
+labels are unreliable, so levels are matched as clusters rather than by index; it
+is a labeling diagnostic, **not** a truncation-error estimate, and does not by
+itself set ``underconverged``.
+
+**Modes.** ``verify`` and ``strict`` perform the full composite refinement and
+are authoritative. ``quick`` skips the composite re-diagonalization: it runs the
+hybridization screen and each subsystem's own quick check, and reports the
+composite truncation as verify-recommended (never an unqualified ``converged``).
 
 
 Settings
