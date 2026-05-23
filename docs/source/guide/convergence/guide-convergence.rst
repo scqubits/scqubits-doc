@@ -30,8 +30,10 @@ labeled as such and are never presented as a substitute for an actual comparison
    :class:`.ZeroPi`, :class:`.FullZeroPi`, and :class:`.Cos2PhiQubit`, covering the
    energy spectrum and -- on request -- the wavefunctions, matrix elements, and
    coherence rates. Coupled :class:`.HilbertSpace` systems are supported as well
-   (see :ref:`guide_convergence_composite`). Calling ``estimate_convergence`` on a
-   class that does not support it raises :class:`TypeError`.
+   (see :ref:`guide_convergence_composite`), as are custom :class:`.Circuit`
+   instances that are not hierarchically diagonalized (see
+   :ref:`guide_convergence_circuit`). Calling ``estimate_convergence`` on a class
+   that does not support it raises :class:`TypeError`.
 
 
 The basic workflow
@@ -696,6 +698,37 @@ spacing and theta charge cutoff, with the FD diagnostics above), attached under
 ``zeropi_cutoff`` (how many 0-pi levels enter the coupling, channel
 ``composite_coupling``) and ``zeta_cutoff`` (the zeta Fock cutoff, channel
 ``HO_tail``). Pass ``assume_inner_converged=True`` to skip the interior check.
+
+
+.. _guide_convergence_circuit:
+
+Custom circuits
+===============
+
+For a custom :class:`.Circuit` that is **not** hierarchically diagonalized, the
+Hilbert space is a single product of the per-variable bases, and the refinement
+axes are the variable cutoffs (``self.cutoff_names``): a periodic variable's charge
+cutoff ``cutoff_n_<i>`` (channel ``charge_tail``) and an extended variable's cutoff
+``cutoff_ext_<i>`` (``FD_stencil`` for a discretized variable -- a finite-difference
+grid, verified by Richardson extrapolation in strict mode -- or ``HO_tail`` for a
+harmonic one). Each cutoff is refined and the spectrum re-diagonalized; the
+dominant channel names the cutoff to grow::
+
+    import scqubits as scq
+
+    circ = scq.Circuit(yaml_string, from_file=False, ext_basis="discretized")
+    report = circ.estimate_convergence(n_levels=4, mode="verify", target_abs_GHz=1e-4)
+    print(report)
+
+As for the other multi-coordinate qubits, quick mode is verify-recommended (a
+coupled circuit basis has no clean cheap estimator).
+
+.. note::
+
+   Convergence checking for **hierarchically diagonalized** circuits is not yet
+   supported and raises :class:`NotImplementedError`. Either run the circuit
+   without hierarchical diagonalization (``system_hierarchy=None``), or check the
+   individual leaf subsystems via ``circuit.subsystems[i].estimate_convergence(...)``.
 
 
 Settings
