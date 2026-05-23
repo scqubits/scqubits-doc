@@ -542,6 +542,37 @@ including both endpoints, the usual worst case; ``sample=None`` checks every
 value), restores the swept parameter afterward, and returns a
 :class:`.ParamSweepConvergence` holding every per-point report and the worst case.
 
+For a precomputed :class:`.ParameterSweep` -- which sweeps a coupled
+:class:`.HilbertSpace` over an N-dimensional grid through an
+``update_hilbertspace`` callback -- call
+:meth:`~.ParameterSweep.estimate_convergence` instead. It applies the callback at
+sampled grid points (the grid corners first, then evenly-spread interior points up
+to ``sample``; ``sample=None`` checks every point), runs the composite
+:meth:`~.HilbertSpace.estimate_convergence` at each, restores the sweep, and
+returns a :class:`.ParameterSweepConvergence`::
+
+    sweep = scq.ParameterSweep(
+        hs, {"flux": np.linspace(0.0, 0.5, 21)}, update_hilbertspace
+    )
+    result = sweep.estimate_convergence(n_levels=4, mode="verify", target_abs_GHz=1e-4)
+    print(result)
+
+::
+
+    convergence across sweep of (flux) (5 points): worst = underconverged at flux=0
+      flux=0: underconverged  <-- worst
+      flux=0.5: marginal
+      flux=0.25: marginal
+      flux=0.175: marginal
+      flux=0.325: marginal
+
+Each point is a parameter-name-to-value mapping, so multi-parameter sweeps are
+reported by their full coordinates; ``result.worst_point()`` and
+``result.worst_report()`` give the least-trustworthy grid point and its full
+report. Unlike the single-object helper above, this honors the sweep's
+``update_hilbertspace`` callback (which may set several coupled parameters at once)
+and handles grids over more than one parameter.
+
 
 A complete example
 ==================
