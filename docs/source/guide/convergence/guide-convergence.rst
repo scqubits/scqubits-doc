@@ -17,11 +17,20 @@ as that truncation allows. If the cutoff is too small, results are silently
 wrong; if it is far too large, calculations are needlessly slow.
 
 The convergence-diagnostics framework answers a single practical question: *for
-the cutoff I have chosen, how accurate is the result, and what should I do if it
-is not accurate enough?* The recommended way to get a trustworthy answer is
-**verified refinement**: scqubits re-runs your calculation at a larger cutoff and
-compares. Cheap estimates are also available for fast feedback, but they are
-labeled as such and are never presented as a substitute for an actual comparison.
+the cutoff I have chosen, is the result trustworthy, and what should I do if it
+is not?*
+
+**A convergence test can only ever dismiss convergence.** This is the central
+idea, and it shapes every verdict the framework returns. A test refines the
+cutoff and looks for the spectrum still moving, for an eigenstate spilling over
+the basis boundary, for a refinement series that refuses to contract. When it
+finds one of these, it has *caught a clearly-wrong result* -- a strong, useful,
+negative statement. When it finds none of them, all it can honestly say is *"I
+failed to dismiss this"*; that is never a proof that the true error is small. A
+more rigorous mode simply applies sharper dismissal tests, so a result that
+survives it has survived more. The most actionable signal the framework can give
+you is therefore a ``distrust`` verdict: it means a check actively caught a
+result you should not rely on at the current cutoff.
 
 .. note::
 
@@ -33,13 +42,49 @@ labeled as such and are never presented as a substitute for an actual comparison
    (see :ref:`guide_convergence_composite`), as are custom :class:`.Circuit`
    instances, including hierarchically diagonalized ones (see
    :ref:`guide_convergence_circuit`). Calling ``estimate_convergence`` on a class
-   that does not support it raises :class:`TypeError`.
+   that does not support it raises :class:`TypeError` -- ``<Class> does not
+   support convergence checking; it must subclass ConvergenceCheckable.``
+
+
+The verdict ladder
+==================
+
+Every level is assigned one verdict from a single ladder, ordered best to worst:
+
+``likely_converged``
+    Passed the ``strict`` two-step ratio/asymptoticity test -- the strongest
+    statement the framework makes, and still not an outright guarantee.
+
+``maybe_converged``
+    Passed the ``moderate`` one-step refinement check: a larger cutoff was tried
+    and the spectrum did not move appreciably.
+
+``marginal``
+    The estimated error sits close to the requested target -- a borderline
+    result that may or may not meet your needs.
+
+``unverified``
+    Neither dismissed nor verified: a ``cheap`` pass, or a level that could not
+    be assessed (for example, no target was supplied).
+
+``distrust``
+    A test *actively dismissed* convergence. The result is not trustworthy at
+    this cutoff. This includes the strict-mode ratio test failing
+    (:math:`R \ge 1`) and a kept eigenstate reaching the basis boundary.
+
+Read these the right way round. ``likely_converged`` and ``maybe_converged``
+both mean *"we failed to dismiss this level"*, with the former having survived a
+harder test; neither is a certificate. ``distrust`` is the one verdict that
+states a fact with confidence -- we caught a result you should not use as is.
+
+The verdict name carries the confidence directly; there is no separate evidence
+field to consult.
 
 
 The basic workflow
 ==================
 
-Achieving a converged result is a short loop: estimate, read the verdict, and --
+Reaching a trustworthy result is a short loop: estimate, read the verdict, and --
 if necessary -- increase the cutoff and repeat.
 
 1. **Build the qubit** at an initial cutoff::
@@ -58,36 +103,38 @@ if necessary -- increase the cutoff and repeat.
 3. **Read the verdict.** The report prints itself::
 
        print(report)                  # human-readable summary of every level
-       print(report.aggregate_status) # e.g. 'converged'
+       print(report.aggregate_status) # e.g. 'maybe_converged'
        worst = report.level(report.worst_level)   # the driving level's verdict
 
    For the ``ncut=31`` transmon above, ``print(report)`` produces::
 
-       aggregate: converged   (worst level: 0)
-         level 0: converged        evidence=verified_empirical channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
-         level 1: converged        evidence=verified_empirical channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
-         level 2: converged        evidence=verified_empirical channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
-         level 3: converged        evidence=verified_empirical channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
-         level 4: converged        evidence=verified_empirical channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
+       aggregate: maybe_converged   (worst level: 0)
+         level 0: maybe_converged  channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
+         level 1: maybe_converged  channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
+         level 2: maybe_converged  channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
+         level 3: maybe_converged  channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
+         level 4: maybe_converged  channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
          channel_breakdown_GHz: {'charge_tail': '2.47e-13'}
 
-   Every estimated error sits far below the ``1e-4`` GHz target, so each level is
-   ``converged`` -- ``ncut=31`` is in fact more than enough for these parameters.
-   (Exact digits depend on the platform and diagonalization backend.)
+   Every estimated error sits far below the ``1e-4`` GHz target and the default
+   moderate refinement found no movement, so each level is ``maybe_converged``:
+   ``ncut=31`` was not dismissed for these parameters. (Exact digits depend on
+   the platform and diagonalization backend.)
 
-4. **Act on the recommendation.** When a result is not converged, the printed
-   report (above) ends with a plain-language fix for each problem channel. For an
-   under-resolved transmon it reads::
+4. **Act on the recommendation.** When a level is dismissed, the printed report
+   ends with a plain-language fix for each problem channel. For an under-resolved
+   transmon it reads::
 
        recommendation: charge-basis tail dominates: increase ncut from 6 to at least 10 (charge cutoff) and re-run
 
    The same lines are also available as a list of strings in
    ``report.recommendations``. Apply the suggested change and repeat from step 2;
-   a typical loop converges in one or two iterations.
+   a typical loop settles in one or two iterations.
 
-The default mode (``mode='verify'``) performs one extra diagonalization at a
-larger cutoff and compares the two spectra level by level. This is the
-recommended setting for any result you intend to publish or rely on.
+The default mode (``mode='moderate'``) performs one extra diagonalization at a
+larger cutoff and compares the two spectra level by level. It is the recommended
+setting: cheap enough for routine use, and it actually tries a larger cutoff
+rather than reasoning about one.
 
 
 Notation
@@ -97,9 +144,8 @@ Let :math:`N` be the cutoff parameter and :math:`E_{k,N}` the :math:`k`-th
 computed eigenvalue. The (unknown) true error of a level is
 :math:`\Delta E_{k,N} = |E_{k,N} - E_k|`; every diagnostic reports an *estimate*
 :math:`\widehat{\mathrm{err}}_{k,N} \approx \Delta E_{k,N}`, never the true error
-itself, and attaches an evidence label saying how the estimate was obtained. A
-refinement bumps the cutoff to :math:`N_1 > N_0` (and, in strict mode, a second
-:math:`N_2 > N_1`); the per-level refinement differences are
+itself. A refinement bumps the cutoff to :math:`N_1 > N_0` (and, in strict mode,
+a second :math:`N_2 > N_1`); the per-level refinement differences are
 
 .. math::
 
@@ -116,20 +162,26 @@ Setting a target
 A convergence verdict only means something relative to a target accuracy. In the
 default **absolute** scope you say how accurate you need the energies to be, in
 GHz, via ``target_abs_GHz`` :math:`\equiv \Delta_\star`. With
-:math:`\widehat{\mathrm{err}}_{k}` the per-level estimate the status is
+:math:`\widehat{\mathrm{err}}_{k}` the per-level estimate, before the mode
+ceiling is applied (see below), the verdict is
 
 .. math::
 
    \begin{aligned}
-   \widehat{\mathrm{err}}_{k} < \Delta_\star &\;\Rightarrow\; \texttt{converged}, \\
+   \widehat{\mathrm{err}}_{k} < \Delta_\star &\;\Rightarrow\; \texttt{(pass)}, \\
    \Delta_\star \le \widehat{\mathrm{err}}_{k} < 10\,\Delta_\star &\;\Rightarrow\; \texttt{marginal}, \\
-   \widehat{\mathrm{err}}_{k} \ge 10\,\Delta_\star &\;\Rightarrow\; \texttt{underconverged}.
+   \widehat{\mathrm{err}}_{k} \ge 10\,\Delta_\star &\;\Rightarrow\; \texttt{distrust}.
    \end{aligned}
+
+A pass is then capped at the best verdict the mode is entitled to claim --
+``maybe_converged`` for moderate, ``likely_converged`` for strict (see
+:ref:`guide_convergence_modes`). A ``marginal`` or ``distrust`` dismissal is
+never softened or raised.
 
 If you omit ``target_abs_GHz``, scqubits still computes and reports the per-level
 estimate ``abs_err_est_GHz``, but it does not convert that into a pass/fail
-status -- the status is ``unverified`` and a recommendation reminds you to supply
-a target.
+verdict -- the verdict is ``unverified`` and a recommendation reminds you to
+supply a target.
 
 If you care about error *relative to the qubit's own spectrum* rather than an
 absolute energy, choose the observed-gap scope::
@@ -164,39 +216,45 @@ level carries an ``upper_gap_unavailable`` warning.
    is deliberately not used as a reporting denominator.
 
 
+.. _guide_convergence_modes:
+
 Choosing a mode
 ===============
 
-The ``mode`` argument trades cost for confidence; the next section gives the
-estimator equations behind each.
+The ``mode`` argument trades cost for the rigor of the dismissal test. Because a
+test can only dismiss convergence -- never prove it -- each mode also **caps** the
+best verdict it can return: a stronger claim demands more work. The next section
+gives the estimator equations behind each.
 
-``mode='quick'``
-    A cheap per-level estimate with **no extra diagonalization**, computed from
+``mode='cheap'``
+    Cheap per-level diagnostics with **no extra diagonalization**, computed from
     the eigenvectors you already have (the charge finite-tail estimate for charge
-    bases, the harmonic-oscillator finite-window estimate for fluxonium). It
-    carries ``perturbative`` evidence and never returns an unqualified
-    ``converged``: the best status it assigns is ``likely_converged``. Use it for
-    rapid feedback while exploring parameters.
+    bases, the harmonic-oscillator finite-window estimate for fluxonium). It can
+    still *dismiss* a level -- a kept state reaching the basis boundary is caught
+    here -- but a level it fails to dismiss earns at best ``unverified``: cheap
+    mode makes no verification claim. Use it for rapid feedback while exploring
+    parameters.
 
-``mode='verify'`` (default)
+``mode='moderate'`` (default)
     One refinement diagonalization at a larger cutoff, compared against the
     current one -- an actual measurement of how much the spectrum is still
-    changing. Evidence is ``verified_empirical``.
+    moving. A level it fails to dismiss caps at ``maybe_converged``.
 
 ``mode='strict'``
     Two refinement diagonalizations, used to run an asymptoticity test (a
     geometric ratio test, or Richardson extrapolation for finite-difference
     grids) before trusting a tail-extrapolated error estimate. A level that
-    passes is ``verified_empirical``; one whose refinement differences are not shrinking is
-    reported ``underconverged`` rather than softened to ``marginal``.
+    passes caps at ``likely_converged`` -- the strongest verdict available; a
+    level whose refinement differences are not shrinking (:math:`R \ge 1`) is
+    dismissed to ``distrust`` rather than softened to ``marginal``.
 
 ::
 
-    quick   = tmon.estimate_convergence(n_levels=5, mode="quick")
-    verify  = tmon.estimate_convergence(n_levels=5, mode="verify",
-                                        target_abs_GHz=1e-4)
-    strict  = tmon.estimate_convergence(n_levels=5, mode="strict",
-                                        target_abs_GHz=1e-4)
+    cheap    = tmon.estimate_convergence(n_levels=5, mode="cheap")
+    moderate = tmon.estimate_convergence(n_levels=5, mode="moderate",
+                                         target_abs_GHz=1e-4)
+    strict   = tmon.estimate_convergence(n_levels=5, mode="strict",
+                                         target_abs_GHz=1e-4)
 
 
 How each check works
@@ -204,23 +262,24 @@ How each check works
 
 This section gives the estimator used by each mode and truncation channel,
 together with its equation. Every estimate is empirical or perturbative; none is
-a theorem-level bound.
+a theorem-level bound, and a passing estimate is always a failure to dismiss
+rather than a guarantee.
 
 Refinement estimators (energies)
 --------------------------------
 
-**One-step (verify mode).** The estimate is the safety-scaled one-step refinement
-difference,
+**One-step (moderate mode).** The estimate is the safety-scaled one-step
+refinement difference,
 
 .. math::
 
    \widehat{\mathrm{err}}_{k} = S\, d_{0,k},
 
-reported as ``verified_empirical``: a direct measurement of how the spectrum
-responds to a larger cutoff, scaled by the conservative safety factor :math:`S`.
-This is an observed refinement difference, not a proof that the sequence has
-reached its asymptotic regime -- for that, use ``mode='strict'``, which adds a
-second refinement and tests whether the refinement differences are contracting.
+a direct measurement of how the spectrum responds to a larger cutoff, scaled by
+the conservative safety factor :math:`S`. This is an observed refinement
+difference, not a proof that the sequence has reached its asymptotic regime --
+for that, use ``mode='strict'``, which adds a second refinement and tests whether
+the refinement differences are contracting.
 
 **Two-step geometric ratio test (strict mode, charge / HO channels).** With both
 refinement differences available, the per-level ratio and geometric-tail estimate are
@@ -231,10 +290,10 @@ refinement differences available, the per-level ratio and geometric-tail estimat
    \widehat{\mathrm{err}}_{k} = \frac{d_{0,k}}{1 - R_k}\quad (R_k < 1).
 
 A cluster with :math:`R_k < 1` is in the asymptotic regime and the geometric tail
-is reported as ``verified_empirical``. If :math:`R_k \ge 1` on a non-negligible
-refinement difference the series is not contracting: the level is forced to
-``underconverged`` (evidence ``unverified``) rather than ``marginal``, and carries
-a ``ratio_test_not_asymptotic`` warning.
+is reported (capped at ``likely_converged`` for a passing level). If
+:math:`R_k \ge 1` on a non-negligible refinement difference the series is not
+contracting: the level is dismissed to ``distrust`` rather than ``marginal``, and
+carries a ``ratio_test_not_asymptotic`` warning.
 
 **Richardson extrapolation (strict mode, finite-difference stencil).** For an FD
 grid the discretization error scales as :math:`h^p` with spacing
@@ -248,9 +307,9 @@ model-predicted refinement-difference ratio are
    \widehat{\mathrm{err}}_{k} = \frac{d_{0,k}}{1 - g_1/g_0}, \qquad
    \rho_{\rm expected} = \frac{g_1 - g_2}{g_0 - g_1}.
 
-The level is asymptotic (and the estimate ``verified_empirical``) when the
-observed ratio :math:`d_{1,k}/d_{0,k}` matches :math:`\rho_{\rm expected}` to
-within a relative tolerance; otherwise it falls back to the one-step bound.
+The level is asymptotic when the observed ratio :math:`d_{1,k}/d_{0,k}` matches
+:math:`\rho_{\rm expected}` to within a relative tolerance; otherwise it falls
+back to the one-step estimate.
 
 .. note::
 
@@ -277,7 +336,7 @@ of the largest principal angle,
 
 which is robust to eigenvector rotations within the block.
 
-Cheap estimators (quick mode)
+Cheap estimators (cheap mode)
 -----------------------------
 
 **Charge finite tail (Transmon and TunableTransmon).** For a one-dimensional
@@ -296,15 +355,15 @@ where :math:`T^{(d)}` is the depth-:math:`d` tridiagonal block of the dropped
 tail (diagonal :math:`4E_C(n-n_g)^2`, hopping :math:`-E_J/2`); :math:`d` is grown
 until the estimate stabilizes. At :math:`d=1` this reduces to the familiar
 boundary-denominator estimate with denominators
-:math:`4E_C(n_{\rm cut}+1\mp n_g)^2 - E_{k}`. The estimate is reported as
-``perturbative``. It is reliable only when the tail is perturbative: if a tail
-eigenvalue lies at or below :math:`E_k` the level is ``unverified``, and if the
-boundary probability :math:`|c_{R,k}|^2+|c_{L,k}|^2` is large the level is
-``underconverged`` with a ``boundary_probability_large`` warning regardless of
-the estimate. A multi-dimensional charge basis (such as :class:`.FluxQubit`,
-which has several boundary faces and a coupling structure not captured by the 1D
-formula) does not use this estimator; its quick mode falls back to a boundary
-diagnostic and it is verify-recommended.
+:math:`4E_C(n_{\rm cut}+1\mp n_g)^2 - E_{k}`. It is reliable only when the tail
+is perturbative: if a tail eigenvalue lies at or below :math:`E_k` the level is
+``unverified``, and if the boundary probability :math:`|c_{R,k}|^2+|c_{L,k}|^2`
+is large the level is dismissed to ``distrust`` with a
+``boundary_probability_large`` warning regardless of the estimate. A
+multi-dimensional charge basis (such as :class:`.FluxQubit`, which has several
+boundary faces and a coupling structure not captured by the 1D formula) does not
+use this estimator; its cheap mode falls back to a boundary diagnostic and it is
+moderate-recommended.
 
 **Harmonic-oscillator finite window (fluxonium).** The cosine is not banded in
 the oscillator basis, so the dropped-space residual must use the full kept
@@ -321,18 +380,19 @@ extended Fock basis (the LC term is diagonal and does not couple kept to
 dropped). A further dropped band gives the omitted-residual norm
 :math:`\rho_{\rm tail} = \sum_{m \ge N+d} |(r_W)_m|^2`; if it is not small
 compared with :math:`\|r_W\|^2`, or a window state is near-resonant with
-:math:`E_k`, the estimate is flagged unreliable. The result is a ``perturbative``
+:math:`E_k`, the estimate is flagged unreliable. The result is a perturbative
 estimate with an omitted-tail diagnostic, **not a bound** -- a finite dropped
 window omits both the far-dropped residual and the Schur self-energy of the rest
 of the dropped space, so it is not sign-definite. If :math:`\rho_{\rm tail}` is
-not small the level is reported ``unverified`` in quick mode; verify mode remains
-authoritative.
+not small the level is reported ``unverified`` in cheap mode; moderate mode
+remains authoritative.
 
 Finite-difference grids: two channels
 -------------------------------------
 
-A finite-difference coordinate on a box :math:`[-L,L]` with spacing :math:`h` has
-**two independent error channels** that require different tests.
+A discretized (finite-difference) extended variable on a box :math:`[-L,L]` with
+spacing :math:`h` has **two independent truncation channels** that require
+different tests, and a check must verify both.
 
 * **Finite box** (``FD_box``). A small endpoint amplitude is not a bound on the
   error from the wall at :math:`\pm L`. The cheap diagnostic is the edge-band
@@ -346,9 +406,9 @@ A finite-difference coordinate on a box :math:`[-L,L]` with spacing :math:`h` ha
                      + \sum_{i=N_{\rm grid}-q}^{N_{\rm grid}-1} |c_{i,k}|^2 .
 
   A large :math:`P_{\rm edge}` is a reliable warning that the box is too small.
-  The box is *verified* by an expanded-box calculation at comparable spacing
-  (increase :math:`L`, hold :math:`h`); increasing the number of grid points at
-  fixed :math:`L` does not fix a box error.
+  The box is verified by an expanded-box calculation at comparable spacing
+  (increase :math:`L`, hold :math:`h`); adding grid points at fixed :math:`L`
+  cannot fix a box error.
 
 * **Finite spacing** (``FD_stencil``). At fixed box, stencil error is tested by
   grid refinement and the Richardson estimate above.
@@ -362,13 +422,13 @@ Multi-coordinate qubits (composite)
 
 When several truncation channels contribute, their absolute estimates are
 combined by the triangle inequality, and the *sum* (not the maximum) sets the
-status:
+verdict:
 
 .. math::
 
    \widehat{\mathrm{err}}^{\rm total}_{k} \le \sum_c \widehat{\mathrm{err}}^{(c)}_{k}.
 
-The per-level ``truncation_channel`` is then ``composite_coupling``, while
+The per-level ``truncation_channel`` is then the dominant physical channel, while
 ``channel_breakdown_GHz`` retains the per-channel contributions for display.
 
 Transition frequencies
@@ -390,16 +450,17 @@ calling :meth:`~.ConvergenceReport.summary`) gives a readable rundown; the field
 are also available programmatically:
 
 ``aggregate_status``
-    The overall verdict, equal to the worst per-level status: ``converged``,
-    ``likely_converged``, ``marginal``, ``underconverged``, or ``unverified``.
+    The overall verdict, equal to the worst per-level verdict on the ladder:
+    ``likely_converged``, ``maybe_converged``, ``marginal``, ``unverified``, or
+    ``distrust``.
 
 ``per_level`` / :meth:`~.ConvergenceReport.level`
     A list of :class:`.LevelVerdict`, one per requested level;
-    ``report.level(k)`` looks one up by level index. A failure of a high-lying
-    level never hides the convergence of the lower levels.
+    ``report.level(k)`` looks one up by level index. A dismissed high-lying
+    level never hides the standing of the lower levels.
 
 ``worst_level``
-    The index of the level that determined the aggregate status;
+    The index of the level that determined the aggregate verdict;
     ``report.level(report.worst_level)`` retrieves it.
 
 ``channel_breakdown_GHz``
@@ -421,13 +482,13 @@ are also available programmatically:
     When derived quantities are requested, a mapping from each name to its own
     :class:`.ConvergenceReport`; ``None`` otherwise.
 
-Each :class:`.LevelVerdict` carries a ``status``, a ``status_scope``
+Each :class:`.LevelVerdict` carries a ``status`` (the verdict), a ``status_scope``
 (``absolute`` or ``observed_gap_scale``), an ``abs_err_est_GHz`` estimate, an
 optional ``eps_gap_est``, the ``transition_err_est_GHz`` map, a
 ``truncation_channel`` (``charge_tail``, ``HO_tail``, ``FD_box``, ``FD_stencil``,
 or ``composite_coupling``), an ``estimator_method`` (e.g. ``one_step``,
-``ratio_test``, ``finite_tail_resolvent``), any ``warnings``, and an ``evidence``
-label.
+``ratio_test``, ``finite_tail_resolvent``), and any ``warnings``. The verdict
+name itself records the confidence -- there is no separate evidence field.
 
 
 Derived quantities
@@ -437,10 +498,10 @@ By default the report covers the energy spectrum. Pass ``include_derived=True``
 together with ``derived_quantities`` to additionally assess any of
 ``"wavefunctions"``, ``"matrix_elements"``, and ``"coherence"``; each comes back
 as its own :class:`.ConvergenceReport` under ``report.derived`` and requires
-``mode='verify'`` or ``'strict'`` (a refinement comparison is needed)::
+``mode='moderate'`` or ``'strict'`` (a refinement comparison is needed)::
 
     report = tmon.estimate_convergence(
-        n_levels=5, mode="verify", target_abs_GHz=1e-4,
+        n_levels=5, mode="moderate", target_abs_GHz=1e-4,
         include_derived=True,
         derived_quantities=["wavefunctions", "matrix_elements", "coherence"],
     )
@@ -450,7 +511,7 @@ Eigenvectors and matrix elements can converge more slowly than eigenvalues
 (Davis--Kahan: an isolated level's eigenvector angle scales like
 :math:`\|r_k\|/\delta_k`, linear in the residual, while the Kato--Temple
 eigenvalue error is quadratic). Each derived sub-report stores the dimensionless
-change of the quantity in ``eps_gap_est``.
+change of the quantity in ``rel_change_est``.
 
 **Wavefunctions** -- the overlap deficit :math:`1 - |\langle\psi_{N_0,k}|
 \psi_{N_1,k}\rangle|` for an isolated level, or the cluster subspace angle
@@ -473,35 +534,6 @@ and a channel whose rate falls below ``CONVERGENCE_RATE_FLOOR_HZ`` carries a
 ``noise_floor`` warning instead of a lifetime claim.
 
 
-The evidence ladder
--------------------
-
-Every numerical conclusion is tagged with an ``evidence`` label so that you can
-tell a refinement-verified result from a cheap heuristic at a glance. From
-strongest to weakest:
-
-``verified_empirical``
-    A refinement or cross-check with a ratio/asymptoticity/stability test --
-    what ``mode='verify'`` and a successful ``mode='strict'`` ratio test produce.
-    This is the strongest label; ``converged`` requires it.
-
-``perturbative``
-    A perturbation-theory or resolvent estimate with unverified runtime
-    hypotheses -- what ``mode='quick'`` produces for the charge and oscillator
-    tails.
-
-``diagnostic``
-    A signal of possible trouble, not a measurement of the error -- the
-    quick-mode fallback when no cheap estimator is available.
-
-``unverified``
-    Inputs unavailable, assumptions failed, or no target supplied.
-
-The guiding principle is conservative: a cheap signal is never silently promoted
-to a strong claim. ``converged`` is reserved for results backed by
-``verified_empirical`` evidence.
-
-
 Convergence across a parameter sweep
 ====================================
 
@@ -519,7 +551,7 @@ worst case::
     sweep = fluxonium.estimate_convergence_vs_paramvals(
         "flux", flux_vals, sample=5, n_levels=5, target_abs_GHz=1e-4
     )
-    print(sweep)                    # per-point status, worst marked
+    print(sweep)                    # per-point verdict, worst marked
     print(sweep.worst_param_val())  # the value where the cutoff is least trusted
     worst = sweep.worst_report()    # the full ConvergenceReport there
 
@@ -528,9 +560,9 @@ approaches the half-flux point, so ``print(sweep)`` shows a verdict that varies
 across the range::
 
     convergence vs flux (5 points): worst = marginal at flux=0.375
-      flux=0          converged
-      flux=0.125      converged
-      flux=0.25       converged
+      flux=0          maybe_converged
+      flux=0.125      maybe_converged
+      flux=0.25       maybe_converged
       flux=0.375      marginal  <-- worst
       flux=0.5        marginal
 
@@ -551,20 +583,38 @@ to ``sample``; ``sample=None`` checks every point), runs the composite
 :meth:`~.HilbertSpace.estimate_convergence` at each, restores the sweep, and
 returns a :class:`.ParameterSweepConvergence`::
 
+    import numpy as np
+
+    qbt = scq.TunableTransmon(
+        EJmax=30.0, EC=0.3, d=0.1, flux=0.0, ng=0.0, ncut=31, truncated_dim=5
+    )
+    osc = scq.Oscillator(E_osc=5.0, truncated_dim=5)
+    hs = scq.HilbertSpace([qbt, osc])
+    hs.add_interaction(g=0.3, op1=qbt.n_operator, op2=osc.creation_operator,
+                       add_hc=True)
+
+    def update_hilbertspace(flux):
+        qbt.flux = flux
+
     sweep = scq.ParameterSweep(
         hs, {"flux": np.linspace(0.0, 0.5, 21)}, update_hilbertspace
     )
-    result = sweep.estimate_convergence(n_levels=4, mode="verify", target_abs_GHz=1e-4)
+    result = sweep.estimate_convergence(
+        n_levels=4, mode="moderate", target_abs_GHz=1e-4
+    )
     print(result)
 
 ::
 
-    convergence across sweep of (flux) (5 points): worst = underconverged at flux=0
-      flux=0: underconverged  <-- worst
-      flux=0.5: marginal
-      flux=0.25: marginal
-      flux=0.175: marginal
-      flux=0.325: marginal
+    convergence across sweep of (flux) (8 points): worst = marginal at flux=0.375
+      flux=0: maybe_converged
+      flux=0.5: maybe_converged
+      flux=0.25: maybe_converged
+      flux=0.175: maybe_converged
+      flux=0.325: maybe_converged
+      flux=0.125: maybe_converged
+      flux=0.375: marginal  <-- worst
+      flux=0.1: maybe_converged
 
 Each point is a parameter-name-to-value mapping, so multi-parameter sweeps are
 reported by their full coordinates; ``result.worst_point()`` and
@@ -577,8 +627,8 @@ and handles grids over more than one parameter.
 A complete example
 ==================
 
-Start with a deliberately small cutoff and let the loop guide you to a converged
-result::
+Start with a deliberately small cutoff and let the loop guide you to a
+trustworthy result::
 
     import scqubits as scq
 
@@ -587,53 +637,64 @@ result::
     report = tmon.estimate_convergence(n_levels=5, target_abs_GHz=1e-6)
     print(report)                      # the full diagnostic
 
-At ``ncut=6`` the report flags the offending levels and spells out the fix::
+At ``ncut=6`` the moderate refinement catches the offending levels and spells out
+the fix::
 
-    aggregate: underconverged   (worst level: 1)
-      level 0: marginal         evidence=verified_empirical channel=charge_tail        abs_err=8.90e-06  eps_gap=  -    via one_step
-      level 1: underconverged   evidence=verified_empirical channel=charge_tail        abs_err=1.65e-04  eps_gap=  -    via one_step
-      level 2: underconverged   evidence=verified_empirical channel=charge_tail        abs_err=1.43e-03  eps_gap=  -    via one_step
-      level 3: underconverged   evidence=verified_empirical channel=charge_tail        abs_err=7.78e-03  eps_gap=  -    via one_step  [boundary_probability_large]
-      level 4: underconverged   evidence=verified_empirical channel=charge_tail        abs_err=2.92e-02  eps_gap=  -    via one_step  [boundary_probability_large]
+    aggregate: distrust   (worst level: 1)
+      level 0: marginal         channel=charge_tail        abs_err=8.90e-06  eps_gap=  -    via one_step
+      level 1: distrust         channel=charge_tail        abs_err=1.65e-04  eps_gap=  -    via one_step
+      level 2: distrust         channel=charge_tail        abs_err=1.43e-03  eps_gap=  -    via one_step
+      level 3: distrust         channel=charge_tail        abs_err=7.78e-03  eps_gap=  -    via one_step  [boundary_probability_large]
+      level 4: distrust         channel=charge_tail        abs_err=2.92e-02  eps_gap=  -    via one_step  [boundary_probability_large]
       channel_breakdown_GHz: {'charge_tail': '2.92e-02'}
       recommendation: charge-basis tail dominates: increase ncut from 6 to at least 10 (charge cutoff) and re-run
       recommendation: levels [3, 4] carry the 'boundary_probability_large' warning: the kept state reaches the basis boundary, so the dropped tail is non-perturbative -- increase the cutoff aggressively
 
-The lowest level is already close (``marginal``); the higher levels reach the
-basis boundary and are badly truncated. Follow the recommendation and re-run::
+The lowest level is only borderline (``marginal``); the higher levels reach the
+basis boundary and are badly truncated, so they are dismissed to ``distrust``.
+This is exactly the signal you want -- the framework caught a clearly-wrong
+result. Follow the recommendation and re-run::
 
     tmon.ncut = 31                     # follow the recommendation
     report = tmon.estimate_convergence(n_levels=5, target_abs_GHz=1e-6)
     print(report.aggregate_status)
 
-The aggregate status is now::
+The aggregate verdict is now::
 
-    converged
+    maybe_converged
 
-Every level passes against the ``1e-6`` GHz target.
+Every level passes the moderate one-step check against the ``1e-6`` GHz target.
+Note the verdict is ``maybe_converged``, not an unqualified guarantee: the
+moderate refinement found no movement, which is the most this single check can
+claim.
 
-For a fast check while scanning parameters, drop the extra diagonalization::
+For a fast scan while exploring parameters, drop the extra diagonalization::
 
-    report = tmon.estimate_convergence(n_levels=5, mode="quick", target_abs_GHz=1e-6)
+    report = tmon.estimate_convergence(n_levels=5, mode="cheap", target_abs_GHz=1e-6)
     print(report.aggregate_status)
+
+which prints::
+
+    unverified
+
+Cheap mode skips the refinement diagonalization, so a level it does not dismiss
+earns only ``unverified`` -- it can flag a clearly-wrong result, but it never
+makes a verification claim.
+
+For the strongest available check, demand the asymptoticity test::
+
+    report = tmon.estimate_convergence(
+        n_levels=5, mode="strict", target_abs_GHz=1e-6
+    )
+    print(report.level(report.worst_level).status)
 
 which prints::
 
     likely_converged
 
-Quick mode skips the refinement diagonalization, so the best status it will ever
-report is ``likely_converged`` -- never an unqualified ``converged``.
-
-For a publication-grade check, demand the asymptoticity test::
-
-    report = tmon.estimate_convergence(
-        n_levels=5, mode="strict", target_abs_GHz=1e-6
-    )
-    print(report.per_level[0].evidence)
-
-which prints::
-
-    verified_empirical
+The refinement series contracts and passes the ratio test, so the worst level
+reaches ``likely_converged`` -- the strongest verdict the framework makes, and
+still a failure to dismiss rather than a proof.
 
 
 .. _guide_convergence_composite:
@@ -675,31 +736,31 @@ subsystem verdict: the composite cannot be more converged than its parts.
         g=0.6, op1=tmon.n_operator, op2=osc.creation_operator, add_hc=True
     )
 
-    report = hs.estimate_convergence(n_levels=3, mode="verify", target_abs_GHz=1e-5)
+    report = hs.estimate_convergence(n_levels=3, mode="moderate", target_abs_GHz=1e-5)
     print(report)
 
-With the resonator truncated to only three levels the composite is
-underconverged. The report names the subsystem to grow, flags the near-resonance,
-and attaches the (converged) subsystem report underneath::
+With the resonator truncated to only three levels the composite is dismissed. The
+report names the subsystem to grow, flags the near-resonance, and attaches the
+(undismissed) subsystem report underneath::
 
-    aggregate: underconverged   (worst level: 0)
-      level 0: underconverged   evidence=verified_empirical channel=composite_coupling abs_err=1.14e-04  eps_gap=  -    via one_step
-      level 1: underconverged   evidence=verified_empirical channel=composite_coupling abs_err=4.86e-03  eps_gap=  -    via one_step
-      level 2: underconverged   evidence=verified_empirical channel=composite_coupling abs_err=3.17e-03  eps_gap=  -    via one_step
+    aggregate: distrust   (worst level: 0)
+      level 0: distrust         channel=composite_coupling abs_err=1.14e-04  eps_gap=  -    via one_step
+      level 1: distrust         channel=composite_coupling abs_err=4.86e-03  eps_gap=  -    via one_step
+      level 2: distrust         channel=composite_coupling abs_err=3.17e-03  eps_gap=  -    via one_step
       channel_breakdown_GHz: {'composite_coupling': '6.43e-03'}
       recommendation: composite truncation dominates: increase truncated_dim of 'Oscillator_1' from 3 to at least 5 and re-run (it sets how many of that subsystem's levels enter the product space)
       recommendation: hybridization screen: near-resonant coupling (eta ~= 1.1) between bare product states of 'Transmon_1' and 'Oscillator_1'; product-state labels are unreliable -- rely on cluster-safe matching and full composite refinement
       derived [subsystem:Transmon_1]:
-        aggregate: converged   (worst level: 0)
-          level 0: converged        evidence=verified_empirical channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
-          level 1: converged        evidence=verified_empirical channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
-          level 2: converged        evidence=verified_empirical channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
-          level 3: converged        evidence=verified_empirical channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
-          level 4: converged        evidence=verified_empirical channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
+        aggregate: maybe_converged   (worst level: 0)
+          level 0: maybe_converged  channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
+          level 1: maybe_converged  channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
+          level 2: maybe_converged  channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
+          level 3: maybe_converged  channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
+          level 4: maybe_converged  channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
           channel_breakdown_GHz: {'charge_tail': '2.47e-13'}
 
-Raising the resonator (and transmon) ``truncated_dim`` -- here to 8 -- reaches
-``converged``.
+Raising the resonator (and transmon) ``truncated_dim`` -- here to 8 -- clears the
+dismissal.
 
 **Hybridization screen.** When subsystems are coupled near resonance, the bare
 product-state labels :math:`|a,b\rangle` mix strongly. For each two-body
@@ -714,12 +775,12 @@ hybridization parameter
 and warns when it is large (as above). A large :math:`\eta` means the product
 labels are unreliable, so levels are matched as clusters rather than by index; it
 is a labeling diagnostic, **not** a truncation-error estimate, and does not by
-itself set ``underconverged``.
+itself set ``distrust``.
 
-**Modes.** ``verify`` and ``strict`` perform the full composite refinement and
-are authoritative. ``quick`` skips the composite re-diagonalization: it runs the
-hybridization screen and each subsystem's own quick check, and reports the
-composite truncation as verify-recommended (never an unqualified ``converged``).
+**Modes.** ``moderate`` and ``strict`` perform the full composite refinement and
+are authoritative. ``cheap`` skips the composite re-diagonalization: it runs the
+hybridization screen and each subsystem's own cheap check, and reports the
+composite truncation as moderate-recommended (never a verification claim).
 
 **FullZeroPi.** The hierarchical :class:`.FullZeroPi` -- an interior
 :class:`.ZeroPi` coupled to a zeta oscillator -- is checked the same two-layer
@@ -740,18 +801,20 @@ For a custom :class:`.Circuit` that is **not** hierarchically diagonalized, the
 Hilbert space is a single product of the per-variable bases, and the refinement
 axes are the variable cutoffs (``self.cutoff_names``): a periodic variable's charge
 cutoff ``cutoff_n_<i>`` (channel ``charge_tail``) and an extended variable's cutoff
-``cutoff_ext_<i>`` (``FD_stencil`` for a discretized variable -- a finite-difference
-grid, verified by Richardson extrapolation in strict mode -- or ``HO_tail`` for a
-harmonic one). Each cutoff is refined and the spectrum re-diagonalized; the
-dominant channel names the cutoff to grow::
+``cutoff_ext_<i>``. A discretized extended variable is a finite-difference grid
+with the two truncation channels described above -- ``FD_box`` (the coordinate box
+must be wide enough) and ``FD_stencil`` (the grid spacing, Richardson-extrapolated
+in strict mode) -- while a harmonic extended variable uses ``HO_tail``. Each
+cutoff is refined and the spectrum re-diagonalized; the dominant channel names the
+cutoff to grow::
 
     import scqubits as scq
 
     circ = scq.Circuit(yaml_string, from_file=False, ext_basis="discretized")
-    report = circ.estimate_convergence(n_levels=4, mode="verify", target_abs_GHz=1e-4)
+    report = circ.estimate_convergence(n_levels=4, mode="moderate", target_abs_GHz=1e-4)
     print(report)
 
-As for the other multi-coordinate qubits, quick mode is verify-recommended (a
+As for the other multi-coordinate qubits, cheap mode is moderate-recommended (a
 coupled circuit basis has no clean cheap estimator).
 
 **Hierarchical diagonalization.** When the circuit is hierarchically diagonalized,
