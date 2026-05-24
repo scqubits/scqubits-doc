@@ -79,8 +79,11 @@ both mean *"we failed to dismiss this level"*, with the former having survived a
 harder test; neither is a certificate. ``distrust`` is the one verdict that
 states a fact with confidence -- we caught a result you should not use as is.
 
-The verdict name carries the confidence directly; there is no separate evidence
-field to consult.
+The verdict name carries the confidence directly. To see *why* a level earned
+its verdict -- which falsification tests ran and how they fared -- read its
+structured ``checks`` record together with the ``estimator_method`` and any
+``warnings`` (see :ref:`guide_convergence_checks`); there is no separate
+evidence-tier field.
 
 
 The basic workflow
@@ -509,8 +512,45 @@ Each :class:`.LevelVerdict` carries a ``status`` (the verdict), a ``status_scope
 optional ``eps_gap_est``, the ``transition_err_est_GHz`` map, a
 ``truncation_channel`` (``charge_tail``, ``HO_tail``, ``FD_box``, ``FD_stencil``,
 or ``composite_coupling``), an ``estimator_method`` (e.g. ``one_step``,
-``ratio_test``, ``finite_tail_resolvent``), and any ``warnings``. The verdict
-name itself records the confidence -- there is no separate evidence field.
+``ratio_test``, ``finite_tail_resolvent``), any ``warnings``, and a structured
+``checks`` record (below). The verdict name itself records the confidence --
+there is no separate evidence-tier field.
+
+
+.. _guide_convergence_checks:
+
+Which checks ran: the per-level ``checks`` record
+-------------------------------------------------
+
+To make the verdict auditable, each :class:`.LevelVerdict` carries a ``checks``
+tuple of :class:`.CheckOutcome` (``name``, ``status``, ``detail``) recording the
+falsification tests that applied to the level and how each fared. The status of a
+check is ``pass`` (it ran and did not dismiss the level), ``fail`` (it ran and
+dismissed the level), or ``not_applicable`` (it does not apply in the chosen mode
+or for this channel). The tests recorded are:
+
+* ``asymptoticity`` -- the ``strict`` two-step ratio / Richardson test (recorded
+  ``not_applicable`` outside ``strict`` mode, or when the refinement sits at the
+  eigensolver noise floor);
+* ``boundary`` -- the kept-state amplitude at the basis boundary, where a
+  boundary diagnostic exists (``detail`` reports the edge probability);
+* ``monotonicity`` -- the charge-basis variational check (present only for a
+  charge axis);
+* ``perturbative_tail`` -- the reliability of the ``cheap``-mode tail estimator.
+
+For example, the printed report shows the per-check line under each level::
+
+    level 1: distrust   channel=charge_tail   abs_err=1.65e-04  via ratio_test
+        checks: asymptoticity=pass  boundary=pass(P_edge=5.4e-05)  monotonicity=pass
+
+and ``report.level(1).checks`` exposes the same record programmatically.
+
+The ``checks`` are the *falsification tests*; they are distinct from the
+estimate-vs-target grading. A level can therefore be ``distrust`` with **every
+check passing** -- this means no test caught a structural problem, but the
+estimated error still exceeded ``target_abs_GHz`` (or ``target_gap_rel``). In
+that case the fix is simply a larger cutoff; ``abs_err_est_GHz`` and the target
+tell you how far off you are.
 
 
 Derived quantities
@@ -864,15 +904,12 @@ safety factor :math:`S`, gap floor, rate floor, and default mode -- live in
 globally; see the :ref:`guide-settings` section.
 
 
-Worked examples
-===============
+Worked example
+==============
 
-Two runnable notebooks accompany this guide. The first covers the everyday
-single-qubit workflow; the second works through multi-coordinate qubits, coupled
-systems, and sweeps.
+A runnable companion notebook walks through the core workflow end to end:
 
 .. toctree::
    :maxdepth: 1
 
-   The basics <ipynb/convergence-basics.ipynb>
-   Multi-coordinate, composite, and sweeps <ipynb/convergence-advanced.ipynb>
+   Convergence diagnostics: a worked example <ipynb/convergence-workflow.ipynb>
