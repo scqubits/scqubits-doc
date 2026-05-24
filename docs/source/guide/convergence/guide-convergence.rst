@@ -70,7 +70,9 @@ Every level is assigned one verdict from a single ladder, ordered best to worst:
 ``distrust``
     A test *actively dismissed* convergence. The result is not trustworthy at
     this cutoff. This includes the strict-mode ratio test failing
-    (:math:`R \ge 1`) and a kept eigenstate reaching the basis boundary.
+    (:math:`R \ge 1`), a kept eigenstate reaching the basis boundary, and a
+    charge-basis energy that *rises* under refinement (a variational-monotonicity
+    violation -- see :ref:`guide_convergence_monotonicity`).
 
 Read these the right way round. ``likely_converged`` and ``maybe_converged``
 both mean *"we failed to dismiss this level"*, with the former having survived a
@@ -335,6 +337,26 @@ of the largest principal angle,
    \sin\Theta = \bigl\| (I - U_{N_0} U_{N_0}^\dagger)\, U_{N_1} \bigr\|_2,
 
 which is robust to eigenvector rotations within the block.
+
+.. _guide_convergence_monotonicity:
+
+Variational monotonicity
+------------------------
+
+For an *exactly nested* basis truncation, enlarging the basis cannot raise an
+ordered eigenvalue (the Rayleigh--Ritz min--max theorem):
+:math:`E_{k,N_1} \le E_{k,N_0}` for :math:`N_1 > N_0`. In scqubits this holds for
+the **charge basis** -- growing ``ncut`` borders the kept block with additional
+charge states, so the smaller Hamiltonian is an exact principal submatrix of the
+larger. Every refinement therefore carries a near-free falsification test: a
+charge-basis energy that *rises* by more than the eigensolver noise floor
+violates the variational bound, and the level is dismissed to ``distrust`` in any
+mode -- such a rise signals an operator-construction or backend problem rather
+than mere truncation. The check is silent on healthy results and is restricted to
+the charge basis: harmonic-oscillator bases build the potential from matrix
+functions of the *truncated* quadratures (so the truncation is not nested), and
+finite-difference grids are non-variational, so a rise there is legitimate and
+those channels are excluded.
 
 Cheap estimators (cheap mode)
 -----------------------------
@@ -840,3 +862,17 @@ The defaults that control the diagnostics -- refinement step, cluster threshold,
 safety factor :math:`S`, gap floor, rate floor, and default mode -- live in
 :mod:`scqubits.settings` under the ``CONVERGENCE_*`` names and can be adjusted
 globally; see the :ref:`guide-settings` section.
+
+
+Worked examples
+===============
+
+Two runnable notebooks accompany this guide. The first covers the everyday
+single-qubit workflow; the second works through multi-coordinate qubits, coupled
+systems, and sweeps.
+
+.. toctree::
+   :maxdepth: 1
+
+   The basics <ipynb/convergence-basics.ipynb>
+   Multi-coordinate, composite, and sweeps <ipynb/convergence-advanced.ipynb>
