@@ -48,10 +48,13 @@ result you should not rely on at the current cutoff.
    support convergence checking; it must subclass ConvergenceCheckable.``
 
 
-The verdict ladder
-==================
+The verdicts
+============
 
-Every level is assigned one verdict from a single ladder, ordered best to worst:
+Every level is assigned one of five verdicts, ordered from best (left) to worst
+(right)::
+
+    likely_converged  >  maybe_converged  >  marginal  >  unverified  >  distrust
 
 ``likely_converged``
     Passed the ``strict`` two-step ratio/asymptoticity test -- the strongest
@@ -486,7 +489,7 @@ calling :meth:`~.ConvergenceReport.summary`) gives a readable rundown; the field
 are also available programmatically:
 
 ``aggregate_status``
-    The overall verdict, equal to the worst per-level verdict on the ladder:
+    The overall verdict, equal to the worst per-level verdict: one of
     ``likely_converged``, ``maybe_converged``, ``marginal``, ``unverified``, or
     ``distrust``.
 
