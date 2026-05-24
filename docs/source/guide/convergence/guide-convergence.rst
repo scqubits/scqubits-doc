@@ -7,18 +7,19 @@
 Convergence Diagnostics
 **************************
 
-Every qubit in scqubits is represented by a finite matrix obtained by truncating
-an underlying infinite-dimensional Hamiltonian. The transmon, for example, is
-truncated to a finite charge basis controlled by ``ncut``; fluxonium uses a
+Every qubit in scqubits is modeled by a Hamiltonian that, in general, acts on an
+infinite-dimensional Hilbert space; scqubits represents it numerically as a finite
+matrix by truncating the basis it is expressed in. The transmon, for example, is
+represented in a finite charge basis controlled by ``ncut``; fluxonium in a
 harmonic-oscillator basis controlled by ``cutoff``; the grid-based qubits
 discretize a flux coordinate on a finite box. The numbers scqubits returns --
 energies, wavefunctions, matrix elements, coherence times -- are only as accurate
-as that truncation allows. If the cutoff is too small, results are silently
-wrong; if it is far too large, calculations are needlessly slow.
+as that truncated representation allows. If the cutoff is too small, results are
+silently wrong; if it is far too large, calculations are needlessly slow.
 
 The convergence-diagnostics framework answers a single practical question: *for
-the cutoff I have chosen, is the result trustworthy, and what should I do if it
-is not?*
+the cutoff I have chosen, is there any reason to distrust the result, and what
+should I do if there is?*
 
 **A convergence test can only ever dismiss convergence.** This is the central
 idea, and it shapes every verdict the framework returns. A test refines the
@@ -41,8 +42,9 @@ result you should not rely on at the current cutoff.
    coherence rates. Coupled :class:`.HilbertSpace` systems are supported as well
    (see :ref:`guide_convergence_composite`), as are custom :class:`.Circuit`
    instances, including hierarchically diagonalized ones (see
-   :ref:`guide_convergence_circuit`). Calling ``estimate_convergence`` on a class
-   that does not support it raises :class:`TypeError` -- ``<Class> does not
+   :ref:`guide_convergence_circuit`). Calling the top-level
+   ``scq.estimate_convergence(obj)`` on an object that does not subclass
+   ``ConvergenceCheckable`` raises :class:`TypeError` -- ``<Class> does not
    support convergence checking; it must subclass ConvergenceCheckable.``
 
 
@@ -124,7 +126,9 @@ if necessary -- increase the cutoff and repeat.
    Every estimated error sits far below the ``1e-4`` GHz target and the default
    moderate refinement found no movement, so each level is ``maybe_converged``:
    ``ncut=31`` was not dismissed for these parameters. (Exact digits depend on
-   the platform and diagonalization backend.)
+   the platform and diagonalization backend. For brevity the example outputs in
+   this guide omit the per-level ``checks:`` line that ``print(report)`` also
+   prints; see :ref:`guide_convergence_checks`.)
 
 4. **Act on the recommendation.** When a level is dismissed, the printed report
    ends with a plain-language fix for each problem channel. For an under-resolved
@@ -209,9 +213,10 @@ floored at ``g_floor_GHz`` (default :math:`10^{-3}` GHz = 1 MHz) to avoid
 dividing by an accidentally tiny gap, giving
 :math:`\widetilde\epsilon_{{\rm gap},k} = \widehat{\mathrm{err}}_{k}/\max\{g_{\rm iso}(k), g_{\rm floor}\}`.
 The same ``< target`` / ``< 10\,target`` thresholds apply, with a default
-relative target :math:`10^{-3}`. A buffer level is diagonalized automatically so
-the highest requested level still has an upper gap; if it is unavailable the
-level carries an ``upper_gap_unavailable`` warning.
+relative target :math:`10^{-3}`. One eigenvalue beyond the requested levels is
+computed automatically (in the same diagonalization) so the highest requested
+level still has an upper neighbor for the gap; if it is unavailable the level
+carries an ``upper_gap_unavailable`` warning.
 
 .. note::
 
@@ -292,7 +297,7 @@ refinement differences available, the per-level ratio and geometric-tail estimat
 .. math::
 
    R_k = \frac{d_{1,k}}{d_{0,k}}, \qquad
-   \widehat{\mathrm{err}}_{k} = \frac{d_{0,k}}{1 - R_k}\quad (R_k < 1).
+   \widehat{\mathrm{err}}_{k} = \frac{S\,d_{0,k}}{1 - R_k}\quad (R_k < 1).
 
 A cluster with :math:`R_k < 1` is in the asymptotic regime and the geometric tail
 is reported (capped at ``likely_converged`` for a passing level). If
@@ -364,9 +369,10 @@ those channels are excluded.
 Cheap estimators (cheap mode)
 -----------------------------
 
-**Charge finite tail (Transmon and TunableTransmon).** For a one-dimensional
-charge chain the dropped charge states couple to the kept space only through the
-two boundary charges, so a second-order (resolvent) estimate uses the boundary
+**Charge finite tail (Transmon and TunableTransmon).** For the transmon's
+nearest-neighbor (single-cosine) Josephson Hamiltonian -- tridiagonal in the
+charge basis -- the dropped charge states couple to the kept space only through
+the two boundary charges, so a second-order (resolvent) estimate uses the boundary
 amplitudes :math:`c_{R,k}=\langle n_{\rm cut}|u_k\rangle`,
 :math:`c_{L,k}=\langle -n_{\rm cut}|u_k\rangle`,
 
@@ -404,13 +410,16 @@ m|\cos(\hat\varphi+\varphi_{\rm ext})|j\rangle` taken from the cosine on an
 extended Fock basis (the LC term is diagonal and does not couple kept to
 dropped). A further dropped band gives the omitted-residual norm
 :math:`\rho_{\rm tail} = \sum_{m \ge N+d} |(r_W)_m|^2`; if it is not small
-compared with :math:`\|r_W\|^2`, or a window state is near-resonant with
+compared with :math:`\|r_W\|^2`, or a window eigenvalue lies at or below
 :math:`E_k`, the estimate is flagged unreliable. The result is a perturbative
 estimate with an omitted-tail diagnostic, **not a bound** -- a finite dropped
 window omits both the far-dropped residual and the Schur self-energy of the rest
 of the dropped space, so it is not sign-definite. If :math:`\rho_{\rm tail}` is
 not small the level is reported ``unverified`` in cheap mode; moderate mode
-remains authoritative.
+remains authoritative. The dismissal-triggering boundary probability is a separate
+quantity -- the occupation of the top few kept Fock states, the oscillator analog
+of the charge-edge probability -- whose large value raises
+``boundary_probability_large`` independently of the window estimate.
 
 Finite-difference grids: two channels
 -------------------------------------
@@ -569,10 +578,13 @@ as its own :class:`.ConvergenceReport` under ``report.derived`` and requires
     )
     print(report.derived["wavefunctions"].aggregate_status)
 
-Eigenvectors and matrix elements can converge more slowly than eigenvalues
-(Davis--Kahan: an isolated level's eigenvector angle scales like
-:math:`\|r_k\|/\delta_k`, linear in the residual, while the Kato--Temple
-eigenvalue error is quadratic). Each derived sub-report stores the dimensionless
+Eigenvectors and matrix elements generally converge no faster than -- and often
+slower than -- eigenvalues: for an isolated level the eigenvector rotation scales
+like :math:`\|r_k\|/\delta_k` (Davis--Kahan), linear in the residual, whereas the
+eigenvalue error of a Ritz pair can scale like :math:`\|r_k\|^2/\delta_k`
+(Kato--Temple) under an isolating-gap assumption. scqubits does not compute these
+bounds; it measures the refinement change of each quantity directly. Each derived
+sub-report stores the dimensionless
 change of the quantity in ``rel_change_est``.
 
 **Wavefunctions** -- the overlap deficit :math:`1 - |\langle\psi_{N_0,k}|
