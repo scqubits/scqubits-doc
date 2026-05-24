@@ -115,20 +115,22 @@ if necessary -- increase the cutoff and repeat.
 
    For the ``ncut=31`` transmon above, ``print(report)`` produces::
 
-       aggregate: maybe_converged   (worst level: 0)
-         level 0: maybe_converged  channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
-         level 1: maybe_converged  channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
-         level 2: maybe_converged  channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
-         level 3: maybe_converged  channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
-         level 4: maybe_converged  channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
-         channel_breakdown_GHz: {'charge_tail': '2.47e-13'}
+       aggregate: maybe_converged   (worst: level 0)
+
+         lvl   status            channel       err (GHz)   via
+           0   maybe_converged   charge_tail    7.11e-15   one_step
+           1   maybe_converged   charge_tail    1.85e-13   one_step
+           2   maybe_converged   charge_tail    2.47e-13   one_step
+           3   maybe_converged   charge_tail    4.97e-14   one_step
+           4   maybe_converged   charge_tail    4.44e-14   one_step
+
+         channels (GHz): charge_tail=2.47e-13
 
    Every estimated error sits far below the ``1e-4`` GHz target and the default
    moderate refinement found no movement, so each level is ``maybe_converged``:
    ``ncut=31`` was not dismissed for these parameters. (Exact digits depend on
-   the platform and diagonalization backend. For brevity the example outputs in
-   this guide omit the per-level ``checks:`` line that ``print(report)`` also
-   prints; see :ref:`guide_convergence_checks`.)
+   the platform and diagonalization backend; a passing level prints no per-check
+   line -- those appear only under a dismissed or borderline level.)
 
 4. **Act on the recommendation.** When a level is dismissed, the printed report
    ends with a plain-language fix for each problem channel. For an under-resolved
@@ -714,15 +716,23 @@ trustworthy result::
 At ``ncut=6`` the moderate refinement catches the offending levels and spells out
 the fix::
 
-    aggregate: distrust   (worst level: 1)
-      level 0: marginal         channel=charge_tail        abs_err=8.90e-06  eps_gap=  -    via one_step
-      level 1: distrust         channel=charge_tail        abs_err=1.65e-04  eps_gap=  -    via one_step
-      level 2: distrust         channel=charge_tail        abs_err=1.43e-03  eps_gap=  -    via one_step
-      level 3: distrust         channel=charge_tail        abs_err=7.78e-03  eps_gap=  -    via one_step  [boundary_probability_large]
-      level 4: distrust         channel=charge_tail        abs_err=2.92e-02  eps_gap=  -    via one_step  [boundary_probability_large]
-      channel_breakdown_GHz: {'charge_tail': '2.92e-02'}
-      recommendation: charge-basis tail dominates: increase ncut from 6 to at least 10 (charge cutoff) and re-run
-      recommendation: levels [3, 4] carry the 'boundary_probability_large' warning: the kept state reaches the basis boundary, so the dropped tail is non-perturbative -- increase the cutoff aggressively
+    aggregate: distrust   (worst: level 1)
+
+      lvl   status     channel       err (GHz)   via
+        0   marginal   charge_tail    8.90e-06   one_step
+          checks 0: asymptoticity=n/a(strict mode only)  boundary=pass(P_edge=3.2e-06)  monotonicity=pass
+        1   distrust   charge_tail    1.65e-04   one_step
+          checks 1: asymptoticity=n/a(strict mode only)  boundary=pass(P_edge=5.4e-05)  monotonicity=pass
+        2   distrust   charge_tail    1.43e-03   one_step
+          checks 2: asymptoticity=n/a(strict mode only)  boundary=pass(P_edge=0.00042)  monotonicity=pass
+        3   distrust   charge_tail    7.78e-03   one_step   [boundary_probability_large]
+          checks 3: asymptoticity=n/a(strict mode only)  boundary=fail(P_edge=0.002)  monotonicity=pass
+        4   distrust   charge_tail    2.92e-02   one_step   [boundary_probability_large]
+          checks 4: asymptoticity=n/a(strict mode only)  boundary=fail(P_edge=0.0068)  monotonicity=pass
+
+    channels (GHz): charge_tail=2.92e-02
+    -> charge-basis tail dominates: increase ncut from 6 to at least 10 (charge cutoff) and re-run
+    -> levels [3, 4] carry the 'boundary_probability_large' warning: the kept state reaches the basis boundary, so the dropped tail is non-perturbative -- increase the cutoff aggressively
 
 The lowest level is only borderline (``marginal``); the higher levels reach the
 basis boundary and are badly truncated, so they are dismissed to ``distrust``.
@@ -817,21 +827,30 @@ With the resonator truncated to only three levels the composite is dismissed. Th
 report names the subsystem to grow, flags the near-resonance, and attaches the
 (undismissed) subsystem report underneath::
 
-    aggregate: distrust   (worst level: 0)
-      level 0: distrust         channel=composite_coupling abs_err=1.14e-04  eps_gap=  -    via one_step
-      level 1: distrust         channel=composite_coupling abs_err=4.86e-03  eps_gap=  -    via one_step
-      level 2: distrust         channel=composite_coupling abs_err=3.17e-03  eps_gap=  -    via one_step
-      channel_breakdown_GHz: {'composite_coupling': '6.43e-03'}
-      recommendation: composite truncation dominates: increase truncated_dim of 'Oscillator_1' from 3 to at least 5 and re-run (it sets how many of that subsystem's levels enter the product space)
-      recommendation: hybridization screen: near-resonant coupling (eta ~= 1.1) between bare product states of 'Transmon_1' and 'Oscillator_1'; product-state labels are unreliable -- rely on cluster-safe matching and full composite refinement
+    aggregate: distrust   (worst: level 0)
+
+      lvl   status     channel              err (GHz)   via
+        0   distrust   composite_coupling    1.14e-04   one_step
+          checks 0: asymptoticity=n/a(strict mode only)
+        1   distrust   composite_coupling    4.86e-03   one_step
+          checks 1: asymptoticity=n/a(strict mode only)
+        2   distrust   composite_coupling    3.17e-03   one_step
+          checks 2: asymptoticity=n/a(strict mode only)
+
+      channels (GHz): composite_coupling=6.43e-03
+      -> composite truncation dominates: increase truncated_dim of 'Oscillator_1' from 3 to at least 5 and re-run (it sets how many of that subsystem's levels enter the product space)
+      -> hybridization screen: near-resonant coupling (eta ~= 1.1) between bare product states of 'Transmon_1' and 'Oscillator_1'; product-state labels are unreliable -- rely on cluster-safe matching and full composite refinement
       derived [subsystem:Transmon_1]:
-        aggregate: maybe_converged   (worst level: 0)
-          level 0: maybe_converged  channel=charge_tail        abs_err=7.11e-15  eps_gap=  -    via one_step
-          level 1: maybe_converged  channel=charge_tail        abs_err=1.85e-13  eps_gap=  -    via one_step
-          level 2: maybe_converged  channel=charge_tail        abs_err=2.47e-13  eps_gap=  -    via one_step
-          level 3: maybe_converged  channel=charge_tail        abs_err=4.97e-14  eps_gap=  -    via one_step
-          level 4: maybe_converged  channel=charge_tail        abs_err=4.44e-14  eps_gap=  -    via one_step
-          channel_breakdown_GHz: {'charge_tail': '2.47e-13'}
+        aggregate: maybe_converged   (worst: level 0)
+
+          lvl   status            channel       err (GHz)   via
+            0   maybe_converged   charge_tail    7.11e-15   one_step
+            1   maybe_converged   charge_tail    1.85e-13   one_step
+            2   maybe_converged   charge_tail    2.47e-13   one_step
+            3   maybe_converged   charge_tail    4.97e-14   one_step
+            4   maybe_converged   charge_tail    4.44e-14   one_step
+
+          channels (GHz): charge_tail=2.47e-13
 
 Raising the resonator (and transmon) ``truncated_dim`` -- here to 8 -- clears the
 dismissal.
