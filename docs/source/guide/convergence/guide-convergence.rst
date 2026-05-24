@@ -127,7 +127,7 @@ if necessary -- increase the cutoff and repeat.
            3   maybe_converged   charge_tail    4.97e-14   one_step
            4   maybe_converged   charge_tail    4.44e-14   one_step
 
-         channels (GHz): charge_tail=2.47e-13
+         error by channel (GHz): charge_tail=2.47e-13
 
    Every estimated error sits far below the ``1e-4`` GHz target and the default
    moderate refinement found no movement, so each level is ``maybe_converged``:
@@ -733,7 +733,7 @@ the fix::
         4   distrust   charge_tail    2.92e-02   one_step   [boundary_probability_large]
           checks 4: asymptoticity=n/a(strict mode only)  boundary=fail(P_edge=0.0068)  monotonicity=pass
 
-    channels (GHz): charge_tail=2.92e-02
+    error by channel (GHz): charge_tail=2.92e-02
     -> charge-basis tail dominates: increase ncut from 6 to at least 10 (charge cutoff) and re-run
     -> levels [3, 4] carry the 'boundary_probability_large' warning: the kept state reaches the basis boundary, so the dropped tail is non-perturbative -- increase the cutoff aggressively
 
@@ -840,7 +840,7 @@ report names the subsystem to grow, flags the near-resonance, and attaches the
         2   distrust   composite_coupling    3.17e-03   one_step
           checks 2: asymptoticity=n/a(strict mode only)
 
-      channels (GHz): composite_coupling=6.43e-03
+      error by channel (GHz): composite_coupling=6.43e-03
       -> composite truncation dominates: increase truncated_dim of 'Oscillator_1' from 3 to at least 5 and re-run (it sets how many of that subsystem's levels enter the product space)
       -> hybridization screen: near-resonant coupling (eta ~= 1.1) between bare product states of 'Transmon_1' and 'Oscillator_1'; product-state labels are unreliable -- rely on cluster-safe matching and full composite refinement
       derived [subsystem:Transmon_1]:
@@ -853,7 +853,7 @@ report names the subsystem to grow, flags the near-resonance, and attaches the
             3   maybe_converged   charge_tail    4.97e-14   one_step
             4   maybe_converged   charge_tail    4.44e-14   one_step
 
-          channels (GHz): charge_tail=2.47e-13
+          error by channel (GHz): charge_tail=2.47e-13
 
 Raising the resonator (and transmon) ``truncated_dim`` -- here to 8 -- clears the
 dismissal.
