@@ -42,10 +42,9 @@ result you should not rely on at the current cutoff.
    coherence rates. Coupled :class:`.HilbertSpace` systems are supported as well
    (see :ref:`guide_convergence_composite`), as are custom :class:`.Circuit`
    instances, including hierarchically diagonalized ones (see
-   :ref:`guide_convergence_circuit`). Calling the top-level
-   ``scq.check_convergence(obj)`` on an object that does not subclass
-   ``ConvergenceCheckable`` raises :class:`TypeError` -- ``<Class> does not
-   support convergence checking; it must subclass ConvergenceCheckable.``
+   :ref:`guide_convergence_circuit`), and precomputed :class:`.ParameterSweep`
+   grids (see :ref:`guide_convergence_paramvals`). Calling the top-level
+   ``scq.check_convergence(obj)`` on anything else raises :class:`TypeError`.
 
 
 Quick start
@@ -134,7 +133,7 @@ if necessary -- increase the cutoff and repeat.
 
        tmon = scq.Transmon(EJ=20.0, EC=0.3, ng=0.0, ncut=31, truncated_dim=6)
 
-2. **Estimate convergence** for the levels you care about. You either call the
+2. **Check convergence** for the levels you care about. You either call the
    method on the qubit or use the top-level shim; they are equivalent::
 
        report = tmon.check_convergence(n_levels=5, target_abs_GHz=1e-4)
@@ -644,6 +643,8 @@ and a channel whose rate falls below ``CONVERGENCE_RATE_FLOOR_HZ`` carries a
 ``noise_floor`` warning instead of a lifetime claim.
 
 
+.. _guide_convergence_paramvals:
+
 Convergence across a parameter sweep
 ====================================
 
@@ -682,7 +683,7 @@ hands back the full :class:`.ConvergenceReport` at that point for a closer look.
 It runs the per-point check at ``sample`` values spread across the range (always
 including both endpoints, the usual worst case; ``sample=None`` checks every
 value), restores the swept parameter afterward, and returns a
-:class:`.ParamSweepConvergence` holding every per-point report and the worst case.
+:class:`.ParameterSweepConvergence` holding every per-point report and the worst case.
 
 For a precomputed :class:`.ParameterSweep` -- which sweeps a coupled
 :class:`.HilbertSpace` over an N-dimensional grid through an
