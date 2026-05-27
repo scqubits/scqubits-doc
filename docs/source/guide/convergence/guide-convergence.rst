@@ -48,6 +48,37 @@ result you should not rely on at the current cutoff.
    support convergence checking; it must subclass ConvergenceCheckable.``
 
 
+Quick start
+===========
+
+The shortest path to "is my qubit converged?" is the :func:`scqubits.csc`
+convenience (**c**\ onvergence **s**\ anity **c**\ heck), which picks sensible
+defaults and returns a pretty-printable verdict with no further input::
+
+   >>> import scqubits as scq
+   >>> q = scq.Transmon(EJ=20.0, EC=0.3, ng=0.0, ncut=31, truncated_dim=4)
+   >>> print(scq.csc(q))
+
+prints a header, a one-line ``VERDICT:``, a plain-English explanation, an
+optional next-step tip, and the full underlying
+:class:`~scqubits.core.convergence_report.ConvergenceReport`. If the verdict
+is anything but a clean pass, the recommendations name *which* cutoff to grow.
+
+**Calling** ``csc`` **on the same object twice escalates the check from**
+``mode="moderate"`` **to** ``mode="strict"`` -- if you doubt the first
+answer, just ask again. The default precision target (``1e-4`` GHz, i.e.
+0.1 MHz) and the auto-chosen ``n_levels`` cap are tunable as
+``settings.CSC_DEFAULT_TARGET_ABS_GHZ`` and
+``settings.CSC_DEFAULT_NLEVELS_CAP``; see :ref:`settings-params` for the full
+list of scqubits settings.
+
+``csc`` is a zero-input wrapper around the full
+:meth:`~scqubits.core.convergence.ConvergenceCheckable.estimate_convergence`
+API documented below; use the full API when you need to control ``n_levels``,
+``target_abs_GHz``, ``mode``, ``scope``, derived quantities, or
+parameter-sweep checks.
+
+
 The verdicts
 ============
 
