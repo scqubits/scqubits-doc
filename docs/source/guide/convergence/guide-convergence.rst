@@ -43,7 +43,7 @@ result you should not rely on at the current cutoff.
    (see :ref:`guide_convergence_composite`), as are custom :class:`.Circuit`
    instances, including hierarchically diagonalized ones (see
    :ref:`guide_convergence_circuit`). Calling the top-level
-   ``scq.estimate_convergence(obj)`` on an object that does not subclass
+   ``scq.check_convergence(obj)`` on an object that does not subclass
    ``ConvergenceCheckable`` raises :class:`TypeError` -- ``<Class> does not
    support convergence checking; it must subclass ConvergenceCheckable.``
 
@@ -73,7 +73,7 @@ answer, just ask again. The default precision target (``1e-4`` GHz, i.e.
 list of scqubits settings.
 
 ``csc`` is a zero-input wrapper around the full
-:meth:`~scqubits.core.convergence.ConvergenceCheckable.estimate_convergence`
+:meth:`~scqubits.core.convergence.ConvergenceCheckable.check_convergence`
 API documented below; use the full API when you need to control ``n_levels``,
 ``target_abs_GHz``, ``mode``, ``scope``, derived quantities, or
 parameter-sweep checks.
@@ -137,9 +137,9 @@ if necessary -- increase the cutoff and repeat.
 2. **Estimate convergence** for the levels you care about. You either call the
    method on the qubit or use the top-level shim; they are equivalent::
 
-       report = tmon.estimate_convergence(n_levels=5, target_abs_GHz=1e-4)
+       report = tmon.check_convergence(n_levels=5, target_abs_GHz=1e-4)
        # identical to:
-       report = scq.estimate_convergence(tmon, n_levels=5, target_abs_GHz=1e-4)
+       report = scq.check_convergence(tmon, n_levels=5, target_abs_GHz=1e-4)
 
 3. **Read the verdict.** The report prints itself::
 
@@ -231,7 +231,7 @@ supply a target.
 If you care about error *relative to the qubit's own spectrum* rather than an
 absolute energy, choose the observed-gap scope::
 
-    report = tmon.estimate_convergence(
+    report = tmon.check_convergence(
         n_levels=5, scope="observed_gap_scale", target_gap_rel=1e-3
     )
 
@@ -296,10 +296,10 @@ gives the estimator equations behind each.
 
 ::
 
-    cheap    = tmon.estimate_convergence(n_levels=5, mode="cheap")
-    moderate = tmon.estimate_convergence(n_levels=5, mode="moderate",
+    cheap    = tmon.check_convergence(n_levels=5, mode="cheap")
+    moderate = tmon.check_convergence(n_levels=5, mode="moderate",
                                          target_abs_GHz=1e-4)
-    strict   = tmon.estimate_convergence(n_levels=5, mode="strict",
+    strict   = tmon.check_convergence(n_levels=5, mode="strict",
                                          target_abs_GHz=1e-4)
 
 
@@ -515,7 +515,7 @@ bound on a transition error,
 Reading the report
 ==================
 
-``estimate_convergence`` returns a :class:`.ConvergenceReport`. Printing it (or
+``check_convergence`` returns a :class:`.ConvergenceReport`. Printing it (or
 calling :meth:`~.ConvergenceReport.summary`) gives a readable rundown; the fields
 are also available programmatically:
 
@@ -607,7 +607,7 @@ together with ``derived_quantities`` to additionally assess any of
 as its own :class:`.ConvergenceReport` under ``report.derived`` and requires
 ``mode='moderate'`` or ``'strict'`` (a refinement comparison is needed)::
 
-    report = tmon.estimate_convergence(
+    report = tmon.check_convergence(
         n_levels=5, mode="moderate", target_abs_GHz=1e-4,
         include_derived=True,
         derived_quantities=["wavefunctions", "matrix_elements", "coherence"],
@@ -651,14 +651,14 @@ A single report covers one parameter set. A plot such as
 ``plot_evals_vs_paramvals`` instead sweeps a parameter at a *fixed* cutoff, and
 truncation convergence can vary across that range -- a cutoff that is comfortable
 at one flux value can be marginal at another. Use
-:meth:`~.ConvergenceCheckable.estimate_convergence_vs_paramvals` to check the
+:meth:`~.ConvergenceCheckable.check_convergence_vs_paramvals` to check the
 worst case::
 
     import numpy as np
 
     fluxonium = scq.Fluxonium(EJ=10.0, EC=5.0, EL=1.0, flux=0.5, cutoff=35)
     flux_vals = np.linspace(0.0, 0.5, 101)
-    sweep = fluxonium.estimate_convergence_vs_paramvals(
+    sweep = fluxonium.check_convergence_vs_paramvals(
         "flux", flux_vals, sample=5, n_levels=5, target_abs_GHz=1e-4
     )
     print(sweep)                    # per-point verdict, worst marked
@@ -687,10 +687,10 @@ value), restores the swept parameter afterward, and returns a
 For a precomputed :class:`.ParameterSweep` -- which sweeps a coupled
 :class:`.HilbertSpace` over an N-dimensional grid through an
 ``update_hilbertspace`` callback -- call
-:meth:`~.ParameterSweep.estimate_convergence` instead. It applies the callback at
+:meth:`~.ParameterSweep.check_convergence` instead. It applies the callback at
 sampled grid points (the grid corners first, then evenly-spread interior points up
 to ``sample``; ``sample=None`` checks every point), runs the composite
-:meth:`~.HilbertSpace.estimate_convergence` at each, restores the sweep, and
+:meth:`~.HilbertSpace.check_convergence` at each, restores the sweep, and
 returns a :class:`.ParameterSweepConvergence`::
 
     import numpy as np
@@ -709,7 +709,7 @@ returns a :class:`.ParameterSweepConvergence`::
     sweep = scq.ParameterSweep(
         hs, {"flux": np.linspace(0.0, 0.5, 21)}, update_hilbertspace
     )
-    result = sweep.estimate_convergence(
+    result = sweep.check_convergence(
         n_levels=4, mode="moderate", target_abs_GHz=1e-4
     )
     print(result)
@@ -744,7 +744,7 @@ trustworthy result::
 
     tmon = scq.Transmon(EJ=20.0, EC=0.3, ng=0.0, ncut=6, truncated_dim=6)
 
-    report = tmon.estimate_convergence(n_levels=5, target_abs_GHz=1e-6)
+    report = tmon.check_convergence(n_levels=5, target_abs_GHz=1e-6)
     print(report)                      # the full diagnostic
 
 At ``ncut=6`` the moderate refinement catches the offending levels and spells out
@@ -774,7 +774,7 @@ This is exactly the signal you want -- the framework caught a clearly-wrong
 result. Follow the recommendation and re-run::
 
     tmon.ncut = 31                     # follow the recommendation
-    report = tmon.estimate_convergence(n_levels=5, target_abs_GHz=1e-6)
+    report = tmon.check_convergence(n_levels=5, target_abs_GHz=1e-6)
     print(report.aggregate_status)
 
 The aggregate verdict is now::
@@ -788,7 +788,7 @@ claim.
 
 For a fast scan while exploring parameters, drop the extra diagonalization::
 
-    report = tmon.estimate_convergence(n_levels=5, mode="cheap", target_abs_GHz=1e-6)
+    report = tmon.check_convergence(n_levels=5, mode="cheap", target_abs_GHz=1e-6)
     print(report.aggregate_status)
 
 which prints::
@@ -801,7 +801,7 @@ makes a verification claim.
 
 For the strongest available check, demand the asymptoticity test::
 
-    report = tmon.estimate_convergence(
+    report = tmon.check_convergence(
         n_levels=5, mode="strict", target_abs_GHz=1e-6
     )
     print(report.level(report.worst_level).status)
@@ -821,11 +821,11 @@ Coupled subsystems (HilbertSpace)
 =================================
 
 A :class:`.HilbertSpace` truncates in **two layers**, and
-``hs.estimate_convergence(...)`` checks both:
+``hs.check_convergence(...)`` checks both:
 
 * **Layer 1 -- subsystem-internal.** Each subsystem carries its own basis cutoff
   (``ncut``, ``cutoff``, a grid). Every capable subsystem is checked with its own
-  :meth:`~.ConvergenceCheckable.estimate_convergence` -- at ``truncated_dim`` plus
+  :meth:`~.ConvergenceCheckable.check_convergence` -- at ``truncated_dim`` plus
   the refinement reach, so the extra levels a composite refinement pulls in are
   themselves verified -- and the per-subsystem report is attached under
   ``report.derived["subsystem:<id>"]``. Oscillators have no internal cutoff and
@@ -854,7 +854,7 @@ subsystem verdict: the composite cannot be more converged than its parts.
         g=0.6, op1=tmon.n_operator, op2=osc.creation_operator, add_hc=True
     )
 
-    report = hs.estimate_convergence(n_levels=3, mode="moderate", target_abs_GHz=1e-5)
+    report = hs.check_convergence(n_levels=3, mode="moderate", target_abs_GHz=1e-5)
     print(report)
 
 With the resonator truncated to only three levels the composite is dismissed. The
@@ -938,7 +938,7 @@ cutoff to grow::
     import scqubits as scq
 
     circ = scq.Circuit(yaml_string, from_file=False, ext_basis="discretized")
-    report = circ.estimate_convergence(n_levels=4, mode="moderate", target_abs_GHz=1e-4)
+    report = circ.check_convergence(n_levels=4, mode="moderate", target_abs_GHz=1e-4)
     print(report)
 
 As for the other multi-coordinate qubits, cheap mode is moderate-recommended (a
@@ -948,7 +948,7 @@ coupled circuit basis has no clean cheap estimator).
 the check is two-layer, like :class:`.HilbertSpace`: layer 2 refines each top-level
 subsystem's ``truncated_dim`` (channel ``composite_coupling``) and re-diagonalizes
 the dressed spectrum; layer 1 delegates to each subsystem's own
-``estimate_convergence`` (attached under ``report.derived["subsystem:<id>"]``, and
+``check_convergence`` (attached under ``report.derived["subsystem:<id>"]``, and
 skipped by ``assume_subsystems_converged=True``). The aggregate is the worse of the
 two layers. A *nested* hierarchically diagonalized subsystem is recorded as
 unchecked, to be verified separately.
@@ -957,7 +957,7 @@ unchecked, to be verified separately.
 
    A circuit returns at most ``truncated_dim`` eigenvalues, so ``n_levels`` (plus
    one buffer level in the observed-gap scope) must not exceed ``truncated_dim``;
-   otherwise ``estimate_convergence`` raises :class:`ValueError`.
+   otherwise ``check_convergence`` raises :class:`ValueError`.
 
 
 Settings
