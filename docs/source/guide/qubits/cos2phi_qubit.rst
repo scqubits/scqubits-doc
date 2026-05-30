@@ -26,7 +26,7 @@ In the presence of disorder, the circuit is described by
     & + E_\text{L}'(\phi - \pi\Phi_\text{ext}/\Phi_0)^2 + E_\text{L}' \zeta^2 - 2 E_\text{J}\cos{\theta}\cos{\phi} \\
     & + 2 dE_\text{J} E_\text{J}\sin{\theta}\sin{\phi} \\
     & - 4 dC_\text{J} E_\text{CJ}' n_\phi (n_\theta - n_\text{g}-n_\zeta) \\
-    & + dL E_\text{L}'(2\phi - \varphi_\text{ext})\zeta ,
+    & + dL E_\text{L}'(2\phi - \varphi_\text{ext})\zeta,
 
 where :math:`E_\text{CJ}' = E_\text{CJ} / (1 - dC_\text{J})^2` and
 :math:`E_\text{L}' = E_\text{L} / (1 - dL)^2`.

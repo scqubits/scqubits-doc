@@ -42,7 +42,7 @@ with the following parameters:
 
 The frequency derivatives in the above expressions are calculated from matrix elements of :math:`\partial_\lambda H`. The `Method Parameter Name` column in the above table describes the argument names that can be passed to various 1/f noise methods (see below) when one wants to use custom parameter values.
 
-Currently, at sweet spots, where :math:`\partial_\lambda H` is zero, scqubits returns a ``np.nan`` value as the dephasing time. Higher order corrections will be implemented in the future. 
+Currently, at sweet spots, where :math:`\partial_\lambda H` is zero, scqubits returns a ``np.nan`` value as the dephasing time. Higher-order corrections will be implemented in the future. 
 
 The general-purpose scqubits method for calculating 1/f dephasing times due to an arbitrary noise channel
 is given by ``tphi_1_over_f()``. Depending on the qubit of interest, more specific methods for the different kinds

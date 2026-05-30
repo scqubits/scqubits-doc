@@ -47,10 +47,10 @@ summarized here:
 | ``filename``: `str`          | If provided, plot is written to file           |
 +------------------------------+------------------------------------------------+
 
-A number of additional options falling in the ``Axes.set_xxx(...)`` category is available; consult the
+A number of additional options falling in the ``Axes.set_xxx(...)`` category are available; consult the
 ``matplotlib.axes.Axes`` `API documentation`__ to see the complete list. 
 
-Matplotlib's option ``grid`` is also supported and appropriately handled by scqubits. An argument that reads ``grid=xxx`` which is passed to an scqubits plotting command, is internally processed as ``Axes.grid(**xxx)``, if the ``xxx`` is a python dictionary, or as ``Axes.grid(xxx)`` otherwise.
+Matplotlib's option ``grid`` is also supported and appropriately handled by scqubits. An argument that reads ``grid=xxx`` which is passed to an scqubits plotting command, is internally processed as ``Axes.grid(**xxx)``, if ``xxx`` is a Python dictionary, or as ``Axes.grid(xxx)`` otherwise.
 
 There are also some plotting options that scqubits plotting routines directly pass to the appropriate Matplotlib plotting commands (such as ``plot`` or ``imshow``). In the case of standard x vs y types of plots, these include:
 
@@ -65,7 +65,7 @@ There are also some plotting options that scqubits plotting routines directly pa
 +---------------------------------+-------------------------------------------------------+
 | ``marker``: `str`               | Marker style                                          |
 +---------------------------------+-------------------------------------------------------+
-| ``markersize``: `str`           | Markersize in points                                  |
+| ``markersize``: `float`         | Markersize in points                                  |
 +---------------------------------+-------------------------------------------------------+
 
 scqubits plotting routines that internally use Matplotlib's ``imshow`` command (such as ``ZeroPi.plot_wavefunction`` for example) support
@@ -73,7 +73,7 @@ scqubits plotting routines that internally use Matplotlib's ``imshow`` command (
 +------------------------------+-----------------------------------------------------------------+
 | keyword                      | Description                                                     |
 +==============================+=================================================================+
-| ``interpolation``: `str`     | Types of interpolation such (e.g. "spline16", "bilinear", etc.) |
+| ``interpolation``: `str`     | Type of interpolation (e.g., "spline16", "bilinear", etc.)      |
 +------------------------------+-----------------------------------------------------------------+
 
 For a more detailed description of some of the above options, see Matplotlib's `documentation <https://matplotlib.org/api/axes_api.html#plotting>`_.
@@ -85,6 +85,6 @@ __ API_
 Returns of plot functions
 -------------------------
 
-Every scqubit routine for plotting returns a tuple ``(Figure, Axes)`` of Matplotlib objects. These can be used for
+Every scqubits routine for plotting returns a tuple ``(Figure, Axes)`` of Matplotlib objects. These can be used for
 further processing by the user. In Jupyter, lines calling plot routines can be ended with a ``;`` to avoid the text
 output indicating the returned objects.

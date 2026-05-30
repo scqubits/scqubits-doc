@@ -670,12 +670,12 @@ Here ``cutoff=35`` is comfortable near zero flux but degrades as the flux
 approaches the half-flux point, so ``print(sweep)`` shows a verdict that varies
 across the range::
 
-    convergence vs flux (5 points): worst = marginal at flux=0.375
-      flux=0          maybe_converged
-      flux=0.125      maybe_converged
-      flux=0.25       maybe_converged
-      flux=0.375      marginal  <-- worst
-      flux=0.5        marginal
+    convergence across sweep of (flux) (5 points): worst = marginal at flux=0.375
+      flux=0: maybe_converged
+      flux=0.125: maybe_converged
+      flux=0.25: maybe_converged
+      flux=0.375: marginal  <-- worst
+      flux=0.5: marginal
 
 ``sweep.worst_param_val()`` then returns ``0.375`` and ``sweep.worst_report()``
 hands back the full :class:`.ConvergenceReport` at that point for a closer look.

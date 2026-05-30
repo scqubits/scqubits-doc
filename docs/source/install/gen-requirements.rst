@@ -44,7 +44,7 @@ The following packages are optional:
 +------------------------+--------------+-----------------------------------------------------+
 | pytest                 | 5.3+         | For running the test suite.                         |
 +------------------------+--------------+-----------------------------------------------------+
-| matplotlib-label-lines | 0.3.6+       | For smart labelling of matrix element plots         |
+| matplotlib-label-lines | 0.3.6+       | For smart labeling of matrix element plots          |
 +------------------------+--------------+-----------------------------------------------------+
 
 .. warning::

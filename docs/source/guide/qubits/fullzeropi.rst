@@ -22,12 +22,12 @@ Hamiltonian :math:`H = H_{0-\pi} + H_\text{int} + H_\zeta`, where
    H_\text{int} =& 2E_{C\Sigma}dC\,\partial_\theta\partial_\zeta + E_L dE_L \phi\,\zeta\\
    H_\zeta =& \omega_\zeta a^\dagger a
 
-expressed in the phase basis. The definition of the relevant charging energies
+expressed in the phase basis. The definitions of the relevant charging energies
 :math:`E_\text{CJ}`, :math:`E_{\text{C}\Sigma}`,
 Josephson energies :math:`E_\text{J}`, inductive energies :math:`E_\text{L}`, and relative amounts of disorder
-:math:`dC_\text{J}`, :math:`dE_\text{J}`, :math:`dC`, :math:`dE_\text{L}` follows [Groszkowski2018]_.
+:math:`dC_\text{J}`, :math:`dE_\text{J}`, :math:`dC`, :math:`dE_\text{L}` follow [Groszkowski2018]_.
 Internally, the ``FullZeroPi`` class formulates the Hamiltonian matrix via the product basis of the decoupled Zero-Pi
-qubit (realized by ``ZeroPi``)  on one hand, and the zeta LC oscillator on the other hand.
+qubit (realized by ``ZeroPi``) on the one hand, and the zeta LC oscillator on the other hand.
 
 An instance of the full Zero-Pi qubit is created as follows::
 
@@ -49,7 +49,7 @@ An instance of the full Zero-Pi qubit is created as follows::
                                 zeta_cutoff = 30)
 
 Here, ``flux`` is given in terms of the flux quantum, i.e., in the form :math:`\Phi_\text{ext}/\Phi_0`. In the above example,
-the disorder parameters ``dEJ`` and ``dCJ`` are not specified, and hence take on the default value zero (no disorder).
+the disorder parameters ``dEJ``, ``dCJ``, ``dEL``, and ``dC`` are all specified explicitly (here, to nonzero values introducing disorder).
 
 From within a Jupyter notebook, an instance of the disordered Zero-Pi qubit can alternatively be created with::
 

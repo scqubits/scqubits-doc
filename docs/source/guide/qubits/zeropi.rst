@@ -19,9 +19,9 @@ The Zero-Pi qubit [Brooks2013]_ [Dempster2014]_, when decoupled from the zeta mo
      &\qquad -2E_\text{J}\cos\theta\cos(\phi-\varphi_\text{ext}/2)+E_L\phi^2+2E_\text{J}
     + E_J dE_J \sin\theta\sin(\phi-\varphi_\text{ext}/2)
 
-expressed in phase basis. The definition of the relevant charging energies :math:`E_\text{CJ}`, :math:`E_{\text{C}\Sigma}`,
+expressed in phase basis. The definitions of the relevant charging energies :math:`E_\text{CJ}`, :math:`E_{\text{C}\Sigma}`,
 Josephson energies :math:`E_\text{J}`, inductive energies :math:`E_\text{L}`, and relative amounts of disorder
-:math:`dC_\text{J}`, :math:`dE_\text{J}` follows [Groszkowski2018]_.
+:math:`dC_\text{J}`, :math:`dE_\text{J}` follow [Groszkowski2018]_.
 
 Internally, the ``ZeroPi`` class formulates the Hamiltonian matrix by discretizing the ``phi`` variable, and
 using charge basis for the ``theta`` variable.

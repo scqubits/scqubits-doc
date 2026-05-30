@@ -15,22 +15,22 @@ The rate of a transition from state :math:`i` to state :math:`j` can be expresse
    \Gamma_{ij} = \frac{1}{\hbar^2} |\langle i| B_{\lambda} |j \rangle|^2 S(\omega_{ij}),
 
 where :math:`B_\lambda` is the noise operator, and :math:`S(\omega_{ij})` the spectral density function evaluated at
-the angular frequency associated with the transition frequency, :math:`\omega_{ij} = \omega_{j} - \omega_{i}`.
-:math:`\omega_{ij}` is positive in the case of  decay (the qubit emits energy to the bath), and negative in case of
+the angular frequency associated with the transition frequency, :math:`\omega_{ij} = \omega_{i} - \omega_{j}`.
+:math:`\omega_{ij}` is positive in the case of decay (the qubit emits energy to the bath), and negative in the case of
 excitations (the qubit absorbs energy from the bath).
 
 Unless stated otherwise, it is assumed that the depolarizing noise channels satisfy detailed balance. This implies
 
 .. math::
 
-    \frac{S(\omega)}{S(-\omega)} = \exp{\frac{\hbar \omega}{k_B T}},
+    \frac{S(\omega)}{S(-\omega)} = \exp\left(\frac{\hbar \omega}{k_B T}\right),
 
 where :math:`T` is the bath temperature, and :math:`k_B` Boltzmann's constant.
 
 
 .. note::
 
-    By default all :math:`t_1` methods estimate the coherence depolarization times from the sum of the upward and downward rates.
+    By default, all :math:`T_1` methods estimate the coherence depolarization times from the sum of the upward and downward rates.
     This behavior is controlled by the argument `total`, which can be modified by the user. For example, setting `total=False`
     will calculate only a single-directional transition rate from the state indexed `i` to the state indexed `j` (both of which
     can also be changed by the user through providing their values as arguments)
@@ -40,7 +40,7 @@ Capacitive noise
 -----------------------
 
 +-------------------+--------------------+
-| Noise operator    | ``t1_capacitive``  |
+| Method name       | ``t1_capacitive``  |
 +===================+====================+
 | :math:`B_\lambda` | :math:`2e \hat{n}` |
 +-------------------+--------------------+
@@ -80,7 +80,7 @@ are ``i``, ``j`` and ``total``. Their properties are described below.
 |                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
 |                |               |                                                                                  |
 |                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | and ``i`` to ``j`` are combined to give a total effective depolarization         |
 |                |               | time (or rate).                                                                  |
 +----------------+---------------+----------------------------------------------------------------------------------+
 
@@ -112,7 +112,7 @@ Inductive noise
 -----------------------
 
 +-------------------+----------------------------------------+
-| Noise operator    | ``t1_inductive``                       |
+| Method name       | ``t1_inductive``                       |
 +===================+========================================+
 | :math:`B_\lambda` | :math:`\frac{\Phi_0}{2\pi} \hat{\phi}` |
 +-------------------+----------------------------------------+
@@ -156,7 +156,7 @@ are ``i``, ``j`` and ``total``. Their properties are described below.
 |                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
 |                |               |                                                                                  |
 |                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | and ``i`` to ``j`` are combined to give a total effective depolarization         |
 |                |               | time (or rate).                                                                  |
 +----------------+---------------+----------------------------------------------------------------------------------+
 
@@ -190,7 +190,7 @@ Charge-coupled impedance noise
 ------------------------------
 
 +--------------------------------------------+-----------------------------------------+
-| Noise operator                             | ``t1_charge_impedance``                 |
+| Method name                                | ``t1_charge_impedance``                 |
 +--------------------------------------------+-----------------------------------------+
 | :math:`B_\lambda`                          | :math:`2e \hat{n}`                      |
 +--------------------------------------------+-----------------------------------------+
@@ -230,7 +230,7 @@ are ``i``, ``j`` and ``total``. Their properties are described below.
 |                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
 |                |               |                                                                                  |
 |                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | and ``i`` to ``j`` are combined to give a total effective depolarization         |
 |                |               | time (or rate).                                                                  |
 +----------------+---------------+----------------------------------------------------------------------------------+
 
@@ -262,7 +262,7 @@ Flux-bias line noise
 -------------------------
 
 +-------------------+--------------------------------------------------+
-| Noise operator    | ``t1_flux_bias_line``                            |
+| Method name       | ``t1_flux_bias_line``                            |
 +===================+==================================================+
 | :math:`B_\lambda` | :math:`\frac{\partial \hat{H}}{\partial \Phi_x}` |
 +-------------------+--------------------------------------------------+
@@ -298,7 +298,7 @@ are ``i``, ``j`` and ``total``. Their properties are described below.
 |                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
 |                |               |                                                                                  |
 |                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | and ``i`` to ``j`` are combined to give a total effective depolarization         |
 |                |               | time (or rate).                                                                  |
 +----------------+---------------+----------------------------------------------------------------------------------+
 
@@ -326,13 +326,13 @@ Other parameters that could be used for further customization are:
 +----------------+---------------+---------------------------------------------------------------------+
 
 
-References: [Koch2007]_, [Groszkowski2018]_, 
+References: [Koch2007]_, [Groszkowski2018]_
 
 Quasiparticle-tunneling noise
 ----------------------------------
 
 +-------------------+--------------------------------------------------+
-| Noise operator    | ``t1_quasiparticle_tunneling``                   |
+| Method name       | ``t1_quasiparticle_tunneling``                   |
 +===================+==================================================+
 | :math:`B_\lambda` | :math:`\sin(\hat{\phi}/2)`  (see note ** below)  |
 +-------------------+--------------------------------------------------+
@@ -343,16 +343,15 @@ Noise due to quasiparticle tunneling. The assumed spectral density reads
 
     S(\omega) = \hbar \omega {\rm Re} Y_{\rm qp}(\omega) \left(1 + \coth \frac{\hbar |\omega|}{2 k_B T} \right)
 
-where :math:`L_J` (with :math:`E_J = \phi_0^2/L_J` ) is the relevant inductance or superinductance, and :math:`Q_{\rm ind}` the corresponding inductive
-quality factor. The default value of the frequency-dependent quality factor is assumed to be
-
-The default real part of admittance is assumed to be 
+where :math:`Y_{\rm qp}(\omega)` is the admittance associated with quasiparticle tunneling. The default real part of the admittance is assumed to be
 
 .. math::
 
     {\rm Re} Y_{\rm qp}(\omega) = \sqrt{\frac{2}{\pi}} \frac{8 E_J}{R_k \Delta} \
     \left(\frac{2 \Delta}{\hbar \omega} \right)^{3/2}  x_{\rm qp} \
     K_{0} \left( \frac{\hbar |\omega|}{2 k_B T} \right) \sinh \left( \frac{\hbar \omega }{2 k_B T} \right).
+
+where :math:`R_k = h/e^2` is the resistance quantum, :math:`\Delta` the superconducting gap, :math:`x_{\rm qp}` the quasiparticle density, and :math:`K_0` a modified Bessel function of the second kind.
 
 ** This form assumes that the external flux is grouped with the inductive term of the Hamiltonian. In qubits where the flux is grouped with the Josephson term, the noise operator is appropriately transformed.  
 
@@ -379,7 +378,7 @@ are ``i``, ``j`` and ``total``. Their properties are described below.
 |                |               | time (or rate) corresponds to a relaxation or excitation process, respectively.  |
 |                |               |                                                                                  |
 |                |               | If ``total=True`` then both transition rates from ``j`` to ``i``                 |
-|                |               | and ``i`` to ``j`` are combined to give  total effective depolarization          |
+|                |               | and ``i`` to ``j`` are combined to give a total effective depolarization         |
 |                |               | time (or rate).                                                                  |
 +----------------+---------------+----------------------------------------------------------------------------------+
 
@@ -395,7 +394,7 @@ Other parameters that could be used for further customization are:
 +----------------+-------------------------------------+------------------------------------------------+
 | Parameter name | Default value                       | Description                                    |
 +================+=====================================+================================================+
-| Y_qp           | :math:`Y_{\rm qp}`                  | Complex admittance (:math:`\Omega`)            |
+| Y_qp           | :math:`Y_{\rm qp}`                  | Complex admittance (:math:`\Omega^{-1}`)       |
 |                |                                     |                                                |
 |                |                                     | Can be function of :math:`\omega`, or a number |
 +----------------+-------------------------------------+------------------------------------------------+
@@ -415,7 +414,7 @@ User-defined noise
 -----------------------
 
 +--------------------------------------------+-----------------------------------------+
-| Noise operator                             | ``t1``                                  |
+| Method name                                | ``t1``                                  |
 +--------------------------------------------+-----------------------------------------+
 | :math:`B_\lambda`                          | user defined                            |
 +--------------------------------------------+-----------------------------------------+
