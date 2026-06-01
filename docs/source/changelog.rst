@@ -12,6 +12,23 @@ Version 4.3.2
 
 **ADDITIONS**
 
+    - New setting `scqubits.settings.MULTIPROC_BLAS_THREADS` (int or
+      `None`, default `None`): caps the number of BLAS/OpenMP threads
+      per worker process during parallel sweeps (`NUM_CPUS` > 1) to
+      avoid core oversubscription. The cap is applied only while the
+      worker pool is created and the parent environment is restored
+      afterwards. For fork-based workers (the default on Linux/macOS)
+      this requires the optional `threadpoolctl` package; it has no
+      effect when numpy's BLAS exposes no thread control (e.g. Apple
+      Accelerate). A one-time warning is emitted when the cap cannot
+      take effect. See the :ref:`settings guide <guide-settings>`.
+    - `ParameterSweep` now reuses a single worker pool across the
+      per-subsystem and dressed sweeps within one run (cached in
+      `scqubits.settings.POOL` and shut down automatically at
+      interpreter exit), instead of starting a fresh pool for each,
+      and ships only the per-grid-point bare eigensystem to each
+      worker, reducing inter-process serialization on large sweeps.
+
     - Named constructors for `Circuit` from a YAML description:
       `Circuit.from_yaml_file(path, ...)` (path on disk) and
       `Circuit.from_yaml_string(yaml_text, ...)` (inline YAML). These

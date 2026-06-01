@@ -34,6 +34,11 @@ scqubits has a few internal parameters that can be changed by the user:
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``NUM_CPUS``                 | int                          | Number of cores to be used in parallelization (default: 1)        |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``MULTIPROC_BLAS_THREADS``   | int or None (default: None)  | Cap BLAS/OpenMP threads per worker process during parallel sweeps |
+|                              |                              | (``NUM_CPUS`` > 1), avoiding core oversubscription. Needs         |
+|                              |                              | ``threadpoolctl`` for fork-based workers; no effect when numpy's  |
+|                              |                              | BLAS exposes no thread control (e.g. Apple Accelerate).           |
++------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_SLICING``            | True / False (default: False)| Whether to enable approximate value-based slicing                 |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_WARNING``            | True / False (default: True) | Whether to warn user about use of approximate values in slicing   |
