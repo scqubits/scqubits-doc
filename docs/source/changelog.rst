@@ -12,6 +12,23 @@ Version 4.3.2
 
 **ADDITIONS**
 
+    - Automatic sparse diagonalization for composite `HilbertSpace`
+      spectra (prototype). When `evals_method`/`esys_method` are left
+      at their default, diagonalization now uses sparse scipy `eigsh`
+      instead of dense QuTiP when only a small fraction of a large
+      spectrum is requested -- the dressed-spectrum regime of coupled
+      qubits, where dense diagonalizes the whole matrix to obtain a few
+      states (and may not fit in memory). Controlled by the new
+      settings `AUTO_SPARSE_DIAG` (default `True`), `SPARSE_DIAG_MIN_DIM`
+      (default `1000`), and `SPARSE_DIAG_MAX_EVALS_FRAC` (default `0.1`),
+      with a dense fallback if the sparse solver fails. Small systems
+      and many-eigenvalue requests are unaffected. Eigenvalues and
+      physical observables are unchanged; only integer dressed-state
+      labels of degenerate states may differ between diagonalizers
+      (reference states by bare-state labels, not hard-coded dressed
+      indices). Set `AUTO_SPARSE_DIAG = False` to restore the previous
+      always-dense behavior.
+
     - Named constructors for `Circuit` from a YAML description:
       `Circuit.from_yaml_file(path, ...)` (path on disk) and
       `Circuit.from_yaml_string(yaml_text, ...)` (inline YAML). These

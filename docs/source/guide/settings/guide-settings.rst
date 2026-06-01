@@ -34,6 +34,11 @@ scqubits has a few internal parameters that can be changed by the user:
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``NUM_CPUS``                 | int                          | Number of cores to be used in parallelization (default: 1)        |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``AUTO_SPARSE_DIAG``         | True / False (default: True) | Use sparse diagonalization (scipy eigsh) instead of dense for the |
+|                              |                              | default evals_method/esys_method when few eigenstates of a large  |
+|                              |                              | Hamiltonian are requested (thresholds SPARSE_DIAG_MIN_DIM,        |
+|                              |                              | SPARSE_DIAG_MAX_EVALS_FRAC); falls back to dense on failure.      |
++------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_SLICING``            | True / False (default: False)| Whether to enable approximate value-based slicing                 |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_WARNING``            | True / False (default: True) | Whether to warn user about use of approximate values in slicing   |
