@@ -1,7 +1,7 @@
 scqubits: superconducting qubits in Python
 ===========================================
 
-[J. Koch](https://github.com/jkochNU), [P. Groszkowski](https://github.com/petergthatsme)
+[J. Koch](https://github.com/kochjens), [P. Groszkowski](https://github.com/petergthatsme)
 
 
 **This repository contains the source files for the documentation of the scqubits library, generated via Sphinx and available on ReadTheDocs.**
