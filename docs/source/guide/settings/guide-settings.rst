@@ -32,10 +32,6 @@ scqubits has a few internal parameters that can be changed by the user:
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``MULTIPROC``                | `str`                        | 'pathos' (default) or 'multiprocessing'                           |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
-| ``MULTIPROC_START_METHOD``   | str or None (default: None)  | Worker-process start method: None (platform default), 'fork',     |
-|                              |                              | 'spawn', or 'forkserver'. Default is 'fork' on Linux and          |
-|                              |                              | 'spawn' on macOS/Windows (fork is unsafe on macOS).               |
-+------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``NUM_CPUS``                 | int                          | Number of cores to be used in parallelization (default: 1)        |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``MULTIPROC_BLAS_THREADS``   | int or None (default: None)  | Cap BLAS/OpenMP threads per worker process during parallel sweeps |
