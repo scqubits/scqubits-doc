@@ -12,6 +12,22 @@ Version 4.3.2
 
 **ADDITIONS**
 
+    - Parallel sweeps now use the ``spawn`` process start method on
+      macOS (and Windows), and ``fork`` on Linux, configurable via the
+      new setting ``scqubits.settings.MULTIPROC_START_METHOD``. Fork is
+      unsafe on macOS -- Apple's Accelerate/GCD and the Objective-C
+      runtime are not fork-safe, so forking a worker pool after the
+      numerics have started threads can crash or hang (CPython itself
+      defaults macOS to ``spawn`` since 3.8; this affects both Intel and
+      Apple Silicon). With ``spawn``, a plain script that uses
+      ``num_cpus > 1`` must guard its entry point with
+      ``if __name__ == "__main__":`` (Jupyter/IPython are unaffected; a
+      one-time reminder is emitted otherwise). The worker pool is cached
+      and reused, so the one-time ``spawn`` startup cost is paid once per
+      session, not per sweep. Set ``MULTIPROC_START_METHOD = 'fork'`` to
+      restore the previous behavior. See the
+      :ref:`settings guide <guide-settings>`.
+
     - New setting `scqubits.settings.MULTIPROC_BLAS_THREADS` (int or
       `None`, default `None`): caps the number of BLAS/OpenMP threads
       per worker process during parallel sweeps (`NUM_CPUS` > 1) to
