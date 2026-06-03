@@ -12,6 +12,26 @@ Version 4.3.2
 
 **ADDITIONS**
 
+    - New function `scqubits.recommend_parallelization(...)`: a
+      workload-aware heuristic that picks `num_cpus` and a per-worker
+      BLAS-thread cap from the Hilbert-space dimension, grid size,
+      eigenvalue count, and sparse-vs-dense regime. It applies the
+      choice live (no kernel restart) and starts no worker processes,
+      so it is safe to call from Jupyter and from plain scripts.
+      Sweep/spectrum methods accept `num_cpus="auto"` to tune
+      themselves before running, and `scqubits.settings.AUTO_PARALLEL`
+      (default `False`) makes unspecified `num_cpus` do the same. See
+      the :ref:`settings guide <guide-settings>`.
+
+    - New function `scqubits.calibrate_parallelization()`: a one-time
+      measurement that times a short battery of sweeps in isolated
+      subprocesses and records this machine's per-task overhead,
+      pool-startup cost, and per-point diagonalization cost to
+      `~/.scqubits/parallel_calibration.json` (override with
+      `scqubits.settings.PARALLEL_CALIBRATION_PATH`). When present, the
+      recommendation uses this measured break-even instead of the
+      built-in defaults.
+
     - Parallel sweeps now use the ``spawn`` process start method on
       macOS (and Windows), and ``fork`` on Linux. Fork is unsafe on
       macOS -- Apple's Accelerate/GCD and the Objective-C runtime are

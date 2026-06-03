@@ -39,6 +39,15 @@ scqubits has a few internal parameters that can be changed by the user:
 |                              |                              | ``threadpoolctl`` for fork-based workers; no effect when numpy's  |
 |                              |                              | BLAS exposes no thread control (e.g. Apple Accelerate).           |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``AUTO_PARALLEL``            | True / False (default: False)| When True, sweeps called without an explicit ``num_cpus`` use the |
+|                              |                              | parallelization heuristic (``recommend_parallelization``) to pick |
+|                              |                              | ``num_cpus`` and a BLAS-thread cap. Per-call opt-in is also       |
+|                              |                              | available via ``num_cpus="auto"``.                                |
++------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``PARALLEL_CALIBRATION_PATH``| str or None (default: None)  | Location of the one-time machine calibration written by           |
+|                              |                              | ``calibrate_parallelization``. None uses                          |
+|                              |                              | ``~/.scqubits/parallel_calibration.json``.                        |
++------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_SLICING``            | True / False (default: False)| Whether to enable approximate value-based slicing                 |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_WARNING``            | True / False (default: True) | Whether to warn user about use of approximate values in slicing   |
