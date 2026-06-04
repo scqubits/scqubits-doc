@@ -62,6 +62,19 @@ Version 4.3.2
       and ships only the per-grid-point bare eigensystem to each
       worker, reducing inter-process serialization on large sweeps.
 
+    - Automatic sparse diagonalization: when `esys_method` /
+      `evals_method` are left at their default (`None`), `scqubits`
+      now uses sparse `scipy` `eigsh` instead of dense diagonalization
+      for a large Hamiltonian of which only a small fraction of the
+      spectrum is requested -- the dressed-spectrum regime of composite
+      `HilbertSpace` objects -- where it is dramatically faster and
+      avoids forming the full dense matrix (which may not even fit in
+      memory). Controlled by `scqubits.settings.AUTO_SPARSE_DIAG`
+      (default `True`; thresholds `SPARSE_DIAG_MIN_DIM` and
+      `SPARSE_DIAG_MAX_EVALS_FRAC`); it falls back to the dense solver
+      if the sparse solver raises or its result fails a residual check.
+      Set `AUTO_SPARSE_DIAG = False` to always use the dense path.
+
     - Named constructors for `Circuit` from a YAML description:
       `Circuit.from_yaml_file(path, ...)` (path on disk) and
       `Circuit.from_yaml_string(yaml_text, ...)` (inline YAML). These

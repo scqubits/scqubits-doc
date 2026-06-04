@@ -48,6 +48,12 @@ scqubits has a few internal parameters that can be changed by the user:
 |                              |                              | ``calibrate_parallelization``. None uses                          |
 |                              |                              | ``~/.scqubits/parallel_calibration.json``.                        |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``AUTO_SPARSE_DIAG``         | True / False (default: True) | When True, default diagonalization (esys_method/evals_method =    |
+|                              |                              | None) uses sparse scipy eigsh for large spectra where only a few  |
+|                              |                              | eigenvalues are needed, with automatic dense fallback (thresholds |
+|                              |                              | SPARSE_DIAG_MIN_DIM, SPARSE_DIAG_MAX_EVALS_FRAC). See the         |
+|                              |                              | diagonalization guide.                                            |
++------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_SLICING``            | True / False (default: False)| Whether to enable approximate value-based slicing                 |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_WARNING``            | True / False (default: True) | Whether to warn user about use of approximate values in slicing   |
