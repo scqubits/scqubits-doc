@@ -34,10 +34,13 @@ scqubits has a few internal parameters that can be changed by the user:
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``NUM_CPUS``                 | int                          | Number of cores to be used in parallelization (default: 1)        |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
-| ``MULTIPROC_BLAS_THREADS``   | int or None (default: None)  | Cap BLAS/OpenMP threads per worker process during parallel sweeps |
-|                              |                              | (``NUM_CPUS`` > 1), avoiding core oversubscription. Needs         |
-|                              |                              | ``threadpoolctl`` for fork-based workers; no effect when numpy's  |
-|                              |                              | BLAS exposes no thread control (e.g. Apple Accelerate).           |
+| ``MULTIPROC_BLAS_THREADS``   | "auto", int, or None         | Cap BLAS/OpenMP threads per worker during parallel sweeps         |
+|                              | (default: "auto")            | (``NUM_CPUS`` > 1). Default "auto" caps each worker to            |
+|                              |                              | cores // num_cpus so workers never oversubscribe; an int          |
+|                              |                              | sets a fixed cap; None leaves threading untouched. Uses           |
+|                              |                              | ``threadpoolctl`` (a dependency) for fork-based (Linux)           |
+|                              |                              | workers; no effect when numpy BLAS exposes no thread              |
+|                              |                              | control (e.g. Apple Accelerate).                                  |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``AUTO_PARALLEL``            | True / False (default: False)| When True, sweeps called without an explicit ``num_cpus`` use the |
 |                              |                              | parallelization heuristic (``recommend_parallelization``) to pick |

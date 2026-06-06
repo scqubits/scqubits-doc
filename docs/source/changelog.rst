@@ -45,16 +45,20 @@ Version 4.3.2
       reused, so the one-time ``spawn`` startup cost is paid once per
       session, not per sweep.
 
-    - New setting `scqubits.settings.MULTIPROC_BLAS_THREADS` (int or
-      `None`, default `None`): caps the number of BLAS/OpenMP threads
-      per worker process during parallel sweeps (`NUM_CPUS` > 1) to
-      avoid core oversubscription. The cap is applied only while the
-      worker pool is created and the parent environment is restored
-      afterwards. It reaches spawn-based workers (macOS, Windows) via
-      the thread-count environment variables; for fork-based workers
-      (Linux) it requires the optional `threadpoolctl` package. A
-      one-time warning is emitted when the cap cannot take effect. See
-      the :ref:`settings guide <guide-settings>`.
+    - New setting `scqubits.settings.MULTIPROC_BLAS_THREADS`
+      (`"auto"`, a positive int, or `None`; default `"auto"`): caps the
+      number of BLAS/OpenMP threads per worker process during parallel
+      sweeps (`NUM_CPUS` > 1) to avoid core oversubscription. The
+      default `"auto"` caps each worker to `cores // num_cpus`, so
+      parallel sweeps no longer oversubscribe the cores out of the box;
+      a positive int sets a fixed cap, and `None` leaves threading
+      untouched. The cap is applied only while the worker pool is
+      created and the parent environment is restored afterwards
+      (serial work is unaffected). It reaches spawn-based workers
+      (macOS, Windows) via the thread-count environment variables; for
+      fork-based workers (Linux) it uses `threadpoolctl` (now a
+      scqubits dependency). A one-time warning is emitted when the cap
+      cannot take effect. See the :ref:`settings guide <guide-settings>`.
     - `ParameterSweep` now reuses a single worker pool across the
       per-subsystem and dressed sweeps within one run (cached in
       `scqubits.settings.POOL` and shut down automatically at
