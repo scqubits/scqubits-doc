@@ -12,6 +12,73 @@ Version 4.3.2
 
 **ADDITIONS**
 
+    - New function `scqubits.recommend_parallelization(...)`: a
+      workload-aware heuristic that picks `num_cpus` and a per-worker
+      BLAS-thread cap from the Hilbert-space dimension, grid size,
+      eigenvalue count, and sparse-vs-dense regime. It applies the
+      choice live (no kernel restart) and starts no worker processes,
+      so it is safe to call from Jupyter and from plain scripts.
+      Sweep/spectrum methods accept `num_cpus="auto"` to tune
+      themselves before running, and `scqubits.settings.AUTO_PARALLEL`
+      (default `False`) makes unspecified `num_cpus` do the same. See
+      the :ref:`settings guide <guide-settings>`.
+
+    - New function `scqubits.calibrate_parallelization()`: a one-time
+      measurement that times a short battery of sweeps in isolated
+      subprocesses and records this machine's per-task overhead,
+      pool-startup cost, and per-point diagonalization cost to
+      `~/.scqubits/parallel_calibration.json` (override with
+      `scqubits.settings.PARALLEL_CALIBRATION_PATH`). When present, the
+      recommendation uses this measured break-even instead of the
+      built-in defaults.
+
+    - Parallel sweeps now use the ``spawn`` process start method on
+      macOS (and Windows), and ``fork`` on Linux. Fork is unsafe on
+      macOS -- Apple's Accelerate/GCD and the Objective-C runtime are
+      not fork-safe, so forking a worker pool after the numerics have
+      started threads can crash or hang (CPython itself defaults macOS
+      to ``spawn`` since 3.8; this affects both Intel and Apple
+      Silicon). With ``spawn``, a plain script that uses ``num_cpus >
+      1`` must guard its entry point with ``if __name__ ==
+      "__main__":`` (Jupyter/IPython are unaffected; a one-time
+      reminder is emitted otherwise). The worker pool is cached and
+      reused, so the one-time ``spawn`` startup cost is paid once per
+      session, not per sweep.
+
+    - New setting `scqubits.settings.MULTIPROC_BLAS_THREADS`
+      (`"auto"`, a positive int, or `None`; default `"auto"`): caps the
+      number of BLAS/OpenMP threads per worker process during parallel
+      sweeps (`NUM_CPUS` > 1) to avoid core oversubscription. The
+      default `"auto"` caps each worker to `cores // num_cpus`, so
+      parallel sweeps no longer oversubscribe the cores out of the box;
+      a positive int sets a fixed cap, and `None` leaves threading
+      untouched. The cap is applied only while the worker pool is
+      created and the parent environment is restored afterwards
+      (serial work is unaffected). It reaches spawn-based workers
+      (macOS, Windows) via the thread-count environment variables; for
+      fork-based workers (Linux) it uses `threadpoolctl` (now a
+      scqubits dependency). A one-time warning is emitted when the cap
+      cannot take effect. See the :ref:`settings guide <guide-settings>`.
+    - `ParameterSweep` now reuses a single worker pool across the
+      per-subsystem and dressed sweeps within one run (cached in
+      `scqubits.settings.POOL` and shut down automatically at
+      interpreter exit), instead of starting a fresh pool for each,
+      and ships only the per-grid-point bare eigensystem to each
+      worker, reducing inter-process serialization on large sweeps.
+
+    - Automatic sparse diagonalization: when `esys_method` /
+      `evals_method` are left at their default (`None`), `scqubits`
+      now uses sparse `scipy` `eigsh` instead of dense diagonalization
+      for a large Hamiltonian of which only a small fraction of the
+      spectrum is requested -- the dressed-spectrum regime of composite
+      `HilbertSpace` objects -- where it is dramatically faster and
+      avoids forming the full dense matrix (which may not even fit in
+      memory). Controlled by `scqubits.settings.AUTO_SPARSE_DIAG`
+      (default `True`; thresholds `SPARSE_DIAG_MIN_DIM` and
+      `SPARSE_DIAG_MAX_EVALS_FRAC`); it falls back to the dense solver
+      if the sparse solver raises or its result fails a residual check.
+      Set `AUTO_SPARSE_DIAG = False` to always use the dense path.
+
     - Named constructors for `Circuit` from a YAML description:
       `Circuit.from_yaml_file(path, ...)` (path on disk) and
       `Circuit.from_yaml_string(yaml_text, ...)` (inline YAML). These

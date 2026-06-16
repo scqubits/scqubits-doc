@@ -34,6 +34,29 @@ scqubits has a few internal parameters that can be changed by the user:
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``NUM_CPUS``                 | int                          | Number of cores to be used in parallelization (default: 1)        |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``MULTIPROC_BLAS_THREADS``   | "auto", int, or None         | Cap BLAS/OpenMP threads per worker during parallel sweeps         |
+|                              | (default: "auto")            | (``NUM_CPUS`` > 1). Default "auto" caps each worker to            |
+|                              |                              | cores // num_cpus so workers never oversubscribe; an int          |
+|                              |                              | sets a fixed cap; None leaves threading untouched. Uses           |
+|                              |                              | ``threadpoolctl`` (a dependency) for fork-based (Linux)           |
+|                              |                              | workers; no effect when numpy BLAS exposes no thread              |
+|                              |                              | control (e.g. Apple Accelerate).                                  |
++------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``AUTO_PARALLEL``            | True / False (default: False)| When True, sweeps called without an explicit ``num_cpus`` use the |
+|                              |                              | parallelization heuristic (``recommend_parallelization``) to pick |
+|                              |                              | ``num_cpus`` and a BLAS-thread cap. Per-call opt-in is also       |
+|                              |                              | available via ``num_cpus="auto"``.                                |
++------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``PARALLEL_CALIBRATION_PATH``| str or None (default: None)  | Location of the one-time machine calibration written by           |
+|                              |                              | ``calibrate_parallelization``. None uses                          |
+|                              |                              | ``~/.scqubits/parallel_calibration.json``.                        |
++------------------------------+------------------------------+-------------------------------------------------------------------+
+| ``AUTO_SPARSE_DIAG``         | True / False (default: True) | When True, default diagonalization (esys_method/evals_method =    |
+|                              |                              | None) uses sparse scipy eigsh for large spectra where only a few  |
+|                              |                              | eigenvalues are needed, with automatic dense fallback (thresholds |
+|                              |                              | SPARSE_DIAG_MIN_DIM, SPARSE_DIAG_MAX_EVALS_FRAC). See the         |
+|                              |                              | diagonalization guide.                                            |
++------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_SLICING``            | True / False (default: False)| Whether to enable approximate value-based slicing                 |
 +------------------------------+------------------------------+-------------------------------------------------------------------+
 | ``FUZZY_WARNING``            | True / False (default: True) | Whether to warn user about use of approximate values in slicing   |
