@@ -371,15 +371,27 @@ Cluster-safe matching
 Near degeneracies, matching levels by index is unreliable. Consecutive levels
 whose internal gaps are small compared with the neighboring external gaps are
 grouped into a *cluster*, compared as a sorted set, and assigned a common
-error estimate plus a ``cluster_index_ambiguity`` warning. The subspace
-diagnostic for a cluster spanned by :math:`U_{N_0}`, :math:`U_{N_1}` is the sine
-of the largest principal angle,
+error estimate plus a ``cluster_index_ambiguity`` warning.
+
+Here :math:`U_{N_0}` and :math:`U_{N_1}` are the **eigenvector blocks** spanning
+that cluster at two cutoffs :math:`N_0` and :math:`N_1` -- the relevant columns
+of the diagonalizing unitary (orthonormal, embedded in a common basis). Inside a
+(near-)degenerate block the individual eigenvectors are not physically
+well-defined -- they can rotate arbitrarily among themselves between cutoffs --
+so the diagnostic compares the *spans* of the blocks rather than vector-by-vector
+overlaps. The subspace diagnostic is the sine of the largest principal angle
+between those two spans,
 
 .. math::
 
    \sin\Theta = \bigl\| (I - U_{N_0} U_{N_0}^\dagger)\, U_{N_1} \bigr\|_2,
 
-which is robust to eigenvector rotations within the block.
+which is :math:`0` when the cluster's eigenspace is unchanged under refinement
+and :math:`1` when it has rotated to a fully orthogonal direction. It is the
+cluster-level analogue of one minus a wavefunction overlap, robust to eigenvector
+rotations within the block. Being built from eigenvectors alone, it is
+dimensionless and independent of the active energy unit
+(:func:`~scqubits.set_units`); it is *not* one of the GHz-valued error estimates.
 
 .. _guide_convergence_monotonicity:
 
