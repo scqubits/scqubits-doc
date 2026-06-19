@@ -42,12 +42,16 @@ CentralDispatch and related classes
 CentralDispatch
 ---------------
 
+.. toctree::
+
    _autosummary/scqubits.core.central_dispatch.CentralDispatch.rst
 
 .. _classes-dispatchclient:
 
 DispatchClient
 ---------------
+
+.. toctree::
 
    _autosummary/scqubits.core.central_dispatch.DispatchClient.rst
 
@@ -61,11 +65,15 @@ Descriptor classes
 WatchedProperty
 ---------------
 
+.. toctree::
+
    _autosummary/scqubits.core.descriptors.WatchedProperty.rst
 
 .. _classes-readonly:
 
 ReadOnlyProperty
 ----------------
+
+.. toctree::
 
    _autosummary/scqubits.core.descriptors.ReadOnlyProperty.rst

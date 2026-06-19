@@ -2,7 +2,7 @@
    Copyright (C) 2019, Jens Koch & Peter Groszkowski
 
 
-scQubits documentation
+scqubits documentation
 ======================
 
 scqubits is an open-source Python library for simulating superconducting qubits.
@@ -83,6 +83,7 @@ appropriately acknowledged by citing:
 
    ./guide/qubits/guide-qubits.rst
    ./guide/noise/guide-noise.rst
+   ./guide/convergence/guide-convergence.rst
    Single-Qubit Parameter Sweep <./guide/parametersweep/ipynb/paramsweep.ipynb>
 
 

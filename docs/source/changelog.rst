@@ -192,7 +192,7 @@ Version 4.3
       make sure this is secure. 
     - Fix parameter functions for parametric driving in the Circuit module.
     - Fix configure method in `SymbolicCircuit`, now does not reset the instance when run with no arguments.
-    - Fix bugs #193 and #209 related to`ParameterSweep`.
+    - Fix bugs #193 and #209 related to `ParameterSweep`.
     - Fix compatibility of `Circuit` module with `HilbertSpace`, bugs #253 and #254.
     - Fix #211, a bug that could occur when `op_in_dressed_eigenbasis` was called without prior lookup generation.
     - `SymbolicCircuit` instances now do not need to be re-initiated when their `configure` method fails (e.g., because of incorrect parameters).
@@ -218,7 +218,7 @@ Version 4.2
 
 **BUG FIXES**
 
-    - Fix prefactor for evaluations noise spectral density for quasiparticle noise - adds an additional factor of :math:`\hbar/e^2`.
+    - Fix prefactor for evaluation of noise spectral density for quasiparticle noise - adds an additional factor of :math:`\hbar/e^2`.
     - Fix error in symbolic Hamiltonian for multi-harmonic junctions.
 
 **UNDER THE HOOD**
@@ -393,7 +393,7 @@ Version 3.0.3
 
 **Under the hood**
 
-    - Initialization of a circuit instance now does not globally switch to latex output (avoids unnecessary slowdowns with regular, non-sympy, output.
+    - Initialization of a circuit instance now does not globally switch to latex output (avoids unnecessary slowdowns with regular, non-sympy, output).
 
 
 Version 3.0.2
@@ -415,7 +415,7 @@ Version 3.0.2
 **Under the hood**
 
     - All numerical diagonalization is now delayed until explicitly required. Changing circuit parameters thus does not incur a repeated runtime cost anymore.
-    - When hierarchical diagonalization is used, the bare eigensystems for each subsystems are now stored and reused for calculations, and only replaced by a new set when necessary. This dramatically improves the performance of wavefunction plotting, identity wrapping, etc.
+    - When hierarchical diagonalization is used, the bare eigensystems for each subsystem are now stored and reused for calculations, and only replaced by a new set when necessary. This dramatically improves the performance of wavefunction plotting, identity wrapping, etc.
     - If the circuit parameters are not updated, successive diagonalizations are skipped for all subsystems.
     - Implemented `eigsh_safe` (wrapper for scipy.sparse.linalg.eigsh) that orthogonalizes the eigenvectors when degenerate eigenvalues are detected. In rare cases of actual degeneracies in the spectrum, sparse matrix methods could have given incorrect results because `scipy.sparse.linalg.eigsh` does not guarantee orthogonality of eigenvectors in degenerate subspaces.
 
@@ -498,8 +498,8 @@ Version 2.2.2
       overlap)^2 instead of (state overlap) for thresholding.
 
 **Under the Hood**
-    typing_extensions is new dependency (used for enhanced typing annotations such as
-    `@overload` and `Literal`
+    typing_extensions is a new dependency (used for enhanced typing annotations such as
+    `@overload` and `Literal`)
 
 
 Version 2.2
@@ -508,7 +508,7 @@ Version 2.2
 **Bug Fixes**
     - Use of `<ParameterSweep>.plot_transitions` could previously lead to a spurious
       switch of `<ParameterSweep>["evals"]` to transition energies.
-    - Include the :math:`/frac{1}{1}hbar` omega term when diagonalizing fluxonium in the harmonic
+    - Include the :math:`\frac{1}{2}\hbar\omega` term when diagonalizing fluxonium in the harmonic
       osc. basis. The omission of this only affected absolute energies, not the energy
       differences which are the relevant quantities in most cases. However, wavefunction
       plots for fluxonium were previously incorrectly positioned relative to the potential energy.
@@ -534,7 +534,7 @@ Version 2.2
     - `supported_noise_channels` and `effective_noise_channels` are now `@classmethods`
       and can be called either directly through a class, or through a class instance.
     - `t1_charge_impedance` is no longer returned by `effective_noise_channels` in the
-      case of a `TunableTransmon` and `Transmon` qubits
+      case of `TunableTransmon` and `Transmon` qubits
     - Added about function that shows basic information about scqubits as well as
       versions of some of the most important libraries that scqubits relies on.
     - Extended `pytests` for enhanced coverage.
@@ -684,7 +684,7 @@ Version 1.1.0
 +++++++++++++
 
    - new class ``InteractionTerm`` works in tandem with ``HilbertSpace`` to ease setup of composite systems with pairwise interactions
-   - new ``ParameterSweep`` class efficiently generates spectral data for performing a scan of a ``HilbertSpace`` object over an external parameters
+   - new ``ParameterSweep`` class efficiently generates spectral data for performing a scan of a ``HilbertSpace`` object over external parameters
    - new ``Explorer`` class introduces interactive plots (see docs and demo ipynb)
    - cleaned up implementation of file Serializable operations
 

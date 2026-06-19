@@ -2,7 +2,7 @@
    Copyright (C) 2019, Jens Koch & Peter Groszkowski
 
 
-scQubits documentation
+scqubits documentation
 ======================
 
 scqubits is an open-source Python library for simulating superconducting qubits.
