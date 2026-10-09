@@ -7,6 +7,31 @@
 Change Log
 **********
 
+Version 4.4
++++++++++++
+
+**ADDITIONS**
+
+    - Optional GPU acceleration for composite systems through NVIDIA
+      cuQuantum. This requires an NVIDIA GPU and an installation of
+      qutip-cuquantum; installations without it are unaffected.
+    - `HilbertSpace.hamiltonian(use_cuquantum=True)` and
+      `identity_wrap(..., use_cuquantum=True)` construct composite
+      operators in the qutip-cuquantum representation, for use with
+      qutip-cuquantum solvers.
+    - New diagonalization methods `evals_cuquantum` and
+      `esys_cuquantum` compute a low-energy partial eigensystem of a
+      `HilbertSpace` on the GPU. They are not supported for individual
+      subsystems, and `generate_lookup` supports them with
+      `ordering="BE"` only.
+    - `get_cuquantum_workstream()` and `set_cuquantum_workstream()`
+      give access to the cuQuantum `WorkStream` shared by all scqubits
+      cuQuantum operations.
+    - New settings `CUQUANTUM_MIN_KRYLOV_BLOCK_SIZE`,
+      `CUQUANTUM_MAX_BUFFER_RATIO`, and `CUQUANTUM_MAX_RESTARTS`
+      control the cuQuantum Krylov eigensolver.
+
+
 Version 4.3.2
 +++++++++++++
 
